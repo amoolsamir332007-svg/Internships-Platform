@@ -1,9 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
- import { useRole } from "../../../hooks/useRole";
+import { useRole } from "../../../hooks/useRole";
 import "./Navbar.css";
-
+ 
+/**
+ * Site-wide navbar. Same links whether logged out or in
+ * (Home, Dashboard, Contact Us, Applications); the user's
+ * name/avatar and a logout option are added on after login.
+ * See Project Plan section 3b.
+ */
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const { isInstitution, isStudent } = useRole();
