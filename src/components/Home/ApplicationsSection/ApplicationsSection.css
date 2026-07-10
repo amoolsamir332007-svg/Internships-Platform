@@ -1,0 +1,41 @@
+.applications-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-header {
+  margin-bottom: 40px;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+/* تقسيم الشبكة (Grid Layout) لعرض الكروت باحترافية وتجاوب */
+.internships-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.section-message {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  padding: 40px;
+}
+
+.section-message.error {
+  color: #e74c3c;
+  font-weight: 600;
+}

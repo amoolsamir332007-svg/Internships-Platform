@@ -1,0 +1,87 @@
+.student-sidebar {
+  width: 260px;
+  height: 100vh;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0; /* التوجيه متوافق مع اللغة العربية */
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.sidebar-brand {
+  padding: 24px;
+  text-align: center;
+  border-bottom: 1px solid #34495e;
+}
+
+.sidebar-brand h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #3498db;
+  font-weight: 700;
+}
+
+.sidebar-menu {
+  flex: 1;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 24px;
+  color: #bdc3c7;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-right: 4px solid transparent; /* شريط جانبي يظهر عند التفعيل */
+}
+
+.menu-item:hover {
+  background-color: #34495e;
+  color: #ffffff;
+}
+
+.menu-item.active {
+  background-color: #1a252f;
+  color: #3498db;
+  border-right-color: #3498db;
+  font-weight: 600;
+}
+
+.menu-icon {
+  margin-left: 12px; /* مسافة أيقونة الـ emoji لليمين باللغة العربية */
+  font-size: 1.2rem;
+}
+
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid #34495e;
+}
+
+.logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}

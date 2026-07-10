@@ -1,0 +1,204 @@
+/* Button.css */
+/* Global reusable button styling */
+
+
+
+.custom-btn{
+
+    padding: 12px 28px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+}
+
+
+
+
+
+.custom-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+
+
+.custom-btn:disabled{
+
+    opacity:0.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+
+
+
+
+/* Primary button */
+
+.primary{
+
+
+    background:
+    linear-gradient(
+        135deg,
+        #6d28d9,
+        #2563eb
+    );
+
+
+    color:white;
+
+    box-shadow:
+    0 8px 20px rgba(37,99,235,0.25);
+
+}
+
+
+
+.primary:hover{
+
+    box-shadow:
+    0 12px 25px rgba(37,99,235,0.35);
+
+}
+
+
+
+
+
+
+/* Secondary button */
+
+.secondary{
+
+
+    background:white;
+
+    color:#374151;
+
+    border:1px solid #ddd;
+
+
+}
+
+
+
+.secondary:hover{
+
+
+    background:#f8fafc;
+
+
+}
+
+
+
+
+
+
+/* Danger button */
+
+.danger{
+
+
+    background:#dc2626;
+
+    color:white;
+
+
+}
+
+
+
+.danger:hover{
+
+
+    background:#b91c1c;
+
+
+}
+
+
+
+
+
+
+
+/* Success button */
+
+.success{
+
+
+    background:#16a34a;
+
+    color:white;
+
+
+}
+
+
+
+.success:hover{
+
+
+    background:#15803d;
+
+
+}
+
+
+
+
+
+/* Full width */
+
+.full-width{
+
+
+    width:100%;
+
+
+}
+
+
+
+
+
+/* Loading */
+
+.btn-loader{
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+}

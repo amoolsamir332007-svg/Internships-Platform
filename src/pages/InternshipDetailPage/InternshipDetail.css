@@ -1,0 +1,315 @@
+.internship-detail-page{
+
+
+    min-height:100vh;
+
+    background:#f8fafc;
+
+    padding:40px;
+
+
+}
+
+
+
+.internship-container{
+
+
+    max-width:1200px;
+
+    margin:auto;
+
+
+}
+
+
+
+
+
+.internship-header{
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #4338ca,
+        #7c3aed
+    );
+
+
+    padding:45px;
+
+    border-radius:25px;
+
+    color:white;
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+
+    gap:30px;
+
+
+}
+
+
+
+
+
+.internship-header h1{
+
+
+    font-size:40px;
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+.internship-header h3{
+
+
+    opacity:.9;
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.badges{
+
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+
+}
+
+
+
+
+.badges span{
+
+
+    background:rgba(255,255,255,.2);
+
+    padding:10px 16px;
+
+    border-radius:20px;
+
+
+}
+
+
+
+
+
+
+
+.apply-btn{
+
+
+    background:white;
+
+    color:#4f46e5;
+
+
+    border:none;
+
+    padding:15px 35px;
+
+
+    border-radius:12px;
+
+
+    font-size:18px;
+
+    font-weight:bold;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+.apply-btn:hover{
+
+
+    transform:translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+
+.detail-grid{
+
+
+    margin-top:30px;
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(2,1fr);
+
+
+    gap:25px;
+
+
+}
+
+
+
+
+
+
+
+.detail-card{
+
+
+    background:white;
+
+
+    padding:30px;
+
+
+    border-radius:20px;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.06);
+
+
+}
+
+
+
+
+
+.detail-card h2{
+
+
+    color:#111827;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+
+.detail-card p,
+
+
+.detail-card li{
+
+
+    color:#6b7280;
+
+    line-height:1.8;
+
+
+}
+
+
+
+
+.skills{
+
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+
+}
+
+
+
+.skills span{
+
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+
+    background:#eef2ff;
+
+    color:#4f46e5;
+
+    font-weight:600;
+
+
+}
+
+
+
+
+
+@media(max-width:800px){
+
+
+.internship-header{
+
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+
+}
+
+
+
+.internship-header h1{
+
+
+    font-size:30px;
+
+
+}
+
+
+
+.detail-grid{
+
+
+    grid-template-columns:1fr;
+
+
+}
+
+
+}

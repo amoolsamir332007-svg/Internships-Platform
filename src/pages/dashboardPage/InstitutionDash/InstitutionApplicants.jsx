@@ -5,8 +5,8 @@ import {
   acceptApplication,
   rejectApplication,
 } from "../../../api/applicationService";
-import StatusTabs from "../../../components/dashboard/StatusTabs";
-import ApplicantCard from "../../../components/dashboard/ApplicantCard";
+import StatusTabs from "../../../components/dashboard/StatusTabs/StatusTabs";
+import ApplicantCard from "../../../components/dashboard/ApplicantCard/ApplicantCard";
 import LoadingSpinner from "../../../components/common/LoadingSpinner";
 import "./InstitutionDash.css";
  

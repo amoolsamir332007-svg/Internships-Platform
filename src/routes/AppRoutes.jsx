@@ -11,12 +11,11 @@ import Contact from "../pages/ContactPage/Contact";
 import InternshipDetail from "../pages/InternshipDetailPage/InternshipDetail";
 import InstitutionProfile from "../pages/InstitutionProfilePage/InstitutionProfile"; 
 import NotFound from "../pages/NotFoundPage/NotFound";
- 
-import InstitutionDashboard from "../pages/dashboard/Institution/InstitutionDashboard";
+import InstitutionDashboard from "../pages/dashboardPage/InstitutionDash/InstitutionDashboard";
 import PostInternship from "../pages/dashboardPage/InstitutionDash/PostInternship";
 import ManageInternships from "../pages/dashboardPage/InstitutionDash/ManageInternships";
 import InstitutionApplicants from "../pages/dashboardPage/InstitutionDash/InstitutionApplicants";
-import InstitutionProfilePage from "../pages/InstitutionProfilePage"; 
+import InstitutionProfilePage from "../pages/InstitutionProfilePage/InstitutionProfile";
  
 import StudentDashboard from "../pages/dashboardPage/StudentDash/StudentDashboard";
 import StudentProfile from "../pages/StudentProfilePage/StudentProfile";
@@ -78,6 +77,8 @@ const AppRoutes = () => {
           />
         </Route>
       </Route>
+
+
  
       <Route element={<ProtectedRoute allowedRoles={[USER_ROLES.STUDENT]} />}>
         <Route element={<DashboardLayout />}>

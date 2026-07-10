@@ -1,4 +1,4 @@
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { getMyProfile } from "../api/profileService";
 import InstitutionProfileForm from "../components/profile/InstitutionProfileForm";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
