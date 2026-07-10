@@ -1,0 +1,22 @@
+.status-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #eaecf0;
+  margin-bottom: 20px;
+}
+ 
+.status-tabs-item {
+  background: none;
+  border: none;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #667085;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+ 
+.status-tabs-item-active {
+  color: #175cd3;
+  border-bottom: 2px solid #175cd3;
+}

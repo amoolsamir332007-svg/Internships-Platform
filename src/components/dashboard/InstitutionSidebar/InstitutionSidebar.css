@@ -1,0 +1,30 @@
+.institution-sidebar {
+  width: 240px;
+  min-height: 100vh;
+  border-left: 1px solid #eaecf0;
+  padding: 24px 16px;
+}
+ 
+.institution-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.institution-sidebar-link {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #344054;
+  text-decoration: none;
+}
+ 
+.institution-sidebar-link:hover {
+  background-color: #f2f4f7;
+}
+ 
+.institution-sidebar-link-active {
+  background-color: #eff4ff;
+  color: #175cd3;
+}
