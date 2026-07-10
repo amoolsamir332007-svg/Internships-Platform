@@ -7,7 +7,7 @@ import {
 } from "../../../api/applicationService";
 import StatusTabs from "../../../components/dashboard/StatusTabs/StatusTabs";
 import ApplicantCard from "../../../components/dashboard/ApplicantCard/ApplicantCard";
-import LoadingSpinner from "../../../components/common/LoadingSpinner";
+import LoadingSpinner from "../../../components/common/LoadingSpinner/LoadingSpinner";
 import "./InstitutionDash.css";
  
 const TABS = [
@@ -21,7 +21,6 @@ const InstitutionApplicants = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [actionLoadingId, setActionLoadingId] = useState(null);
  
-
   const statusFilter = activeTab === "all" ? undefined : activeTab;
  
   const {
@@ -29,14 +28,16 @@ const InstitutionApplicants = () => {
     loading,
     error,
     refetch,
-  } = useFetch(() => getApplicantsForInstitution({ status: statusFilter }), [activeTab]);
- 
+  } = useFetch(
+    () => getApplicantsForInstitution({ status: statusFilter }),
+    [activeTab]
+  );
  
   const handleAccept = async (applicationId) => {
     setActionLoadingId(applicationId);
     try {
       await acceptApplication(applicationId);
-      refetch(); 
+      refetch();
     } catch (err) {
       alert("Something went wrong while accepting the application");
     } finally {
@@ -60,14 +61,20 @@ const InstitutionApplicants = () => {
     <div className="institution-applicants">
       <h1 className="institution-applicants-title">Applicants</h1>
  
-      <StatusTabs tabs={TABS} activeTab={activeTab} onTabChange={setActiveTab} />
+      <StatusTabs
+        tabs={TABS}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
  
       {loading && <LoadingSpinner />}
  
       {error && <p className="institution-applicants-error">{error}</p>}
  
       {!loading && !error && applicants?.length === 0 && (
-        <p className="institution-applicants-empty">No applicants found for the selected status.</p>
+        <p className="institution-applicants-empty">
+          No applicants found for the selected status.
+        </p>
       )}
  
       <div className="institution-applicants-list">

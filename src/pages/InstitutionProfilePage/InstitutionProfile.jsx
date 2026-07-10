@@ -1,8 +1,8 @@
 import { useFetch } from "../../hooks/useFetch";
-import { getMyProfile } from "../api/profileService";
-import InstitutionProfileForm from "../components/profile/InstitutionProfileForm";
-import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
-import "./InstitutionProfilePage.css";
+import { getMyProfile } from "../../api/profileService";
+import InstitutionProfileForm from "../../components/profile/InstitutionProfileForm/InstitutionProfileForm";
+import LoadingSpinner from "../../components/common/LoadingSpinner/LoadingSpinner";
+import "./InstitutionProfile.css";
  
 const InstitutionProfile = () => {
   const {

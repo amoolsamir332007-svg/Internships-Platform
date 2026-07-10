@@ -1,9 +1,8 @@
-
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { institutionProfileSchema } from "../../../schemas/institutionProfileSchema";
- import { updateInstitutionProfile } from "../../../api/profileService";
+import { updateInstitutionProfile } from "../../../api/profileService";
 import "./InstitutionProfileForm.css";
  
 const DEFAULT_VALUES = {
@@ -15,7 +14,12 @@ const DEFAULT_VALUES = {
   logo: "",
 };
  
-
+/**
+ * Editable form for an institution's public profile.
+ *
+ * @param {object} [initialData] - existing profile fetched from the API
+ * @param {(updatedProfile: object) => void} [onSuccess] - called after a successful save
+ */
 const InstitutionProfileForm = ({ initialData, onSuccess }) => {
   const [serverError, setServerError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");

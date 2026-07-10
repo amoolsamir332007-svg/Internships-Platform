@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch";
@@ -7,8 +8,8 @@ import {
   closeInternship,
   deleteInternship,
 } from "../../../api/internshipService";
-import StatusTabs from "../../../components/dashboard/StatusTabs";
-import LoadingSpinner from "../../../components/common/LoadingSpinner";
+import StatusTabs from "../../../components/dashboard/StatusTabs/StatusTabs";
+import LoadingSpinner from "../../../components/common/LoadingSpinner/LoadingSpinner";
 import "./InstitutionDash.css";
  
 const TABS = [
@@ -19,9 +20,7 @@ const TABS = [
  
 const ManageInternships = () => {
   const navigate = useNavigate();
- 
   const [activeTab, setActiveTab] = useState("published");
- 
   const [actionLoadingId, setActionLoadingId] = useState(null);
  
   const {
@@ -35,7 +34,7 @@ const ManageInternships = () => {
     setActionLoadingId(id);
     try {
       await publish(id);
-      refetch(); 
+      refetch();
     } catch (err) {
       alert("Something went wrong while publishing the internship");
     } finally {
@@ -54,9 +53,11 @@ const ManageInternships = () => {
       setActionLoadingId(null);
     }
   };
-
+ 
   const handleDelete = async (id) => {
-    const confirmed = window.confirm("Are you sure you want to delete this internship? This action cannot be undone.");
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this internship? This action cannot be undone."
+    );
     if (!confirmed) return;
  
     setActionLoadingId(id);
@@ -78,7 +79,7 @@ const ManageInternships = () => {
           className="manage-internships-add-btn"
           onClick={() => navigate("/dashboard/institution/post-internship")}
         >
-          +New Internship
+          + New Internship
         </button>
       </div>
  
@@ -99,16 +100,20 @@ const ManageInternships = () => {
               <div className="manage-internships-card-info">
                 <h3>{internship.title}</h3>
                 <p className="manage-internships-applicants-count">
-                 Number of Applicants: {internship.applicantsCount ?? 0}
+                  Number of Applicants: {internship.applicantsCount ?? 0}
                 </p>
               </div>
  
               <div className="manage-internships-card-actions">
                 <button
                   className="manage-internships-btn-edit"
-                  onClick={() => navigate(`/dashboard/institution/post-internship?edit=${internship.id}`)}
+                  onClick={() =>
+                    navigate(
+                      `/dashboard/institution/post-internship?edit=${internship.id}`
+                    )
+                  }
                 >
-                 Edit
+                  Edit
                 </button>
  
                 {activeTab === "draft" && (
@@ -117,7 +122,7 @@ const ManageInternships = () => {
                     disabled={actionLoadingId === internship.id}
                     onClick={() => handlePublish(internship.id)}
                   >
-                   Publish
+                    Publish
                   </button>
                 )}
  
@@ -127,7 +132,7 @@ const ManageInternships = () => {
                     disabled={actionLoadingId === internship.id}
                     onClick={() => handleClose(internship.id)}
                   >
-                   close
+                    Close
                   </button>
                 )}
  
@@ -136,7 +141,7 @@ const ManageInternships = () => {
                   disabled={actionLoadingId === internship.id}
                   onClick={() => handleDelete(internship.id)}
                 >
-                  حذف
+                  Delete
                 </button>
               </div>
             </div>

@@ -3,35 +3,33 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useFetch } from "../../../hooks/useFetch";
 import { getMyInternships } from "../../../api/internshipService";
 import { getApplicantsForInstitution } from "../../../api/applicationService";
-import StatCard from "../../../components/dashboard/StatCard";
-import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import StatCard from "../../../components/dashboard/StatCard/StatCard";
+import LoadingSpinner from "../../../components/common/LoadingSpinner/LoadingSpinner";
 import "./InstitutionDash.css";
- 
+
 const InstitutionDashboard = () => {
   const { user } = useAuth();
- 
+
   const { data: internships, loading: internshipsLoading } = useFetch(
     () => getMyInternships(),
-    []
+    [],
   );
- 
+
   const { data: pendingApplicants, loading: applicantsLoading } = useFetch(
     () => getApplicantsForInstitution({ status: "pending" }),
-    []
+    [],
   );
- 
+
   const internshipsList = internships || [];
   const pendingList = pendingApplicants || [];
- 
+
   const publishedCount = internshipsList.filter(
-    (i) => i.status === "published"
+    (i) => i.status === "published",
   ).length;
-  const draftCount = internshipsList.filter(
-    (i) => i.status === "draft"
-  ).length;
- 
+  const draftCount = internshipsList.filter((i) => i.status === "draft").length;
+
   const loading = internshipsLoading || applicantsLoading;
- 
+
   return (
     <div className="institution-dashboard">
       <div className="institution-dashboard-header">
@@ -40,7 +38,7 @@ const InstitutionDashboard = () => {
         </h1>
         <p>Here's what's happening with your internships today.</p>
       </div>
- 
+
       {loading ? (
         <LoadingSpinner />
       ) : (
@@ -59,7 +57,7 @@ const InstitutionDashboard = () => {
           />
         </div>
       )}
- 
+
       <div className="institution-dashboard-actions">
         <Link
           to="/dashboard/institution/post-internship"
@@ -86,5 +84,5 @@ const InstitutionDashboard = () => {
     </div>
   );
 };
- 
+
 export default InstitutionDashboard;

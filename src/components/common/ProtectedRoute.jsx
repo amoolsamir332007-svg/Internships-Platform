@@ -1,7 +1,8 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useRole } from "../../hooks/useRole";
-import LoadingSpinner from "./LoadingSpinner/LoadingSpinner"; 
+import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
+ 
 const ProtectedRoute = ({ children, allowedRole }) => {
   const { isAuthenticated, loading } = useAuth();
   const { role } = useRole();
@@ -22,3 +23,4 @@ const ProtectedRoute = ({ children, allowedRole }) => {
 };
  
 export default ProtectedRoute;
+ 
