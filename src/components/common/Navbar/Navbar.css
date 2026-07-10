@@ -1,0 +1,142 @@
+.navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #eaecf0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+ 
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+ 
+.navbar-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #175cd3;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+ 
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+  justify-content: center;
+}
+ 
+.navbar-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #344054;
+  text-decoration: none;
+  padding: 6px 4px;
+}
+ 
+.navbar-link:hover {
+  color: #175cd3;
+}
+ 
+.navbar-auth {
+  flex-shrink: 0;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+}
+ 
+.navbar-user {
+  position: relative;
+}
+ 
+.navbar-user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px 4px 4px;
+  border-radius: 20px;
+}
+ 
+.navbar-user-trigger:hover {
+  background: #f2f4f7;
+}
+ 
+.navbar-user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #eff4ff;
+  color: #175cd3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+ 
+.navbar-user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #344054;
+}
+ 
+.navbar-user-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #ffffff;
+  border: 1px solid #eaecf0;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(16, 24, 40, 0.08);
+  min-width: 160px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+}
+ 
+.navbar-user-dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #344054;
+  text-decoration: none;
+  cursor: pointer;
+}
+ 
+.navbar-user-dropdown-item:hover {
+  background: #f2f4f7;
+}
+ 
+.navbar-user-dropdown-item-danger {
+  color: #f04438;
+}
+ 
+@media (max-width: 720px) {
+  .navbar-links {
+    gap: 14px;
+  }
+ 
+  .navbar-link {
+    font-size: 13px;
+  }
+ 
+  .navbar-user-name {
+    display: none;
+  }
+}

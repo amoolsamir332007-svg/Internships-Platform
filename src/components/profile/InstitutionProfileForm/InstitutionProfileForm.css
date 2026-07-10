@@ -1,0 +1,89 @@
+.institution-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 640px;
+}
+ 
+.institution-profile-form-row {
+  display: flex;
+  gap: 16px;
+}
+ 
+.institution-profile-form-row .institution-profile-form-field {
+  flex: 1;
+}
+ 
+.institution-profile-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.institution-profile-form-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #344054;
+}
+ 
+.institution-profile-form-field input,
+.institution-profile-form-field textarea {
+  border: 1px solid #eaecf0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #344054;
+  font-family: inherit;
+  resize: vertical;
+}
+ 
+.institution-profile-form-field input:focus,
+.institution-profile-form-field textarea:focus {
+  outline: none;
+  border-color: #175cd3;
+  box-shadow: 0 0 0 3px #eff4ff;
+}
+ 
+.institution-profile-form-error {
+  font-size: 12px;
+  font-weight: 500;
+  color: #f04438;
+}
+ 
+.institution-profile-form-alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+ 
+.institution-profile-form-alert-error {
+  background: #fef3f2;
+  color: #f04438;
+}
+ 
+.institution-profile-form-alert-success {
+  background: #ecfdf3;
+  color: #12b76a;
+}
+ 
+.institution-profile-form-submit {
+  align-self: flex-start;
+  background: #175cd3;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+ 
+.institution-profile-form-submit:hover {
+  background: #144ead;
+}
+ 
+.institution-profile-form-submit:disabled {
+  background: #98a2b3;
+  cursor: not-allowed;
+}

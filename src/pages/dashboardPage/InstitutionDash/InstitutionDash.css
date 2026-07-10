@@ -232,3 +232,62 @@
   gap: 14px;
   margin-top: 16px;
 }
+/* InstitutionDashboard.css */
+.institution-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+ 
+.institution-dashboard-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #344054;
+  margin: 0 0 4px;
+}
+ 
+.institution-dashboard-header p {
+  font-size: 14px;
+  color: #667085;
+  margin: 0;
+}
+ 
+.institution-dashboard-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+ 
+.institution-dashboard-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+ 
+.institution-dashboard-action-card {
+  display: block;
+  background: #ffffff;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+ 
+.institution-dashboard-action-card:hover {
+  border-color: #175cd3;
+  background: #f2f4f7;
+}
+ 
+.institution-dashboard-action-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #175cd3;
+  margin: 0 0 6px;
+}
+ 
+.institution-dashboard-action-card p {
+  font-size: 13px;
+  color: #667085;
+  margin: 0;
+}

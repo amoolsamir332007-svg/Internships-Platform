@@ -1,0 +1,30 @@
+.institution-profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+ 
+.institution-profile-page-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #344054;
+  margin: 0 0 4px;
+}
+ 
+.institution-profile-page-header p {
+  font-size: 14px;
+  color: #667085;
+  margin: 0;
+  max-width: 560px;
+}
+ 
+.institution-profile-page-error {
+  background: #fef3f2;
+  color: #f04438;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  max-width: 640px;
+}
+ 

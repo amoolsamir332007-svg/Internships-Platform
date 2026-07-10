@@ -1,0 +1,73 @@
+ter · CSS
+.footer {
+  background: #101828;
+  color: #d0d5dd;
+  margin-top: auto;
+}
+ 
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+ 
+.footer-brand {
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+.footer-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+ 
+.footer-tagline {
+  font-size: 13px;
+  color: #98a2b3;
+  margin: 0;
+  line-height: 1.5;
+}
+ 
+.footer-links {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+ 
+.footer-links-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+.footer-links-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+ 
+.footer-links-group a {
+  font-size: 13px;
+  color: #98a2b3;
+  text-decoration: none;
+}
+ 
+.footer-links-group a:hover {
+  color: #ffffff;
+}
+ 
+.footer-bottom {
+  border-top: 1px solid #1d2939;
+  padding: 16px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #667085;
+}
