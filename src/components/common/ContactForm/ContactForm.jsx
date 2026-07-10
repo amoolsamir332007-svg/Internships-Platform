@@ -1,13 +1,3 @@
-// Name
-// Email
-// Message
-// Validation بسيط
-// Loading أثناء الإرسال
-// قابل للربط مع Backend API لاحقاً
-
-// ContactForm.jsx فوررم التواصل (اسم، إيميل، رسالة) - بيتستخدم بصفحة Contact
-// فيه validation بسيط ودالة submit (ترسل الرسالة أو تعرض رسالة نجاح)
-// [cite: 91, 92, 93, 94]
 
 import React, { useState } from 'react';
 import Button from './Button';
@@ -27,31 +17,29 @@ const ContactForm = () => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!formData.name.trim()) newErrors.name = 'الاسم مطلوب';
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) {
-      newErrors.email = 'البريد الإلكتروني مطلوب';
+      newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'البريد الإلكتروني غير صحيح';
+      newErrors.email = 'The email is incorrect';
     }
-    if (!formData.message.trim()) newErrors.message = 'الرسالة مطلوبة';
+    if (!formData.message.trim()) newErrors.message = 'The message is required';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
-    // محاكاة إرسال الرسالة بنجاح
-    setSuccessMsg('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
+    setSuccessMsg('Your message has been sent successfully! We will get in touch with you soon.');
     setFormData({ name: '', email: '', message: '' });
   };
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
-      <h3>تواصل معنا</h3>
+      <h3>Get in touch with us</h3>
       {successMsg && <div className="alert alert-success">{successMsg}</div>}
 
       <div className="form-group">
-        <label>الاسم</label>
+        <label>Name</label>
         <input 
           type="text" 
           name="name" 
@@ -63,7 +51,7 @@ const ContactForm = () => {
       </div>
 
       <div className="form-group">
-        <label>البريد الإلكتروني</label>
+        <label>Email</label>
         <input 
           type="email" 
           name="email" 
@@ -75,7 +63,7 @@ const ContactForm = () => {
       </div>
 
       <div className="form-group">
-        <label>الرسالة</label>
+        <label> Message</label>
         <textarea 
           name="message" 
           rows="5"
@@ -86,7 +74,7 @@ const ContactForm = () => {
         {errors.message && <span className="error-text">{errors.message}</span>}
       </div>
 
-      <Button text="إرسال الرسالة" type="submit" variant="primary" />
+      <Button text="Send the message" type="submit" variant="primary" />
     </form>
   );
 };

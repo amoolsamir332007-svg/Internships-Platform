@@ -1,15 +1,7 @@
-import {
-    FaBriefcase,
-    FaFileAlt,
-    FaCheckCircle,
-    FaClock
-} from "react-icons/fa";
-
+import {FaBriefcase,FaFileAlt,FaCheckCircle,FaClock} from "react-icons/fa";
 import "./StudentDash.css";
 
-
 const StudentDashboard = () => {
-
 
     const stats = [
 
@@ -39,10 +31,6 @@ const StudentDashboard = () => {
 
     ];
 
-
-
-
-
     const internships=[
 
         {
@@ -65,9 +53,6 @@ const StudentDashboard = () => {
 
     ];
 
-
-
-
 return (
 
 <div className="student-dashboard">
@@ -79,21 +64,10 @@ return (
 <h1>
 Welcome Back, Ahmed 🚀
 </h1>
-
-
-<p>
-Discover internships and build your future career.
-</p>
-
+<p>Discover internships and build your future career.</p>
 
 </div>
-
-
-
-
-
 <div className="stats-grid">
-
 
 {
 stats.map((item,index)=>(
@@ -106,10 +80,7 @@ stats.map((item,index)=>(
 {item.icon}
 
 </div>
-
-
 <div>
-
 <h3>
 {item.number}
 </h3>
@@ -119,26 +90,11 @@ stats.map((item,index)=>(
 </p>
 
 </div>
-
-
 </div>
-
-
 ))
 
 }
-
-
 </div>
-
-
-
-
-
-
-
-
-
 <div className="dashboard-section">
 
 
@@ -150,36 +106,22 @@ Recommended Internships
 
 
 </div>
-
-
-
-
-
 <div className="internship-grid">
 
 
 {
 internships.map((item,index)=>(
 
-
 <div className="internship-card" key={index}>
-
-
 <h3>
 {item.title}
 </h3>
-
-
 <p>
 🏢 {item.company}
 </p>
-
-
 <span>
 📍 {item.location}
 </span>
-
-
 
 <button>
 View Details
@@ -187,29 +129,14 @@ View Details
 
 
 </div>
-
-
 ))
 
 }
-
-
+</div>
 </div>
 
-
 </div>
-
-
-
-
-
-
-</div>
-
 );
 
-
 };
-
-
 export default StudentDashboard;

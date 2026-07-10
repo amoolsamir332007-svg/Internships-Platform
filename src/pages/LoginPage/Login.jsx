@@ -4,26 +4,15 @@ import { useAuth } from "../../Context/AuthContext";
 import { DASHBOARD_ROUTE_BY_ROLE } from "../../utils/constants";
 import "./Login.css";
 
-
 function Login() {
-
-
     const navigate = useNavigate();
-
     const { login } = useAuth();
-
-
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [error, setError] = useState("");
 
     const [loading, setLoading] = useState(false);
-
-
-
-
 
     const handleSubmit = (e) => {
 
@@ -34,49 +23,24 @@ function Login() {
         setError("");
         setLoading(true);
 
-
-
-
         const savedUser = JSON.parse(
             localStorage.getItem("registeredUser") || "null"
         );
 
-
-
-
-
         setTimeout(() => {
 
-
-
             if (!savedUser) {
-
 
                 setError(
                     "No account found. Please create an account first."
                 );
-
-
                 setLoading(false);
 
                 return;
-
             }
-
-
-
-
-
-
             const isValidUser =
                 savedUser.email === email &&
                 savedUser.password === password;
-
-
-
-
-
-
 
             if (!isValidUser) {
 
@@ -91,12 +55,6 @@ function Login() {
                 return;
 
             }
-
-
-
-
-
-
             const token = "jwt-demo-token";
 
 
@@ -106,54 +64,23 @@ function Login() {
                 token
             );
 
-
-
-
-
             const dashboardRoute =
                 DASHBOARD_ROUTE_BY_ROLE[
                     savedUser.role
                 ];
 
-
-
-
-
             if (dashboardRoute) {
-
-
                 navigate(dashboardRoute);
-
 
             }
 
             else {
-
-
                 navigate("/");
-
-
             }
-
-
-
-
-
             setLoading(false);
-
-
-
-
         },800);
 
-
-
     };
-
-
-
-
-
 
     return (
 
@@ -178,66 +105,31 @@ function Login() {
                         and discover new opportunities.
                     </p>
 
-
-
                     <div className="login-features">
-
-
                         <span>
                             💼 Find Internship Opportunities
                         </span>
-
-
                         <span>
                             🚀 Build Your Career
                         </span>
 
-
                         <span>
                             🌎 Connect With Companies
                         </span>
-
-
                     </div>
-
-
-
                 </div>
-
-
-
-
-
-
-
                 <div className="login-form">
-
-
                     <h2>
                         Login
                     </h2>
-
-
                     <p className="subtitle">
                         Enter your account details
                     </p>
-
-
-
-
-
-
                     <form onSubmit={handleSubmit}>
-
-
                         <div className="input-group">
-
-
                             <label>
                                 Email
                             </label>
-
-
                             <input
 
                                 type="email"
@@ -256,13 +148,6 @@ function Login() {
 
 
                         </div>
-
-
-
-
-
-
-
                         <div className="input-group">
 
 
@@ -282,21 +167,10 @@ function Login() {
                                 onChange={
                                     (e)=>setPassword(e.target.value)
                                 }
-
                                 required
-
                             />
 
-
                         </div>
-
-
-
-
-
-
-
-
                         {
                             error &&
 
@@ -305,14 +179,6 @@ function Login() {
                             </p>
 
                         }
-
-
-
-
-
-
-
-
                         <button
                             disabled={loading}
                         >
@@ -327,19 +193,7 @@ function Login() {
 
 
                         </button>
-
-
-
-
                     </form>
-
-
-
-
-
-
-
-
 
                     <p className="register-link">
 
@@ -352,31 +206,11 @@ function Login() {
                             Create Account
 
                         </Link>
-
-
-
                     </p>
-
-
-
-
                 </div>
-
-
-
-
             </div>
-
-
-
         </div>
-
-
     );
-
-
 }
-
-
 
 export default Login;

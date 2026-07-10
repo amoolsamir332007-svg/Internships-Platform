@@ -1,99 +1,45 @@
-/* ================= PAGE ================= */
-
 
 .getstarted-page{
-
-
 min-height:100vh;
-
 background:
-
 radial-gradient(
 circle at top left,
 #f3e8ff,
 transparent 35%
 ),
-
 radial-gradient(
 circle at bottom right,
 #dbeafe,
 transparent 35%
 ),
-
 #ffffff;
-
-
 font-family:
 "Inter",
 sans-serif;
-
-
 }
-
-
-
-
-
-
-/* ================= NAVBAR ================= */
-
 
 .getstarted-navbar{
-
-
 height:82px;
-
 padding:0 5%;
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
 background:white;
-
 border-bottom:1px solid #eee;
-
-
 }
-
-
-
-
 .brand{
-
-
 display:flex;
-
 align-items:center;
-
 gap:12px;
-
-
 }
-
-
-
-
 .brand-icon{
-
-
 width:48px;
-
 height:48px;
-
 border-radius:14px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 font-size:24px;
-
-
 background:
 
 linear-gradient(
@@ -101,89 +47,34 @@ linear-gradient(
 #9333ea,
 #2563eb
 );
-
-
 }
-
-
-
-
 .brand h3{
-
-
 margin:0;
-
 font-size:22px;
-
 color:#111827;
-
-
 }
-
-
-
 .brand span{
-
-
 color:#9ca3af;
-
-
 }
-
-
-
-
 .login-area{
-
-
 display:flex;
-
 align-items:center;
-
 gap:20px;
 
-
 }
-
-
-
-
 .login-area span{
-
-
 color:#6b7280;
-
-
 }
-
-
-
-
 .login-area button{
-
-
 padding:12px 30px;
-
 border-radius:10px;
-
 border:2px solid #2563eb;
-
 background:white;
-
 color:#2563eb;
-
 font-size:16px;
-
 font-weight:600;
-
 cursor:pointer;
-
-
 }
-
-
-
-
 
 .login-area button:hover{
 
@@ -195,18 +86,6 @@ color:white;
 
 }
 
-
-
-
-
-
-
-
-
-/* ================= HEADER ================= */
-
-
-
 .welcome-section{
 
 
@@ -217,10 +96,7 @@ padding:70px 20px 40px;
 
 }
 
-
-
 .welcome-section h1{
-
 
 font-size:55px;
 
@@ -228,11 +104,7 @@ font-weight:900;
 
 color:#111827;
 
-
 }
-
-
-
 
 .welcome-section h1 span{
 
@@ -249,140 +121,59 @@ linear-gradient(
 /* -webkit-background-clip:text; */
 
 color:transparent;
-
-
 }
-
-
-
 .welcome-section p{
 
 
 color:#6b7280;
 
 font-size:18px;
-
-
 }
 
-
-
-
-
 .subtitle{
-
-
 font-size:24px!important;
 
 color:#374151!important;
 
 margin-top:20px;
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-/* ================= CARDS ================= */
-
 
 .roles-container{
-
-
 max-width:950px;
-
 margin:40px auto;
-
 display:grid;
-
 grid-template-columns:repeat(2,1fr);
-
 gap:35px;
-
 padding:0 20px;
-
-
 }
-
-
-
-
-
-
-
 .role-card{
-
-
 background:white;
-
 padding:40px 35px;
-
 border-radius:30px;
-
 text-align:center;
-
-box-shadow:
-
-0 20px 45px rgba(0,0,0,.08);
-
-
+box-shadow: 0 20px 45px rgba(0,0,0,.08);
 transition:.35s;
-
-
 border:1px solid #f1f5f9;
-
-
 }
 
 
 
 
 .role-card:hover{
-
-
 transform:translateY(-10px);
-
-
 }
-
-
-
 
 .role-icon{
-
-
 width:85px;
-
 height:85px;
-
 margin:auto;
-
 border-radius:50%;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 font-size:40px;
-
-
 background:#ede9fe;
-
-
 }
-
-
-
 
 .role-card h2{
 
@@ -394,13 +185,8 @@ margin:25px 0 10px;
 
 }
 
-
-
 .institution h2{
-
-
 color:#9333ea;
-
 
 }
 
@@ -414,75 +200,37 @@ color:#2563eb;
 
 }
 
-
-
-
-
 .role-card h4{
-
-
 color:#6b7280;
 
-
 }
-
-
-
 .role-card p{
-
-
 color:#6b7280;
 
 line-height:1.7;
 
 min-height:70px;
-
-
 }
-
-
-
-
-
-
 
 .role-card button{
 
-
 width:100%;
-
 margin-top:25px;
-
 padding:16px;
-
 border:none;
-
 border-radius:12px;
-
 color:white;
-
 font-size:17px;
-
 font-weight:700;
-
 cursor:pointer;
-
 display:flex;
-
 justify-content:center;
-
 gap:15px;
-
 
 }
 
 
-
-
-
 .institution button{
-
-
 background:
 
 linear-gradient(
@@ -494,11 +242,7 @@ linear-gradient(
 
 }
 
-
-
 .student button{
-
-
 background:
 
 linear-gradient(
@@ -506,125 +250,44 @@ linear-gradient(
 #2563eb,
 #1d4ed8
 );
-
-
 }
-
-
-
-
-
-
 .role-card button:hover{
 
 
 opacity:.9;
 
 transform:scale(1.02);
-
-
 }
-
-
-
-
-
-
-
 .security-message{
-
-
 text-align:center;
-
 color:#6b7280;
-
 padding:25px;
-
-
 }
-
-
-
-
-
-
-
-
 
 /* ================= RESPONSIVE ================= */
 
-
-
 @media(max-width:800px){
-
-
-
 .roles-container{
-
-
 grid-template-columns:1fr;
-
-
 }
-
-
-
 .welcome-section h1{
-
-
 font-size:38px;
-
-
 }
-
-
-
 .login-area span{
-
-
 display:none;
-
-
 }
-
-
-
 }
 
 
 
 @media(max-width:500px){
-
-
-
 .getstarted-navbar{
-
-
 padding:0 20px;
 
-
 }
-
-
-
 .welcome-section h1{
-
-
 font-size:30px;
-
-
 }
-
-
-
 .role-card{
-
-
 padding:30px 20px;
-
-
-}
-
-
-
-}
+}}

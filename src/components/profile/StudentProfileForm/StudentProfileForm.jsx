@@ -1,6 +1,3 @@
-    // StudentProfileForm.jsx فورم تعديل بيانات بروفايل الطالب (اسم، جامعة، تخصص، سيرة ذاتية...) بيستخدم studentProfileSchema.js للـ validation وبيرسل البيانات عن طريق profileService
-    //
-
     import React, { useState, useEffect } from 'react';
     import { validateStudentProfile } from '../../schemas/studentProfileSchema';
     import Button from '../common/Button';

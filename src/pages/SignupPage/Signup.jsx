@@ -542,30 +542,12 @@ const Signup = () => {
                     >
 
                         Login
-
-                    </button>
-
+                </button>
 
                 </p>
-
-
-
-
-
-
             </div>
-
-
-
         </div>
-
-
-
     );
-
-
 };
-
-
 
 export default Signup;

@@ -1,12 +1,3 @@
-// عرض روابط Dashboard الطالب
-//  التنقل بين الصفحات باستخدام React Router
-//  إظهار الرابط النشط Active Link
-//  زر تسجيل الخروج
-//  تصميم Responsive
-//  جاهز للربط مع AuthContext لاحقاً
-
-// StudentSidebar.jsx القائمة الجانبية الخاصة بلوحة تحكم الطالب. روابط: Dashboard, My Applications, Profile, Logout
-//
 
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';

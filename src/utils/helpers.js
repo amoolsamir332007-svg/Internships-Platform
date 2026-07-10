@@ -1,7 +1,3 @@
-// helpers.js
-// Common utility functions used across the application.
-// Includes formatting, text processing and status helpers.
-
 
 // تنسيق التاريخ
 // تقصير النصوص الطويلة
@@ -9,7 +5,6 @@
 // تحويل أول حرف Capital
 // معالجة النصوص
 
-// Format date to readable format
 export const formatDate = (date) => {
 
     if (!date) return "";
@@ -22,7 +17,7 @@ export const formatDate = (date) => {
     });
 
 };
-// Shorten long text
+
 export const truncateText = (text, length = 100) => {
 
     if (!text) return "";
@@ -124,13 +119,7 @@ return name
 .map(word=>word[0])
 .join("")
 .toUpperCase();
-
-
 };
-
-
-
-
 
 // Delay function for debounce/search
 export const debounce = (func, delay)=>{

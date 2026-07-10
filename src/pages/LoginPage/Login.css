@@ -1,13 +1,8 @@
 .login-page{
-
 min-height:100vh;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 background:
 linear-gradient(
 135deg,
@@ -20,31 +15,18 @@ padding:30px;
 
 }
 
-
-
 .login-card{
-
 width:950px;
-
 background:white;
-
 border-radius:25px;
-
 display:flex;
-
 overflow:hidden;
-
 box-shadow:
 0 20px 50px rgba(0,0,0,.2);
-
 }
 
-
-
 .login-left{
-
 flex:1;
-
 padding:60px;
 
 background:
@@ -57,8 +39,6 @@ linear-gradient(
 color:white;
 
 }
-
-
 
 .login-left h1{
 

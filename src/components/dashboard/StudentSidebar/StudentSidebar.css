@@ -7,7 +7,7 @@
   flex-direction: column;
   position: fixed;
   top: 0;
-  right: 0; /* التوجيه متوافق مع اللغة العربية */
+  right: 0; 
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
@@ -42,7 +42,7 @@
   font-size: 1rem;
   font-weight: 500;
   transition: all 0.3s ease;
-  border-right: 4px solid transparent; /* شريط جانبي يظهر عند التفعيل */
+  border-right: 4px solid transparent;
 }
 
 .menu-item:hover {
@@ -58,7 +58,7 @@
 }
 
 .menu-icon {
-  margin-left: 12px; /* مسافة أيقونة الـ emoji لليمين باللغة العربية */
+  margin-left: 12px; 
   font-size: 1.2rem;
 }
 
