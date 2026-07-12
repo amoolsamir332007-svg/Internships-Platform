@@ -3,7 +3,7 @@
   align-items: center;
   gap: 14px;
   background: #ffffff;
-  border: 1px solid #eaecf0;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 18px 20px;
   min-width: 160px;
@@ -29,20 +29,20 @@
 .stat-card-value {
   font-size: 24px;
   font-weight: 700;
-  color: #344054;
+  color: var(--color-text);
   line-height: 1.2;
 }
  
 .stat-card-label {
   font-size: 13px;
   font-weight: 500;
-  color: #667085;
+  color: var(--color-text-secondary);
 }
  
 /* accent colors */
 .stat-card-blue .stat-card-icon {
-  background: #eff4ff;
-  color: #175cd3;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
 }
  
 .stat-card-green .stat-card-icon {
@@ -57,5 +57,5 @@
  
 .stat-card-red .stat-card-icon {
   background: #fef3f2;
-  color: #f04438;
+  color: var(--color-danger);
 }

@@ -16,7 +16,7 @@
 }
 
 .search-input-container:focus-within {
-  border-color: #3498db;
+  border-color: var(--color-secondary);
   box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
 }
 
@@ -42,7 +42,7 @@
 }
 
 .search-button {
-  background-color: #3498db;
+  background-color: var(--color-secondary);
   color: #ffffff;
   border: none;
   padding: 10px 24px;

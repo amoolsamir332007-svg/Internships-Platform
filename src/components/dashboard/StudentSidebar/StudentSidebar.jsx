@@ -9,7 +9,7 @@ const StudentSidebar = () => {
 
   const handleLogout = async () => {
     try {
-      await authService.logout();
+      await logoutUser();
       navigate('/login');
     } catch (error) {
       console.error('خطأ أثناء تسجيل الخروج:', error);

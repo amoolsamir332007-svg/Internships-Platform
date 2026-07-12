@@ -1,6 +1,6 @@
 .navbar {
   background: #ffffff;
-  border-bottom: 1px solid #eaecf0;
+  border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -19,7 +19,7 @@
 .navbar-logo {
   font-size: 18px;
   font-weight: 700;
-  color: #175cd3;
+  color: var(--color-primary);
   text-decoration: none;
   flex-shrink: 0;
 }
@@ -35,13 +35,13 @@
 .navbar-link {
   font-size: 14px;
   font-weight: 600;
-  color: #344054;
+  color: var(--color-text);
   text-decoration: none;
   padding: 6px 4px;
 }
  
 .navbar-link:hover {
-  color: #175cd3;
+  color: var(--color-primary);
 }
  
 .navbar-auth {
@@ -67,15 +67,15 @@
 }
  
 .navbar-user-trigger:hover {
-  background: #f2f4f7;
+  background: var(--color-bg-subtle);
 }
  
 .navbar-user-avatar {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #eff4ff;
-  color: #175cd3;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +87,7 @@
 .navbar-user-name {
   font-size: 14px;
   font-weight: 600;
-  color: #344054;
+  color: var(--color-text);
 }
  
 .navbar-user-dropdown {
@@ -95,7 +95,7 @@
   right: 0;
   top: calc(100% + 8px);
   background: #ffffff;
-  border: 1px solid #eaecf0;
+  border: 1px solid var(--color-border);
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(16, 24, 40, 0.08);
   min-width: 160px;
@@ -114,17 +114,17 @@
   padding: 9px 10px;
   font-size: 14px;
   font-weight: 500;
-  color: #344054;
+  color: var(--color-text);
   text-decoration: none;
   cursor: pointer;
 }
  
 .navbar-user-dropdown-item:hover {
-  background: #f2f4f7;
+  background: var(--color-bg-subtle);
 }
  
 .navbar-user-dropdown-item-danger {
-  color: #f04438;
+  color: var(--color-danger);
 }
  
 @media (max-width: 720px) {

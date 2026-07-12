@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border: 1px solid #eaecf0;
+  border: 1px solid var(--color-border);
   border-radius: 10px;
   padding: 18px 20px;
   gap: 16px;
@@ -17,7 +17,7 @@
  
 .applicant-card-university {
   font-size: 13px;
-  color: #667085;
+  color: var(--color-text-secondary);
   margin-bottom: 8px;
 }
  
@@ -34,7 +34,7 @@
  
 .applicant-card-cv-link {
   font-size: 13px;
-  color: #175cd3;
+  color: var(--color-primary);
   text-decoration: underline;
 }
  

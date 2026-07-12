@@ -36,6 +36,6 @@
 }
 
 .section-message.error {
-  color: #e74c3c;
+  color: var(--color-danger);
   font-weight: 600;
 }

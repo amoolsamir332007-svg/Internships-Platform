@@ -32,22 +32,22 @@
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s;
-  background-color: #f8fafc;
+  background-color: var(--color-bg-subtle);
 }
 
 .profile-form input:focus,
 .profile-form textarea:focus {
-  border-color: #3498db;
+  border-color: var(--color-secondary);
   background-color: #ffffff;
 }
 
 .profile-form .input-error {
-  border-color: #e74c3c !important;
+  border-color: var(--color-danger) !important;
   background-color: #fff5f5;
 }
 
 .profile-form .error-text {
-  color: #e74c3c;
+  color: var(--color-danger);
   font-size: 0.85rem;
   margin-top: -2px;
 }

@@ -2,7 +2,7 @@
 .applications-page,
 .student-profile{
 padding:35px;
-background:#f8fafc;
+background:var(--color-bg-subtle);
 min-height:100vh;
 }
 .dashboard-header{
@@ -10,8 +10,8 @@ background:
 
 linear-gradient(
 135deg,
-#4f46e5,
-#7c3aed
+var(--color-primary-dark),
+var(--color-primary)
 );
 padding:40px;
 border-radius:25px;
@@ -43,7 +43,7 @@ box-shadow:
 
 font-size:30px;
 
-color:#6366f1;
+color:var(--color-primary);
 
 }
 
@@ -82,7 +82,7 @@ width:100%;
 padding:12px;
 border:none;
 border-radius:10px;
-background:#6366f1;
+background:var(--color-primary);
 color:white;
 cursor:pointer;
 }
@@ -108,7 +108,7 @@ padding:20px;
 }
 .table-header{
 font-weight:bold;
-background:#eef2ff;
+background:var(--color-secondary-lighter);
 
 
 }
@@ -142,8 +142,8 @@ background:
 
 linear-gradient(
 135deg,
-#6366f1,
-#9333ea
+var(--color-primary),
+var(--color-primary)
 );
 color:white;
 padding:40px;
@@ -155,7 +155,7 @@ width:100px;
 height:100px;
 border-radius:50%;
 background:white;
-color:#6366f1;
+color:var(--color-primary);
 display:flex;
 align-items:center;
 justify-content:center;
@@ -176,7 +176,7 @@ grid-template-columns:
 repeat(3,1fr);
 }
 .skills span{
-background:#eef2ff;
+background:var(--color-secondary-lighter);
 
 padding:8px 15px;
 
@@ -186,7 +186,7 @@ margin:5px;
 
 display:inline-block;
 
-color:#4f46e5;
+color:var(--color-primary-dark);
 
 }
 

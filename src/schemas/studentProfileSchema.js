@@ -103,4 +103,19 @@ const studentProfileSchema = Yup.object({
         .nullable()
 });
 
+export const validateStudentProfile = (formData) => {
+    try {
+        studentProfileSchema.validateSync(formData, { abortEarly: false });
+        return { isValid: true, errors: {} };
+    } catch (err) {
+        const errors = {};
+        (err.inner || []).forEach((e) => {
+            if (e.path && !errors[e.path]) {
+                errors[e.path] = e.message;
+            }
+        });
+        return { isValid: false, errors };
+    }
+};
+
 export default studentProfileSchema;

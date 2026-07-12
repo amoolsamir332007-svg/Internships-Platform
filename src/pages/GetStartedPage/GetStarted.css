@@ -4,12 +4,12 @@ min-height:100vh;
 background:
 radial-gradient(
 circle at top left,
-#f3e8ff,
+var(--color-primary-lighter),
 transparent 35%
 ),
 radial-gradient(
 circle at bottom right,
-#dbeafe,
+var(--color-secondary-light),
 transparent 35%
 ),
 #ffffff;
@@ -44,17 +44,17 @@ background:
 
 linear-gradient(
 135deg,
-#9333ea,
-#2563eb
+var(--color-primary),
+var(--color-secondary)
 );
 }
 .brand h3{
 margin:0;
 font-size:22px;
-color:#111827;
+color:var(--color-text);
 }
 .brand span{
-color:#9ca3af;
+color:var(--color-text-muted);
 }
 .login-area{
 display:flex;
@@ -63,14 +63,14 @@ gap:20px;
 
 }
 .login-area span{
-color:#6b7280;
+color:var(--color-text-secondary);
 }
 .login-area button{
 padding:12px 30px;
 border-radius:10px;
-border:2px solid #2563eb;
+border:2px solid var(--color-secondary);
 background:white;
-color:#2563eb;
+color:var(--color-secondary);
 font-size:16px;
 font-weight:600;
 cursor:pointer;
@@ -79,7 +79,7 @@ cursor:pointer;
 .login-area button:hover{
 
 
-background:#2563eb;
+background:var(--color-secondary);
 
 color:white;
 
@@ -102,7 +102,7 @@ font-size:55px;
 
 font-weight:900;
 
-color:#111827;
+color:var(--color-text);
 
 }
 
@@ -113,8 +113,8 @@ background:
 
 linear-gradient(
 90deg,
-#9333ea,
-#2563eb
+var(--color-primary),
+var(--color-secondary)
 );
 
 
@@ -125,7 +125,7 @@ color:transparent;
 .welcome-section p{
 
 
-color:#6b7280;
+color:var(--color-text-secondary);
 
 font-size:18px;
 }
@@ -133,7 +133,7 @@ font-size:18px;
 .subtitle{
 font-size:24px!important;
 
-color:#374151!important;
+color:var(--color-text)!important;
 
 margin-top:20px;
 }
@@ -172,7 +172,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:40px;
-background:#ede9fe;
+background:var(--color-primary-light);
 }
 
 .role-card h2{
@@ -186,7 +186,7 @@ margin:25px 0 10px;
 }
 
 .institution h2{
-color:#9333ea;
+color:var(--color-primary);
 
 }
 
@@ -195,17 +195,17 @@ color:#9333ea;
 .student h2{
 
 
-color:#2563eb;
+color:var(--color-secondary);
 
 
 }
 
 .role-card h4{
-color:#6b7280;
+color:var(--color-text-secondary);
 
 }
 .role-card p{
-color:#6b7280;
+color:var(--color-text-secondary);
 
 line-height:1.7;
 
@@ -235,8 +235,8 @@ background:
 
 linear-gradient(
 90deg,
-#9333ea,
-#7c3aed
+var(--color-primary),
+var(--color-primary)
 );
 
 
@@ -247,8 +247,8 @@ background:
 
 linear-gradient(
 90deg,
-#2563eb,
-#1d4ed8
+var(--color-secondary),
+var(--color-secondary-dark)
 );
 }
 .role-card button:hover{
@@ -260,7 +260,7 @@ transform:scale(1.02);
 }
 .security-message{
 text-align:center;
-color:#6b7280;
+color:var(--color-text-secondary);
 padding:25px;
 }
 

@@ -1,5 +1,5 @@
 .header {
-  background: linear-gradient(135deg, #175cd3 0%, #0d3f96 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, #0d3f96 100%);
   padding: 80px 24px;
 }
  
@@ -44,11 +44,11 @@
  
 .header-btn-primary {
   background: #ffffff;
-  color: #175cd3;
+  color: var(--color-primary);
 }
  
 .header-btn-primary:hover {
-  background: #f2f4f7;
+  background: var(--color-bg-subtle);
 }
  
 .header-btn-secondary {

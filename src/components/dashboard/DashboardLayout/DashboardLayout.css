@@ -5,5 +5,12 @@
  
 .dashboard-layout-content {
   flex: 1;
+  min-width: 0;
   background-color: #fafafa;
+}
+
+@media (max-width: 800px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
 }

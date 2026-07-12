@@ -43,15 +43,15 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #3498db;
+  border-color: var(--color-secondary);
 }
 
 .input-error {
-  border-color: #e74c3c !important;
+  border-color: var(--color-danger) !important;
 }
 
 .error-text {
-  color: #e74c3c;
+  color: var(--color-danger);
   font-size: 0.85rem;
 }
 

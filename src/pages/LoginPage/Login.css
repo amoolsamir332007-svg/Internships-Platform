@@ -6,9 +6,9 @@ justify-content:center;
 background:
 linear-gradient(
 135deg,
-#4f46e5,
-#7c3aed,
-#2563eb
+var(--color-primary-dark),
+var(--color-primary),
+var(--color-secondary)
 );
 
 padding:30px;
@@ -32,7 +32,7 @@ padding:60px;
 background:
 linear-gradient(
 160deg,
-#111827,
+var(--color-text),
 #312e81
 );
 
@@ -91,7 +91,7 @@ padding:60px;
 
 font-size:35px;
 
-color:#111827;
+color:var(--color-text);
 
 }
 
@@ -99,7 +99,7 @@ color:#111827;
 
 .subtitle{
 
-color:#6b7280;
+color:var(--color-text-secondary);
 
 margin-bottom:30px;
 
@@ -149,7 +149,7 @@ outline:none;
 
 .input-group input:focus{
 
-border-color:#6366f1;
+border-color:var(--color-primary);
 
 }
 
@@ -171,8 +171,8 @@ background:
 
 linear-gradient(
 90deg,
-#6366f1,
-#8b5cf6
+var(--color-primary),
+var(--color-primary-dark)
 );
 
 
@@ -223,7 +223,7 @@ text-align:center;
 
 .register a{
 
-color:#6366f1;
+color:var(--color-primary);
 
 font-weight:bold;
 

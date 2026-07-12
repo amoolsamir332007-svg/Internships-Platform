@@ -7,20 +7,20 @@
 .institution-profile-page-header h1 {
   font-size: 22px;
   font-weight: 700;
-  color: #344054;
+  color: var(--color-text);
   margin: 0 0 4px;
 }
  
 .institution-profile-page-header p {
   font-size: 14px;
-  color: #667085;
+  color: var(--color-text-secondary);
   margin: 0;
   max-width: 560px;
 }
  
 .institution-profile-page-error {
   background: #fef3f2;
-  color: #f04438;
+  color: var(--color-danger);
   border-radius: 8px;
   padding: 10px 14px;
   font-size: 14px;

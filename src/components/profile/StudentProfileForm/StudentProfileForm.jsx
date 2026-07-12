@@ -1,7 +1,7 @@
     import React, { useState, useEffect } from 'react';
-   import { validateStudentProfile } from '../../../schemas/studentProfileSchema';
-import Button from '../../common/Buttons/Button';
-import './StudentProfileForm.css';
+    import { validateStudentProfile } from '../../../schemas/studentProfileSchema';
+    import Button from '../../common/Buttons/Button';
+    import './StudentProfileForm.css';
 
     const StudentProfileForm = ({ initialData, onSave }) => {
     const [formData, setFormData] = useState({

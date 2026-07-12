@@ -3,7 +3,7 @@
 
     min-height:100vh;
 
-    background:#f8fafc;
+    background:var(--color-bg-subtle);
 
     padding:40px;
 
@@ -34,7 +34,7 @@
     linear-gradient(
         135deg,
         #4338ca,
-        #7c3aed
+        var(--color-primary)
     );
 
 
@@ -125,7 +125,7 @@
 
     background:white;
 
-    color:#4f46e5;
+    color:var(--color-primary-dark);
 
 
     border:none;
@@ -216,7 +216,7 @@
 .detail-card h2{
 
 
-    color:#111827;
+    color:var(--color-text);
 
     margin-bottom:20px;
 
@@ -233,7 +233,7 @@
 .detail-card li{
 
 
-    color:#6b7280;
+    color:var(--color-text-secondary);
 
     line-height:1.8;
 
@@ -265,9 +265,9 @@
     border-radius:20px;
 
 
-    background:#eef2ff;
+    background:var(--color-secondary-lighter);
 
-    color:#4f46e5;
+    color:var(--color-primary-dark);
 
     font-weight:600;
 
@@ -291,24 +291,12 @@
 
 }
 
-
-
 .internship-header h1{
-
-
     font-size:30px;
-
-
 }
 
-
-
 .detail-grid{
-
-
     grid-template-columns:1fr;
-
-
 }
 
 

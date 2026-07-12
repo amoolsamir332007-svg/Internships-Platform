@@ -107,7 +107,7 @@ align-items:center;
 
 gap:10px;
 
-color:#6b7280;
+color:var(--color-text-secondary);
 
 margin-bottom:15px;
 
@@ -134,7 +134,7 @@ font-size:20px;
 .description{
 
 
-color:#4b5563;
+color:var(--color-text-secondary);
 
 line-height:1.7;
 
@@ -172,7 +172,7 @@ margin-top:25px;
 
 font-size:14px;
 
-color:#6b7280;
+color:var(--color-text-secondary);
 
 
 }
@@ -189,8 +189,8 @@ background:
 
 linear-gradient(
 135deg,
-#6d28d9,
-#2563eb
+var(--color-primary-dark),
+var(--color-secondary)
 );
 
 

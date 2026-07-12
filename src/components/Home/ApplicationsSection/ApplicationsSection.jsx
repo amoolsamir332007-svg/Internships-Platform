@@ -20,7 +20,7 @@ const ApplicationsSection = () => {
       const data = await internshipService.getPublished(9);
       setInternships(data || []);
     } catch (err) {
-      setError(' Failed to fetch internships. Please try again later.');
+      setError('فشل في تحميل التدريبات المتاحة.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -44,7 +44,7 @@ const ApplicationsSection = () => {
       const data = await internshipService.searchPublished(query);
       setInternships(data || []);
     } catch (err) {
-      setError("Something went wrong while searching for internships.");
+      setError('حدث خطأ أثناء البحث، يرجى المحاولة مرة أخرى.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -54,8 +54,8 @@ const ApplicationsSection = () => {
   return (
     <section id="applications" className="applications-section">
       <div className="section-header">
-        <h2>Available Internships</h2>
-        <p>Explore opportunities and kickstart your professional journey</p>
+        <h2>التدريبات المتاحة</h2>
+        <p>اكتشف فرص التدريب العملي وانطلق في مسيرتك المهنية</p>
       </div>
 
       {/* مكون البحث */}
@@ -63,11 +63,11 @@ const ApplicationsSection = () => {
 
       {/* عرض حالات التحميل والأخطاء أو البيانات */}
       {loading ? (
-        <div className="section-message">Loading available internships...</div>
+        <div className="section-message">جاري تحميل الفرص المتاحة...</div>
       ) : error ? (
         <div className="section-message error">{error}</div>
       ) : internships.length === 0 ? (
-        <div className="section-message">No matching internships found.</div>
+        <div className="section-message">لا توجد تدريبات مطابقة لبحثك حالياً.</div>
       ) : (
         <div className="internships-grid">
           {internships.map((internship) => (
