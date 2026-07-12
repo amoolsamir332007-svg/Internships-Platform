@@ -30,12 +30,12 @@ const SearchBar = ({ onSearch }) => {
         <span className="search-icon">🔍</span>
         <input
           type="text"
-          placeholder="ابحث عن مسمى تدريب أو مهارة معينة..."
+          placeholder="Search for internship titles or skills..."
           value={query}
           onChange={handleChange}
           className="search-input"
         />
-        <button type="submit" className="search-button">بحث</button>
+        <button type="submit" className="search-button">Search</button>
       </div>
     </form>
   );

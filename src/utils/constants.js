@@ -37,6 +37,7 @@ export const PAID_OPTIONS = {
  
 export const STORAGE_KEYS = {
   TOKEN: "token",
+  REGISTERED_USER:"registeredUser",
 };
  
 export const ROUTES = {
