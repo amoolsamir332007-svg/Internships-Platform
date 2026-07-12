@@ -2,9 +2,9 @@
 //
 
 import React, { useState, useEffect } from 'react';
-import SearchBar from './SearchBar';
-import InternshipCard from '../common/InternshipCard';
-import internshipService from '../../api/internshipService';
+import SearchBar from '../SearchBar/SearchBar';
+import InternshipCard from '../../common/InternshipCards/InternshipCard';
+import * as internshipService from '../../../api/internshipService';
 import './ApplicationsSection.css';
 
 const ApplicationsSection = () => {

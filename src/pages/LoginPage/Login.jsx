@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../../Context/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 import { DASHBOARD_ROUTE_BY_ROLE } from "../../utils/constants";
 import "./Login.css";
 

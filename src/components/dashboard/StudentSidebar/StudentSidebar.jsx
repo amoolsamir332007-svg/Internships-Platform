@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import authService from "../../../api/authService";
+import { logoutUser } from "../../../api/authService";
 import './StudentSidebar.css';
 
 const StudentSidebar = () => {

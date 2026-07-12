@@ -10,8 +10,7 @@
 // Used in Home, Search results and Dashboard pages.
 
 import "./InternshipCard.css";
-import { formatDate , truncateText , getStatusColor} from "../../utils/helpers";
-
+import { formatDate , truncateText , getStatusColor} from "../../../utils/helpers";
 const InternshipCard = ({internship,onClick}) => {
 
 return (

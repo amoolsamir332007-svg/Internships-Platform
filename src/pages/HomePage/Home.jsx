@@ -1,8 +1,8 @@
 
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/common/Navbar";
-import Footer from "../../components/common/Footer";
-import ApplicationsSection from "../../components/home/ApplicationsSection";
+import Navbar from "../../components/common/Navbar/Navbar";
+import Footer from "../../components/common/Footer/Footer";
+import ApplicationsSection from "../../components/Home/ApplicationsSection/ApplicationsSection";
 import "./Home.css";
 
 const Home = () => {
@@ -13,7 +13,6 @@ const Home = () => {
     return (
 
         <div className="home-page">
-            <Navbar />
             {/* ================= HERO SECTION ================= */}
             <section className="hero-section">
                 <div className="hero-container">
@@ -398,7 +397,6 @@ const Home = () => {
         </button>
     </div>
 </section>
-            <Footer />
         </div>
     );
 };

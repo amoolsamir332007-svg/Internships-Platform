@@ -1,7 +1,6 @@
 
     import React from 'react';
-    import './Profile.css';
-
+import './ProfileView.css';
     const ProfileView = ({ profileData, role }) => {
     if (!profileData) {
         return <div className="no-data">No data to display</div>;
