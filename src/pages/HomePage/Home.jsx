@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import ApplicationsSection from "../../components/Home/ApplicationsSection/ApplicationsSection";
 import heroImage from "../../assets/images/studying (1).svg";
@@ -395,7 +394,7 @@ const Home = () => {
             Join thousands of students and discover
             internship opportunities today.
         </p>
-        <button>
+        <button onClick={() => navigate("/get-started")}>
             Create Your Account
         </button>
     </div>

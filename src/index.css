@@ -55,6 +55,10 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+main {
+  padding-top: 76px;
+}
  
 img,
 svg {

@@ -196,7 +196,7 @@ function Login() {
                         Don't have an account?
 
 
-                        <Link to="/signup">
+                        <Link to="/get-started">
 
                             Create Account
 

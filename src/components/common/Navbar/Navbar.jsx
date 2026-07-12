@@ -177,7 +177,7 @@ const Navbar = () => {
 
 
                 <Link
-                  to="/signup"
+                  to="/get-started"
                   className="signup-btn"
                   onClick={closeMobileMenu}
                 >
@@ -214,7 +214,7 @@ const Navbar = () => {
 
 
             <Link
-              to="/signup"
+              to="/get-started"
               className="signup-btn"
             >
               Sign Up

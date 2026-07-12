@@ -52,6 +52,8 @@ const AppRoutes = () => {
           path={ROUTES.INSTITUTION_PROFILE_VIEW()}
           element={<InstitutionProfile />}
         />
+        {/* ---------- Fallback (kept inside PublicLayout so it still gets the Navbar/Footer) ---------- */}
+        <Route path="*" element={<NotFound />} />
       </Route>
  
       {/*
@@ -113,10 +115,7 @@ const AppRoutes = () => {
         />
         <Route path={ROUTES.STUDENT_PROFILE} element={<StudentProfile />} />
       </Route>
- 
-      {/* ---------- Fallback ---------- */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+     </Routes>
   );
 };
  

@@ -25,8 +25,11 @@
 }
 .error-number {
 
+    font-family: var(--sans);
     font-size:60px;
-    font-weight: 900;
+    line-height: 1.2;
+    font-weight: 800;
+    font-synthesis: weight;
 
     background: linear-gradient(
         90deg,
