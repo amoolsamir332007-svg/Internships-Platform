@@ -1,6 +1,5 @@
 import "./Button.css";
 
-
 const Button = ({
     children,
     type = "button",
@@ -12,35 +11,12 @@ const Button = ({
 }) => {
 
 return (
-<button
-
-type={type}
-
-onClick={onClick}
-
-disabled={disabled || loading}
-
+<button type={type} onClick={onClick} disabled={disabled || loading}
 className={`
     custom-btn
     ${variant}
-    ${fullWidth ? "full-width" : ""}
-`}
->
-{
-
-
-loading
-
-?
-
-<span className="btn-loader">
-Loading...
-</span>
-
-:
-
-children
-}
+    ${fullWidth ? "full-width" : ""}`}>
+{ loading ? <span className="btn-loader">Loading...</span> :children }
 
 </button>
 );

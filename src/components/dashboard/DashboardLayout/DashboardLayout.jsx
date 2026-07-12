@@ -5,7 +5,7 @@ import {StudentSidebar} from "../StudentSidebar/StudentSidebar";
 import "./DashboardLayout.css";
  
 const DashboardLayout = () => {
-  const { isInstitution, isStudent } = useRole();
+const { isInstitution, isStudent } = useRole();
  
   return (
     <div className="dashboard-layout">
