@@ -1,6 +1,8 @@
 
 import { useNavigate } from "react-router-dom";
 import ApplicationsSection from "../../components/Home/ApplicationsSection/ApplicationsSection";
+import heroImage from "../../assets/images/studying (1).svg";
+
 import "./Home.css";
 
 const Home = () => {
@@ -69,10 +71,12 @@ const Home = () => {
                     {/* Right Image */}
                     <div className="hero-image">
                         <div className="image-circle"></div>
-                        <img 
-  src="https://illustrations.popsy.co/blue/studying.svg"
-  alt="Internship Platform"
-/> 
+                        
+<img 
+ src={heroImage}
+ alt="Internship Platform"
+/>
+
                         {/* Floating Cards */}
                         <div className="floating-card card-one">
                             <span>
@@ -384,7 +388,8 @@ const Home = () => {
 <section className="cta-section">
     <div className="cta-content">
         <h2>
-            Ready To Start Your Career Journey?
+            Ready To Start Your Career
+            <span>Journey?</span>
         </h2>
         <p>
             Join thousands of students and discover

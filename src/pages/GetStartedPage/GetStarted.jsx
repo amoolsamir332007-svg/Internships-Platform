@@ -5,12 +5,10 @@ const GetStarted = () => {
     const navigate = useNavigate();
     const handleRoleSelect = (role) => {
         navigate(`/signup?role=${role}`);
-
-
     };
     return (
         <div className="getstarted-page">
-            <nav className="getstarted-navbar">
+            {/* <nav className="getstarted-navbar">
                 <div className="brand">
                     <div className="brand-icon">
                         💼
@@ -26,10 +24,10 @@ const GetStarted = () => {
                         Login
                     </button>
                 </div>
-            </nav>
+            </nav> */}
 
             <section className="welcome-section">
-                <h1>Welcome to<span>Internship Platform</span></h1>
+                <h1>Welcome to <span>Internship Platform</span></h1>
                 <p className="subtitle">
                     Which describes you best?
                 </p>

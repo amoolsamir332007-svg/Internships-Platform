@@ -86,17 +86,12 @@ function Login() {
 
 
         <div className="login-page">
-
-
             <div className="login-card">
-
-
 
                 <div className="login-side">
 
-
                     <h1>
-                        Welcome Back 🚀
+                        Welcome Back🚀
                     </h1>
 
 

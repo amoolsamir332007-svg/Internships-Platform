@@ -27,7 +27,7 @@ align-items:center;
 background:white;
 border-bottom:1px solid #eee;
 }
-.brand{
+/* .brand{
 display:flex;
 align-items:center;
 gap:12px;
@@ -47,7 +47,7 @@ linear-gradient(
 var(--color-primary),
 var(--color-secondary)
 );
-}
+} */
 .brand h3{
 margin:0;
 font-size:22px;
@@ -105,22 +105,18 @@ font-weight:900;
 color:var(--color-text);
 
 }
+.welcome-section h1 span {
 
-.welcome-section h1 span{
+    background: linear-gradient(
+        90deg,
+        var(--color-primary),
+        var(--color-secondary)
+    );
 
+    background-clip: text;
+    -webkit-background-clip: text;
 
-background:
-
-linear-gradient(
-90deg,
-var(--color-primary),
-var(--color-secondary)
-);
-
-
-/* -webkit-background-clip:text; */
-
-color:transparent;
+    -webkit-text-fill-color: transparent;
 }
 .welcome-section p{
 

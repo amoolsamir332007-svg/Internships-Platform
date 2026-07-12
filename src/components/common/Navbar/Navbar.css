@@ -1,5 +1,5 @@
 .navbar {
-  background: #ffffff;
+   background: #fff;
   border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
@@ -14,14 +14,104 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+}.nav-auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
- 
-.navbar-logo {
+.login-btn,
+.signup-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 28px;
+
+    border-radius: 50px !important;
+
+    font-weight: 800;
+    text-decoration: none;
+
+    transition: 0.3s ease;
+}
+
+
+/* Login */
+.login-btn {
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    background: transparent;
+}
+
+
+.login-btn:hover {
+    background: linear-gradient(
+        90deg,
+        var(--color-primary),
+        var(--color-secondary)
+    );
+
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+
+/* Sign Up */
+.signup-btn {
+
+    border: 2px solid transparent;
+
+    background: linear-gradient(
+        90deg,
+        var(--color-primary),
+        var(--color-secondary)
+    );
+
+    color: white;
+}
+
+
+.signup-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* 
+.signup-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+
+} */
+/* .navbar-logo {
   font-size: 18px;
   font-weight: 700;
   color: var(--color-primary);
   text-decoration: none;
   flex-shrink: 0;
+} */
+
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+}
+.brand-icon{
+width:48px;
+height:48px;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+background:
+
+linear-gradient(
+135deg,
+var(--color-primary),
+var(--color-secondary)
+);
 }
  
 .navbar-links {
@@ -139,4 +229,258 @@
   .navbar-user-name {
     display: none;
   }
+}
+
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    font-size:26px;
+    color:var(--color-primary);
+    cursor:pointer;
+}
+
+
+.mobile-auth{
+    display:none;
+}
+
+
+/* Tablet */
+
+@media(max-width:900px){
+
+
+.navbar-container{
+    padding:14px 18px;
+}
+
+
+.navbar-links{
+    gap:15px;
+}
+
+
+.navbar-link{
+    font-size:13px;
+}
+
+
+}
+
+
+/* Mobile */
+
+@media(max-width:720px){
+
+
+.navbar-container{
+    position:relative;
+}
+
+
+.menu-toggle{
+    display:block;
+}
+
+
+/* hide desktop buttons */
+
+.desktop-auth{
+    display:none;
+}
+
+
+
+/* mobile menu */
+
+.navbar-links{
+
+    position:absolute;
+    top:75px;
+    left:0;
+    width:100%;
+
+    background:white;
+
+    flex-direction:column;
+    align-items:center;
+
+    gap:20px;
+
+    padding:25px 0;
+
+    border-top:1px solid var(--color-border);
+
+    transform:translateY(-120%);
+
+    opacity:0;
+
+    transition:.3s ease;
+
+}
+
+
+.navbar-links.active{
+
+    transform:translateY(0);
+
+    opacity:1;
+
+}
+
+
+.navbar-link{
+
+    font-size:16px;
+
+}
+
+
+
+.mobile-auth{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:10px;
+
+}
+
+
+
+.login-btn,
+.signup-btn{
+
+    padding:10px 20px;
+
+}
+
+
+
+.navbar-user-name{
+
+    display:none;
+
+}
+}
+/* Desktop Authentication Buttons */
+
+.nav-auth-buttons{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+
+.mobile-auth-buttons{
+    display:none;
+}
+
+
+
+
+/* Mobile */
+
+@media(max-width:720px){
+
+
+.navbar-container{
+    position:relative;
+}
+
+
+/* hide desktop buttons */
+
+.nav-auth-buttons{
+    display:none;
+}
+
+
+
+.mobile-auth-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:10px;
+}
+
+
+
+.menu-toggle{
+    display:block;
+}
+
+
+
+.navbar-links{
+
+    position:absolute;
+    top:75px;
+    left:0;
+    width:100%;
+
+    background:white;
+
+    flex-direction:column;
+    align-items:center;
+
+    gap:20px;
+
+    padding:25px 0;
+
+    border-top:1px solid var(--color-border);
+
+    transform:translateY(-120%);
+
+    opacity:0;
+
+    transition:.3s ease;
+
+}
+
+
+
+.navbar-links.active{
+
+    transform:translateY(0);
+
+    opacity:1;
+
+}
+
+
+
+.navbar-link{
+    font-size:16px;
+}
+
+
+
+.navbar-user-name{
+    display:none;
+}
+}
+
+@media(max-width:720px){
+
+    .menu-toggle{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin-left:auto;
+    }
+
+
+    .navbar-container{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+    }
+
+
+    .brand{
+        flex-shrink:0;
+    }
+
 }

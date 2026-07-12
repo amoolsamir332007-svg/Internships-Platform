@@ -3,13 +3,14 @@ min-height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-background:
+background-color: #fff;
+/* background:
 linear-gradient(
 135deg,
 var(--color-primary-dark),
 var(--color-primary),
 var(--color-secondary)
-);
+); */
 
 padding:30px;
 

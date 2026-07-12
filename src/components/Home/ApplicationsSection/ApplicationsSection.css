@@ -21,7 +21,6 @@
   margin: 0;
 }
 
-/* تقسيم الشبكة (Grid Layout) لعرض الكروت باحترافية وتجاوب */
 .internships-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
