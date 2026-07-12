@@ -1,33 +1,33 @@
 :root {
   /* Brand palette — derived from the hero gradient already used across the site */
-  --color-primary: var(--color-primary);
-  --color-primary-dark: var(--color-primary-dark);
-  --color-primary-light: var(--color-primary-light);
-  --color-primary-lighter: var(--color-primary-lighter);
-  --color-secondary: var(--color-secondary);
-  --color-secondary-dark: var(--color-secondary-dark);
-  --color-secondary-light: var(--color-secondary-light);
-  --color-secondary-lighter: var(--color-secondary-lighter);
-
+  --color-primary: #7c3aed;
+  --color-primary-dark: #6d28d9;
+  --color-primary-light: #ede9fe;
+  --color-primary-lighter: #f5f3ff;
+  --color-secondary: #2563eb;
+  --color-secondary-dark: #1d4ed8;
+  --color-secondary-light: #dbeafe;
+  --color-secondary-lighter: #eff6ff;
+ 
   /* Neutrals */
-  --color-text: var(--color-text);
-  --color-text-secondary: var(--color-text-secondary);
-  --color-text-muted: var(--color-text-muted);
+  --color-text: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
   --color-bg: #ffffff;
-  --color-bg-subtle: var(--color-bg-subtle);
+  --color-bg-subtle: #f8fafc;
   --color-border: #e5e7eb;
-
+ 
   /* Status */
   --color-danger: #dc2626;
   --color-danger-light: #fdecea;
   --color-success: #16a34a;
-
+ 
   --shadow-sm: 0 4px 12px rgba(16, 24, 40, 0.08);
   --shadow-md: 0 15px 35px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
-
+ 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-
+ 
   font: 16px/145% var(--sans);
   color: var(--color-text);
   background: var(--color-bg);
@@ -36,11 +36,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+ 
 * {
   box-sizing: border-box;
 }
-
+ 
 html,
 body {
   width: 100%;
@@ -48,17 +48,16 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
-
+ 
 #root {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-
+ 
 img,
 svg {
   max-width: 100%;
   display: block;
 }
-

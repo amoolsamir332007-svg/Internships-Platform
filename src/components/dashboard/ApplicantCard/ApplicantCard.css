@@ -8,6 +8,11 @@
   padding: 18px 20px;
   gap: 16px;
 }
+
+.applicant-card-info {
+  flex: 1;
+  min-width: 0;
+}
  
 .applicant-card-name {
   font-size: 16px;
