@@ -489,3 +489,14 @@ var(--color-secondary)
     }
 
 }
+
+
+.footer-logo{
+
+    font-size:32px;
+
+    font-weight:800;
+
+    margin-bottom:20px;
+
+}

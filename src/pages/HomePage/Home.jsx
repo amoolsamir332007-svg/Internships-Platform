@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ApplicationsSection from "../../components/Home/ApplicationsSection/ApplicationsSection";
 import heroImage from "../../assets/images/studying (1).svg";
-
+import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import "./Home.css";
 
 const Home = () => {
@@ -399,6 +399,8 @@ const Home = () => {
         </button>
     </div>
 </section>
+<ScrollToTop />
+
         </div>
     );
 };

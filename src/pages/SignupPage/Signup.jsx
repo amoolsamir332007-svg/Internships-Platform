@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import signupSchema from "../../schemas/signupSchema";
 import { USER_ROLES, STORAGE_KEYS } from "../../utils/constants";
+import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import "./Signup.css";
 
 const Signup = () => {
@@ -176,6 +177,8 @@ const Signup = () => {
           </button>
         </p>
       </div>
+
+      <ScrollToTop />
     </div>
   );
 };

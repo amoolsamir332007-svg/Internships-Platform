@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { DASHBOARD_ROUTE_BY_ROLE } from "../../utils/constants";
+import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import "./Login.css";
 
 function Login() {
@@ -204,6 +205,9 @@ function Login() {
                     </p>
                 </div>
             </div>
+            
+            <ScrollToTop />
+            
         </div>
     );
 }

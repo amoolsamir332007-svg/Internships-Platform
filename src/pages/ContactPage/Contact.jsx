@@ -1,5 +1,6 @@
 import React from 'react';
 import ContactForm from '../../components/common/ContactForm/ContactForm';import './Contact.css';
+import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 
 const ContactPage = () => {
         return (
@@ -55,6 +56,7 @@ const ContactPage = () => {
             <ContactForm />
             </div>
         </div>
+        <ScrollToTop />
         </div>
     );
     };

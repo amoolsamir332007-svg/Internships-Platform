@@ -33,7 +33,7 @@ const PublicLayout = () => (
     <Footer />
   </>
 );
- 
+
 const AppRoutes = () => {
   return (
     <Routes>

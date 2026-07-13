@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./GetStarted.css";
+import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 const GetStarted = () => {
 
     const navigate = useNavigate();
@@ -85,7 +86,10 @@ const GetStarted = () => {
             <div className="security-message">
                 🔒 Your information is secure and never shared.
             </div>
+
+            <ScrollToTop />
         </div>
+        
     );
 
 };

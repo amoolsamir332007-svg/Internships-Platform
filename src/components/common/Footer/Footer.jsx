@@ -1,62 +1,119 @@
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import { ROUTES } from "../../../utils/constants";
+import {
+  FaLinkedin,
+  FaInstagram,
+  FaGithub,
+  FaEnvelope,
+  FaArrowRight,
+} from "react-icons/fa";
 import "./Footer.css";
- 
 
 const Footer = () => {
   const year = new Date().getFullYear();
- 
+
   return (
     <footer className="footer">
       <div className="footer-container">
+
+        {/* Brand */}
         <div className="footer-brand">
-          <span className="footer-logo">InternHub</span>
-          <p className="footer-tagline">
-            Connecting institutions and students with real internship
-            opportunities.
+
+          <div className="brand">
+
+          <div className="brand-icon">
+            💼
+          </div>
+
+           <h2 className="footer-logo">
+            Intern<span>Ship</span>
+          </h2>
+
+
+          </div>
+
+         
+
+          <p>
+            Connecting students with the best internship opportunities
+            and helping companies discover talented developers.
           </p>
+
+        <Link to={ROUTES.GET_STARTED} className="footer-btn">
+              Get Started
+              <FaArrowRight />
+                </Link>
+
         </div>
- 
-        <div className="footer-links">
-          <div className="footer-links-group">
-            <span className="footer-links-title">Platform</span>
-            <Link to="/">Home</Link>
-            <Link to="/get-started">Get Started</Link>
-            <Link to="/login">Login</Link>
-          </div>
- 
-          <div className="footer-links-group">
-            <span className="footer-links-title">Company</span>
-            <Link to="/about">About</Link>
-            <Link to="/terms">Terms</Link>
-            <Link to="/contact">Contact Us</Link>
-          </div>
- 
-          <div className="footer-links-group">
-            <span className="footer-links-title">Connect</span>
-            <a
-              href="https://www.linkedin.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Instagram
-            </a>
-            <a href="mailto:contact@internhub.com">contact@internhub.com</a>
-          </div>
+        {/* Links */}
+        <div className="footer-column">
+
+          <h3>Platform</h3>
+
+          <Link to="/">Home</Link>
+          <Link to={ROUTES.GET_STARTED}>
+            Get Started
+                </Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Sign Up</Link>
+
         </div>
+        <div className="footer-column">
+
+          <h3>Company</h3>
+          <Link to="/about">About Us</Link>
+          <Link to="/terms">Terms</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/privacy">Privacy Policy</Link>
+        </div>
+
+        {/* Contact */}
+        <div className="footer-column contact">
+
+          <h3>Contact</h3>
+
+          <p>
+            <FaEnvelope />
+            contact@internship.com
+          </p>
+
+
+          <div className="social-icons">
+
+            <a href="https://linkedin.com" target="_blank">
+              <FaLinkedin />
+            </a>
+
+
+            <a href="https://instagram.com" target="_blank">
+              <FaInstagram />
+            </a>
+
+
+            <a href="https://github.com" target="_blank">
+              <FaGithub />
+            </a>
+
+          </div>
+
+        </div>
+
+
       </div>
- 
       <div className="footer-bottom">
-        <span>© {year} InternHub. All rights reserved.</span>
+        <p>
+          © {year} Internshop. All rights reserved.
+          <h3>
+          Bissan Naser,
+          Amal Hamdan,
+          Alaa Alzhammar
+          </h3>
+        </p>
+
       </div>
+
+
     </footer>
   );
 };
- 
 export default Footer;

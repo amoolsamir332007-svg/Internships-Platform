@@ -98,15 +98,14 @@ const Navbar = () => {
 
 
           <div>
-            <h3>
-              Internship
-            </h3>
-
-            <span>
+          <h2 className="footer-logo">
+            Intern<span>Ship</span>
+            
+          </h2>
+            {/* <span>
               Platform
-            </span>
+            </span> */}
           </div>
-
         </div>
 
 
