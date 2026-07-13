@@ -1,104 +1,179 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../../hooks/useAuth";
 import { useRole } from "../../../hooks/useRole";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
 
+
+const NAV_LINKS = [
+  { to: "/", label: "Home" },
+  { to: "__dashboard__", label: "Dashboard" },
+  { to: "/contact", label: "Contact Us" },
+  { to: "/applications", label: "Applications" },
+];
+
+
 const Navbar = () => {
+
   const { user, isAuthenticated, logout } = useAuth();
   const { isInstitution, isStudent } = useRole();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const menuRef = useRef(null);
 
+
+
   useEffect(() => {
+
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
         setMenuOpen(false);
       }
+
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
     };
+
+
   }, []);
+
+
+  // Sticky glass intensifies slightly on scroll — visual only, no functional change
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 12);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
 
   const dashboardPath = isInstitution
     ? "/dashboard/institution"
     : isStudent
-      ? "/dashboard/student"
-      : "/login";
+    ? "/dashboard/student"
+    : "/login";
+
 
   const profilePath = isInstitution
     ? "/dashboard/institution/profile"
     : "/dashboard/student/profile";
 
+
+
   const handleLogout = () => {
+
     setMenuOpen(false);
     logout();
     navigate("/");
+
   };
+
+
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
 
+
+  const resolveLinkPath = (to) =>
+    to === "__dashboard__" ? dashboardPath : to;
+
+
   return (
-    <nav className="navbar">
+
+    <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
+
       <div className="navbar-container">
+
+
         {/* Brand */}
 
-        <div className="brand">
-          <div className="brand-icon">💼</div>
+        <Link to="/" className="brand" onClick={closeMobileMenu}>
+
+          <span className="brand-icon">
+            💼
+          </span>
+
 
           <div>
-            <h2 className="footer-logo">
-              Intern<span>Ship</span>
-            </h2>
+          <h2 className="footer-logo navbar-brand-title">
+            Intern<span>Ship</span>
+
+          </h2>
             {/* <span>
               Platform
             </span> */}
           </div>
-        </div>
+        </Link>
+
+
+
 
         {/* Navigation Links */}
 
-        <div className={`navbar-links ${mobileMenuOpen ? "active" : ""}`}>
-          <Link to="/" className="navbar-link" onClick={closeMobileMenu}>
-            Home
-          </Link>
+        <div
+          className={`navbar-links ${
+            mobileMenuOpen ? "active" : ""
+          }`}
+        >
 
-          <Link
-            to={dashboardPath}
-            className="navbar-link"
-            onClick={closeMobileMenu}
-          >
-            Dashboard
-          </Link>
+          {NAV_LINKS.map((link) => {
+            const path = resolveLinkPath(link.to);
+            const isActive =
+              link.to === "/"
+                ? location.pathname === "/"
+                : location.pathname.startsWith(path);
 
-          <Link to="/contact" className="navbar-link" onClick={closeMobileMenu}>
-            Contact Us
-          </Link>
+            return (
+              <Link
+                key={link.label}
+                to={path}
+                className={`navbar-link ${isActive ? "navbar-link-active" : ""}`}
+                onClick={closeMobileMenu}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
 
-          <Link
-            to="/applications"
-            className="navbar-link"
-            onClick={closeMobileMenu}
-          >
-            Applications
-          </Link>
+
 
           {/* Mobile Auth Buttons */}
 
           <div className="mobile-auth-buttons">
+
+
             {!isAuthenticated && (
+
               <>
                 <Link
                   to="/login"
@@ -108,6 +183,7 @@ const Navbar = () => {
                   Login
                 </Link>
 
+
                 <Link
                   to="/get-started"
                   className="signup-btn"
@@ -115,80 +191,191 @@ const Navbar = () => {
                 >
                   Sign Up
                 </Link>
+
               </>
+
             )}
+
+
           </div>
+
+
         </div>
+
+
+
+
 
         {/* Desktop Auth Buttons */}
 
         {!isAuthenticated && (
+
           <div className="nav-auth-buttons">
-            <Link to="/login" className="login-btn">
+
+
+            <Link
+              to="/login"
+              className="login-btn"
+            >
               Login
             </Link>
 
-            <Link to="/get-started" className="signup-btn">
+
+            <Link
+              to="/get-started"
+              className="signup-btn"
+            >
               Sign Up
             </Link>
+
+
           </div>
+
         )}
+
+
+
+
+
 
         {/* User Menu */}
 
         {isAuthenticated && (
-          <div className="navbar-auth" ref={menuRef}>
+
+          <div
+            className="navbar-auth"
+            ref={menuRef}
+          >
+
+
             <div className="navbar-user">
+
+
               <button
                 type="button"
                 className="navbar-user-trigger"
                 onClick={() => setMenuOpen(!menuOpen)}
               >
+
+
                 <span className="navbar-user-avatar">
-                  {(user?.institutionName || user?.name || "U")
+
+                  {
+                    (
+                      user?.institutionName ||
+                      user?.name ||
+                      "U"
+                    )
                     .charAt(0)
-                    .toUpperCase()}
+                    .toUpperCase()
+                  }
+
                 </span>
+
+
 
                 <span className="navbar-user-name">
-                  {user?.institutionName || user?.name || "Account"}
+
+                  {
+                    user?.institutionName ||
+                    user?.name ||
+                    "Account"
+                  }
+
                 </span>
+
+
               </button>
 
-              {menuOpen && (
-                <div className="navbar-user-dropdown">
-                  <Link
-                    to={profilePath}
-                    className="navbar-user-dropdown-item"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Profile
-                  </Link>
 
-                  <button
-                    type="button"
-                    className="navbar-user-dropdown-item navbar-user-dropdown-item-danger"
-                    onClick={handleLogout}
+
+
+              <AnimatePresence>
+                {menuOpen && (
+
+                  <motion.div
+                    className="navbar-user-dropdown"
+                    initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
                   >
-                    Logout
-                  </button>
-                </div>
-              )}
+
+
+                    <Link
+                      to={profilePath}
+                      className="navbar-user-dropdown-item"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Profile
+                    </Link>
+
+
+
+                    <button
+                      type="button"
+                      className="navbar-user-dropdown-item navbar-user-dropdown-item-danger"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+
+
+                  </motion.div>
+
+                )}
+              </AnimatePresence>
+
+
+
             </div>
+
+
           </div>
+
         )}
+
+
+
+
+
+
 
         {/* Mobile Menu Button */}
 
         <button
+
           className="menu-toggle"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+
+          onClick={() =>
+            setMobileMenuOpen(!mobileMenuOpen)
+          }
+
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+
         >
-          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+
+          {
+            mobileMenuOpen
+              ?
+              <FaTimes />
+              :
+              <FaBars />
+          }
+
+
         </button>
+
+
+
       </div>
+
+
     </nav>
+
   );
+
 };
+
 
 export default Navbar;

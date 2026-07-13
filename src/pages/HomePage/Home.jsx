@@ -1,35 +1,98 @@
 import { useNavigate } from "react-router-dom";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import ApplicationsSection from "../../components/Home/ApplicationsSection/ApplicationsSection";
+import HeroBackground from "../../components/Home/HeroBackground/HeroBackground";
+
 import heroImage from "../../assets/images/studying (1).svg";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import "./Home.css";
 
+/* Entrance animation variants — staggered reveal for hero content */
+const heroContainerVariants = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.12,
+            delayChildren: 0.05,
+        },
+    },
+};
+
+const heroItemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
+};
+
 const Home = () => {
 
     const navigate = useNavigate();
+
+    /* Mouse parallax — normalized -0.5..0.5 offsets from hero-section center */
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const springX = useSpring(mouseX, { stiffness: 80, damping: 20, mass: 0.6 });
+    const springY = useSpring(mouseY, { stiffness: 80, damping: 20, mass: 0.6 });
+
+    const imageRotateX = useTransform(springY, [-0.5, 0.5], [10, -10]);
+    const imageRotateY = useTransform(springX, [-0.5, 0.5], [-10, 10]);
+    const imageTranslateX = useTransform(springX, [-0.5, 0.5], [-14, 14]);
+    const imageTranslateY = useTransform(springY, [-0.5, 0.5], [-14, 14]);
+
+    const cardOneX = useTransform(springX, [-0.5, 0.5], [-18, 18]);
+    const cardOneY = useTransform(springY, [-0.5, 0.5], [-10, 10]);
+    const cardTwoX = useTransform(springX, [-0.5, 0.5], [14, -14]);
+    const cardTwoY = useTransform(springY, [-0.5, 0.5], [10, -10]);
+
+    const handleHeroMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+        mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+    };
+
+    const handleHeroMouseLeave = () => {
+        mouseX.set(0);
+        mouseY.set(0);
+    };
 
 
     return (
 
         <div className="home-page">
             {/* ================= HERO SECTION ================= */}
-            <section className="hero-section">
-                <div className="hero-container">
+            <section
+                className="hero-section"
+                onMouseMove={handleHeroMouseMove}
+                onMouseLeave={handleHeroMouseLeave}
+            >
+                <HeroBackground />
+
+                <motion.div
+                    className="hero-container"
+                    variants={heroContainerVariants}
+                    initial="hidden"
+                    animate="show"
+                >
                     {/* Left Content */}
                     <div className="hero-content">
-                        <span className="hero-badge">
+                        <motion.span className="hero-badge" variants={heroItemVariants}>
                             🚀 Start Your Career Journey
-                        </span>
-                        <h1>
+                        </motion.span>
+
+                        <motion.h1 variants={heroItemVariants}>
                             Find Your Dream
-                        <span>Internship</span></h1>
-                        <p>
+                        <span>Internship</span></motion.h1>
+
+                        <motion.p variants={heroItemVariants}>
                             Discover thousands of internship opportunities
                             from top companies and build your professional
                             future with the right experience.
-                        </p>
+                        </motion.p>
 
-                        <div className="hero-buttons">
+                        <motion.div className="hero-buttons" variants={heroItemVariants}>
 
         <button className="primary-btn" onClick={() => navigate("/get-started")}>
             Get Started</button>
@@ -41,9 +104,9 @@ const Home = () => {
                         .getElementById("applications")
                         .scrollIntoView({
                         behavior:"smooth"})}>Explore Internships</button>
-                                                </div>
+                                                </motion.div>
 
-                        <div className="hero-features">
+                        <motion.div className="hero-features" variants={heroItemVariants}>
                             <div>
                                 <strong>
                                     1000+
@@ -64,20 +127,35 @@ const Home = () => {
                                 <strong>10K+</strong>
                                 <span>Students</span>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
 
                     {/* Right Image */}
-                    <div className="hero-image">
+                    <motion.div
+                        className="hero-image"
+                        variants={heroItemVariants}
+                        style={{ perspective: 1000 }}
+                    >
                         <div className="image-circle"></div>
-                        
-<img 
- src={heroImage}
- alt="Internship Platform"
-/>
+
+                        <motion.img
+                            src={heroImage}
+                            alt="Internship Platform"
+                            style={{
+                                rotateX: imageRotateX,
+                                rotateY: imageRotateY,
+                                x: imageTranslateX,
+                                y: imageTranslateY,
+                            }}
+                        />
 
                         {/* Floating Cards */}
-                        <div className="floating-card card-one">
+                        <motion.div
+                            className="floating-card card-one"
+                            style={{ x: cardOneX, y: cardOneY }}
+                            animate={{ y: [0, -10, 0] }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                        >
                             <span>
                                 🎯
                             </span>
@@ -87,9 +165,14 @@ const Home = () => {
                                     Find best opportunities
                                 </p>
                             </div>
-                        </div>
+                        </motion.div>
 
-                        <div className="floating-card card-two">
+                        <motion.div
+                            className="floating-card card-two"
+                            style={{ x: cardTwoX, y: cardTwoY }}
+                            animate={{ y: [0, 10, 0] }}
+                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                        >
                             <span>
                                 ⭐
                             </span>
@@ -101,9 +184,9 @@ const Home = () => {
                                     Verified internships
                                 </p>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </motion.div>
+                    </motion.div>
+                </motion.div>
             </section>
             {/* ================= TRUSTED COMPANIES ================= */}
             <section className="companies-section">
