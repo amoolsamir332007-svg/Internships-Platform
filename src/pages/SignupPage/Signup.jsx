@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import signupSchema from "../../schemas/signupSchema";
 import { USER_ROLES, STORAGE_KEYS } from "../../utils/constants";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
+import api from "../../utils/api";
 import "./Signup.css";
 
 const Signup = () => {
@@ -10,16 +11,17 @@ const Signup = () => {
   const [searchParams] = useSearchParams();
   const selectedRole = searchParams.get("role") || USER_ROLES.STUDENT;
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    university: "",
-    major: "",
-    field: "",
-  });
-
+  email: "",
+  password: "",
+  fullName: "",       // 🟢 Changed from 'name' to 'fullName'
+  accountType: selectedRole === "institution" ? 2 : 1,    // 🟢 Integer: 1 for Student, 2 for Employer, etc.
+  level: "Freshman",  // 🟢 Added missing field
+  gpa: 4.0,           // 🟢 Decimal/Number
+  address: "bb",        // 🟢 Added missing field
+  phoneNumber: "0533869500"     // 🟢 Added missing field
+});
   const [errors, setErrors] = useState({});
+  console.log(selectedRole)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,40 +39,25 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await signupSchema.validate(
-        {
-          ...formData,
-          role: selectedRole,
-        },
-        {
-          abortEarly: false,
-        },
-      );
+    console.log("i am in submit")
+    
 
-      const userData = {
-        id: Date.now(),
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        university: formData.university,
-        major: formData.major,
-        field: formData.field,
-        role: selectedRole,
-      };
 
-      localStorage.setItem(
-        STORAGE_KEYS.REGISTERED_USER,
-        JSON.stringify(userData),
-      );
-      navigate("/login");
-    } catch (error) {
-      const validationErrors = {};
-      error.inner.forEach((err) => {
-        validationErrors[err.path] = err.message;
-      });
-      setErrors(validationErrors);
+  try {
+     console.log("i am in try")
+    const res = await api.post('Account/register', formData);
+     console.log("i am in send the data")
+     
+
+    console.log(res.data);
+
+  } catch (er) {
+    console.log(er.response?.data);
+ 
+  
     }
+    navigate("/Login");
+   
   };
 
   return (
@@ -86,12 +73,12 @@ const Signup = () => {
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label> Full Name </label>
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-            />
+           <input
+  name="fullName"        // ✅ matches state key
+  value={formData.fullName}
+  onChange={handleChange}
+  placeholder="Enter your name"
+/>
             <p> {errors.name} </p>
           </div>
 
@@ -118,53 +105,32 @@ const Signup = () => {
             />
             <p>{errors.password}</p>
           </div>
-
           <div className="input-group">
-            <label> Confirm Password </label>
+            <label> address </label>
             <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
+              type="address"
+              name="address"
+              value={formData.address}
               onChange={handleChange}
-              placeholder="********"
+              placeholder="type your addresss"
             />
-            <p>{errors.confirmPassword}</p>
+            <p>{errors.address}</p>
+          </div>
+          <div className="input-group">
+            <label> phoneNumber </label>
+            <input
+              type="phoneNumber"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="0590000000"
+            />
+            <p>{errors.password}</p>
           </div>
 
-          {selectedRole === USER_ROLES.STUDENT && (
-            <>
-              <div className="input-group">
-                <label>University </label>
-                <input
-                  name="university"
-                  value={formData.university}
-                  onChange={handleChange}
-                  placeholder="Your university"
-                />
-              </div>
-              <div className="input-group">
-                <label> Major </label>
-                <input
-                  name="major"
-                  value={formData.major}
-                  onChange={handleChange}
-                  placeholder="Software Engineering"
-                />
-              </div>
-            </>
-          )}
+       
 
-          {selectedRole === USER_ROLES.INSTITUTION && (
-            <div className="input-group">
-              <label> Company Field </label>
-              <input
-                name="field"
-                value={formData.field}
-                onChange={handleChange}
-                placeholder="Technology, Education..."
-              />
-            </div>
-          )}
+          
           <button className="signup-btn"> Create Account </button>
         </form>
 
