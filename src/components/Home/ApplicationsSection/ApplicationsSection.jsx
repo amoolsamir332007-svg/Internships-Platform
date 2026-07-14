@@ -17,8 +17,8 @@ const ApplicationsSection = () => {
     try {
       setLoading(true);
       setError('');
-      const data = await internshipService.getPublished(9);
-      setInternships(data || []);
+      const response = await internshipService.getPublished();
+      setInternships(response.data || []);
     } catch (err) {
       setError('Something went wrong while fetching internships. Please try again later.');
       console.error(err);
@@ -41,8 +41,8 @@ const ApplicationsSection = () => {
     try {
       setLoading(true);
       setError('');
-      const data = await internshipService.searchPublished(query);
-      setInternships(data || []);
+      const response = await internshipService.searchPublished(query);
+      setInternships(response.data || []);
     } catch (err) {
       setError('Something went wrong while searching for internships. Please try again later.');
       console.error(err);
