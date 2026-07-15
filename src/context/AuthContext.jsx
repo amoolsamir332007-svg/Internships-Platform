@@ -9,14 +9,21 @@ const [user, setUser] = useState(null)
   useEffect(() => {
     const storedUser = localStorage.getItem('user')
     if(storedUser){
-      setUser(JSON.parse(storedUser))
+      try {
+        setUser(JSON.parse(storedUser))
+      } catch (e) {
+        // كان ممكن ينخزن "undefined" كـ string من نسخة قديمة فيها باغ
+        // (لما كان user يوصل login() فاضي)، فمنعمل clean بدل ما نكسر الصفحة
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+      }
     }
   },[])
   const login = (data, token) => {
     localStorage.setItem('user',JSON.stringify(data))
     localStorage.setItem('token', token)
     setUser(data)
-
+ 
   }
  
   const logout = () => {

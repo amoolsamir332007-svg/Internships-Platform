@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import "./Login.css";
 import api from "../../utils/api";
-
+ 
 function Login() {
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -14,25 +14,36 @@ function Login() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-
+ 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+ 
         setError("");
         setLoading(true);
-
+ 
         try {
             const res = await api.post('Account/login', { email, password });
-
-            login(res.data.user, res.data.token);
-
+ 
+            // الباك اند بيرجع بس { email, token } من غير كائن user،
+            // فبنبني الـ user object إحنا من الـ JWT نفسه.
             const decoded = jwtDecode(res.data.token);
-            const role = decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role"] || decoded.role;
-            const normalizedRole = role?.toLowerCase();
-
-            const targetRoute = DASHBOARD_ROUTE_BY_ROLE[normalizedRole];
+            const role =
+                decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role"] ||
+                decoded.role;
+ 
+            const userData = {
+                email: res.data.email,
+                fullName: decoded.FullName,
+                role, // "Student" أو "Institution" بنفس الكازينج اللي جاي من الباك اند
+            };
+ 
+            login(userData, res.data.token);
+ 
+            // مهم: ما منعمل toLowerCase هون لأنه مفاتيح DASHBOARD_ROUTE_BY_ROLE
+            // بالـ constants.js هي "Student" / "Institution" بحرف كبير (نفس الـ role)
+            const targetRoute = DASHBOARD_ROUTE_BY_ROLE[role];
             navigate(targetRoute || ROUTES.HOME);
-
+ 
         } catch (er) {
             console.log(er.response?.data);
             setError("Invalid email or password");
@@ -40,7 +51,7 @@ function Login() {
             setLoading(false);
         }
     };
-
+ 
     return (
         <div className="login-page">
             <div className="login-card">
@@ -92,5 +103,5 @@ function Login() {
         </div>
     );
 }
-
+ 
 export default Login;
