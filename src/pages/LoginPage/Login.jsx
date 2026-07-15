@@ -23,7 +23,11 @@ function Login() {
     const handleSubmit = async (e) => {
 
 
-        e.preventDefault();
+        if (dashboardRoute) {
+            navigate(dashboardRoute);
+        } else {
+            navigate("/");
+        }
 
 
         setError("");
@@ -59,6 +63,8 @@ function Login() {
 
 
     };
+
+    }
 
     return (
 
@@ -187,6 +193,6 @@ function Login() {
             
         </div>
     );
-}
+
 
 export default Login;

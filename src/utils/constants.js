@@ -1,9 +1,9 @@
 
 export const USER_ROLES = {
-  STUDENT: "student",
-  INSTITUTION: "institution",
+  STUDENT: "Student",
+  INSTITUTION: "Institution",
 };
- 
+
 export const INTERNSHIP_STATUS = {
   DRAFT: "draft",
   PUBLISHED: "published",
