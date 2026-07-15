@@ -236,9 +236,14 @@ const Home = () => {
         <span>
             Why Choose Us
         </span>
+
         <h2>
-            Everything You Need To Start Your Career
-        </h2>
+  <span className="linetitle">Everything You Need To Start</span>
+  <span className="linespan">Your Career</span>
+</h2>
+
+
+
         <p>
             Our platform connects students with the best
             internship opportunities and helps companies
@@ -327,9 +332,14 @@ const Home = () => {
         <span>
             How It Works
         </span>
-        <h2>
+        {/* <h2>
             Start Your Internship Journey In 3 Simple Steps
-        </h2>
+        </h2> */}
+
+        <h2>
+  <span className="linetitle">Start Your Internship Journey</span>
+  <span className="linespan">In 3 Simple Steps</span>
+</h2>
         <p>
             Our platform makes it easier for students
             to discover opportunities and connect with

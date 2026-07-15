@@ -15,74 +15,43 @@ function Login() {
 
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setError("");
+    setLoading(true);
+
+    try {
+
+        const user = await login({
+            email,
+            password,
+        });
+
+        const dashboardRoute =
+            DASHBOARD_ROUTE_BY_ROLE[user.role];
 
 
-        e.preventDefault();
+        if (dashboardRoute) {
+            navigate(dashboardRoute);
+        } else {
+            navigate("/");
+        }
 
 
-        setError("");
-        setLoading(true);
+    } catch (error) {
 
-        const savedUser = JSON.parse(
-            localStorage.getItem("registeredUser") || "null"
+        setError(
+            error.response?.data?.message ||
+            "Invalid email or password."
         );
 
-        setTimeout(() => {
+    } finally {
 
-            if (!savedUser) {
+        setLoading(false);
 
-                setError(
-                    "No account found. Please create an account first."
-                );
-                setLoading(false);
-
-                return;
-            }
-            const isValidUser =
-                savedUser.email === email &&
-                savedUser.password === password;
-
-            if (!isValidUser) {
-
-
-                setError(
-                    "Invalid email or password."
-                );
-
-
-                setLoading(false);
-
-                return;
-
-            }
-            const token = "jwt-demo-token";
-
-
-
-            login(
-                savedUser,
-                token
-            );
-
-            const dashboardRoute =
-                DASHBOARD_ROUTE_BY_ROLE[
-                    savedUser.role
-                ];
-
-            if (dashboardRoute) {
-                navigate(dashboardRoute);
-
-            }
-
-            else {
-                navigate("/");
-            }
-            setLoading(false);
-        },800);
-
-    };
-
+    }
+};
     return (
 
 

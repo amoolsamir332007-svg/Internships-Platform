@@ -32,29 +32,49 @@ export const AuthProvider = ({ children }) => {
  
     checkLoggedInUser();
   }, []);
+
+  const login = async (credentials) => {
+  const response = await loginUser(credentials);
+  const { token, email } = response.data;
+
+  localStorage.setItem("token", token);
+
+  const userData = {
+    email,
+  };
+
+  setUser(userData);
+
+  return userData;
+};
  
   
-  const login = async (credentials) => {
-    const response = await loginUser(credentials); // POST /auth/login
-    const { token, user: userData } = response.data;
+  // const login = async (credentials) => {
+  //   const response = await loginUser(credentials); // POST /auth/login
+  //   const { token, user: userData } = response.data;
  
-    localStorage.setItem("token", token);
-    setUser(userData);
+  //   localStorage.setItem("token", token);
+  //   setUser(userData);
  
-    return userData; 
-  };
+  //   return userData; 
+  // };
+ 
+  // const signup = async (formData) => {
+  //   const response = await registerUser(formData); // POST /auth/register
+  //   const { token, user: userData } = response.data;
+ 
+  //   localStorage.setItem("token", token);
+  //   setUser(userData);
+ 
+  //   return userData;
+  // };
  
   const signup = async (formData) => {
-    const response = await registerUser(formData); // POST /auth/register
-    const { token, user: userData } = response.data;
- 
-    localStorage.setItem("token", token);
-    setUser(userData);
- 
-    return userData;
-  };
- 
- 
+  const response = await registerUser(formData);
+
+  return response.data;
+};
+  
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
