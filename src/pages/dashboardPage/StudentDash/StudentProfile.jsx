@@ -4,11 +4,7 @@ import "./StudentDash.css";
 const StudentProfile =()=>{
 return (
 <div className="student-profile">
-
-
 <div className="profile-cover">
-
-
 <div className="avatar">A</div>
 <h1>
 Ahmed Mohammed

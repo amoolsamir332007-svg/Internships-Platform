@@ -1,5 +1,5 @@
 import { useFetch } from "../../hooks/useFetch";
-import { getMyProfile } from "../../api/profileService";
+import { getInstitutionProfile } from "../../api/profileService";
 import InstitutionProfileForm from "../../components/profile/InstitutionProfileForm/InstitutionProfileForm";
 import LoadingSpinner from "../../components/common/LoadingSpinner/LoadingSpinner";
 import "./InstitutionProfile.css";
@@ -9,7 +9,7 @@ const InstitutionProfile = () => {
     data: profile,
     loading,
     error,
-  } = useFetch(() => getMyProfile(), []);
+  } = useFetch(() => getInstitutionProfile(), []);
  
   return (
     <div className="institution-profile-page">

@@ -1,34 +1,28 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { useFetch } from "../../../hooks/useFetch";
-import { getMyInternships } from "../../../api/internshipService";
 import { getApplicantsForInstitution } from "../../../api/applicationService";
 import StatCard from "../../../components/dashboard/StatCard/StatCard";
 import LoadingSpinner from "../../../components/common/LoadingSpinner/LoadingSpinner";
 import "./InstitutionDash.css";
 
+// NOTE: the "Total internships / Published / Drafts" stats used to come
+// from getMyInternships(), which has no matching backend endpoint (the
+// API only exposes POST /Institution/opportunities, not a GET to list
+// them). Those stats are removed until that endpoint exists; only
+// "Pending applicants" is backed by a real route
+// (GET /Institution/applications).
 const InstitutionDashboard = () => {
   const { user } = useAuth();
-
-  const { data: internships, loading: internshipsLoading } = useFetch(
-    () => getMyInternships(),
-    [],
-  );
 
   const { data: pendingApplicants, loading: applicantsLoading } = useFetch(
     () => getApplicantsForInstitution({ status: "pending" }),
     [],
   );
 
-  const internshipsList = internships || [];
   const pendingList = pendingApplicants || [];
 
-  const publishedCount = internshipsList.filter(
-    (i) => i.status === "published",
-  ).length;
-  const draftCount = internshipsList.filter((i) => i.status === "draft").length;
-
-  const loading = internshipsLoading || applicantsLoading;
+  const loading = applicantsLoading;
 
   return (
     <div className="institution-dashboard">
@@ -43,13 +37,6 @@ const InstitutionDashboard = () => {
         <LoadingSpinner />
       ) : (
         <div className="institution-dashboard-stats">
-          <StatCard
-            label="Total internships"
-            value={internshipsList.length}
-            accent="blue"
-          />
-          <StatCard label="Published" value={publishedCount} accent="green" />
-          <StatCard label="Drafts" value={draftCount} accent="orange" />
           <StatCard
             label="Pending applicants"
             value={pendingList.length}
@@ -71,7 +58,7 @@ const InstitutionDashboard = () => {
           className="institution-dashboard-action-card"
         >
           <h3>Manage internships</h3>
-          <p>Edit, publish, or close your existing internship posts.</p>
+          <p>Coming soon — the API doesn't support listing/editing them yet.</p>
         </Link>
         <Link
           to="/dashboard/institution/applicants"

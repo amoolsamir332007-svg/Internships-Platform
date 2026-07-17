@@ -89,7 +89,7 @@ const AppRoutes = () => {
         {/*
           NOTE: institution's own "edit profile" page and the public
           "view institution" page currently point at the SAME component
-          (InstitutionProfile.jsx, which calls getMyProfile()). That's
+          (InstitutionProfile.jsx, which calls getInstitutionProfile()). That's
           fine for editing your own profile, but it won't yet show a
           different institution's profile when visited via /institution/:id.
           Flag this to your teammate if the public view needs to support

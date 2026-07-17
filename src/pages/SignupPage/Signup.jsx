@@ -6,16 +6,16 @@ import { useAuth } from "../../hooks/useAuth";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import api from "../../utils/api";
 import "./Signup.css";
-
+ 
 const Signup = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
+ 
   const { signup } = useAuth();
-
+ 
   const selectedRole =
     searchParams.get("role") || USER_ROLES.STUDENT;
-
+ 
   const [formData, setFormData] = useState({
   email: "",
   password: "",
@@ -27,71 +27,75 @@ const Signup = () => {
   phoneNumber: "0533869500"     // 🟢 Added missing field
 });
   const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   console.log(selectedRole)
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
+ 
     setFormData({
       ...formData,
       [name]: value,
     });
-
+ 
     setErrors({
       ...errors,
       [name]: "",
     });
-
+ 
     setApiError("");
   };
-
-
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-
-    console.log("i am in submit")
-    
-
-
-  try {
-     console.log("i am in try")
-    const res = await api.post('Account/register', formData);
-     console.log("i am in send the data")
-     
-
-    console.log(res.data);
-
-  } catch (er) {
-    console.log(er.response?.data);
  
-  
+ 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setApiError("");
+    setIsSubmitting(true);
+ 
+    try {
+      const res = await api.post('Account/register', formData);
+      console.log(res.data);
+      // Only navigate away on a CONFIRMED success — previously this
+      // navigated to /Login unconditionally, even when register()
+      // failed, which made failed signups look like they worked and
+      // then "Invalid email or password" on the next login (because the
+      // account was never actually created).
+      navigate("/Login");
+    } catch (er) {
+      console.log(er.response?.data);
+      setApiError(
+        er.response?.data?.message ||
+        er.response?.data?.title ||
+        "Something went wrong while creating your account. Please check your details and try again."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
-    navigate("/Login");
-   
   };
-
+ 
   return (
     <div className="signup-page">
-
+ 
       <div className="signup-card">
-
+ 
         <div className="signup-header">
-
+ 
           <h1>
             Create Your Account
           </h1>
-
+ 
           <p>
             Join Internship Platform as a
             <span> {selectedRole} </span>
           </p>
-
+ 
         </div>
-
-
+ 
+ 
         <form onSubmit={handleSubmit}>
-
-
+ 
+ 
           <div className="input-group">
             <label> Full Name </label>
            <input
@@ -102,15 +106,15 @@ const Signup = () => {
 />
             <p> {errors.name} </p>
           </div>
-
-
-
+ 
+ 
+ 
           <div className="input-group">
-
+ 
             <label>
               Email Address
             </label>
-
+ 
             <input
               type="email"
               name="email"
@@ -118,21 +122,21 @@ const Signup = () => {
               onChange={handleChange}
               placeholder="example@gmail.com"
             />
-
+ 
             <p>
               {errors.email}
             </p>
-
+ 
           </div>
-
-
-
+ 
+ 
+ 
           <div className="input-group">
-
+ 
             <label>
               Password
             </label>
-
+ 
             <input
               type="password"
               name="password"
@@ -140,11 +144,11 @@ const Signup = () => {
               onChange={handleChange}
               placeholder="********"
             />
-
+ 
             <p>
               {errors.password}
             </p>
-
+ 
           </div>
           <div className="input-group">
             <label> address </label>
@@ -168,37 +172,41 @@ const Signup = () => {
             />
             <p>{errors.password}</p>
           </div>
-
+ 
        
-
+ 
           
-          <button className="signup-btn"> Create Account </button>
+          {apiError && <p className="signup-api-error">{apiError}</p>}
+ 
+          <button className="signup-btn" disabled={isSubmitting}>
+            {isSubmitting ? "Creating Account..." : "Create Account"}
+          </button>
         </form>
-
-
-
+ 
+ 
+ 
         <p className="login-link">
-
+ 
           Already have account?
-
+ 
           <button
             type="button"
             onClick={() => navigate("/login")}
           >
             Login
           </button>
-
+ 
         </p>
-
-
+ 
+ 
       </div>
-
-
+ 
+ 
       <ScrollToTop />
-
+ 
     </div>
   );
 };
-
-
+ 
+ 
 export default Signup;
