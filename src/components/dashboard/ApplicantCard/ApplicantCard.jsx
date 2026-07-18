@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../utils/constants";
 import "./ApplicantCard.css";
  
 const STATUS_LABELS = {
@@ -7,7 +9,33 @@ const STATUS_LABELS = {
 };
  
 const ApplicantCard = ({ applicant, onAccept, onReject, isLoading }) => {
+  const navigate = useNavigate();
   const statusInfo = STATUS_LABELS[applicant.status] || STATUS_LABELS.pending;
+
+  // UNCONFIRMED: the applications endpoint's confirmed fields are just
+  // studentName / studentUniversity / studentMajor / cvUrl — there's no
+  // confirmed studentId, bio, gpa, or phoneNumber field yet. This passes
+  // through whatever exists so StudentPublicProfile can render it; fields
+  // that don't exist on `applicant` will just show up blank until the
+  // real response shape is confirmed against the Network tab.
+  const handleShowApplicant = () => {
+    navigate(
+      ROUTES.STUDENT_PROFILE_VIEW(applicant.studentId ?? applicant.id),
+      {
+        state: {
+          student: {
+            name: applicant.studentName,
+            level: [applicant.studentUniversity, applicant.studentMajor]
+              .filter(Boolean)
+              .join(" - "),
+            bio: applicant.studentBio,
+            phoneNumber: applicant.studentPhoneNumber,
+            gpa: applicant.studentGpa,
+          },
+        },
+      }
+    );
+  };
  
   return (
     <div className="applicant-card">
@@ -37,6 +65,13 @@ const ApplicantCard = ({ applicant, onAccept, onReject, isLoading }) => {
         <span className={`applicant-card-status ${statusInfo.className}`}>
           {statusInfo.text}
         </span>
+
+        <button
+          className="applicant-card-btn-show"
+          onClick={handleShowApplicant}
+        >
+          Show applicant
+        </button>
  
         {applicant.status === "pending" && (
           <div className="applicant-card-buttons">

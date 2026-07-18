@@ -1,289 +1,191 @@
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import * as internshipService from "../../api/internshipService";
+import * as applicationService from "../../api/applicationService";
+import LoadingSpinner from "../../components/common/LoadingSpinner/LoadingSpinner";
+import { formatDate, getStatusLabel } from "../../utils/helpers";
+import { ROUTES, STORAGE_KEYS, USER_ROLES } from "../../utils/constants";
 import "./InternshipDetail.css";
-
-
+ 
+// IMPORTANT BACKEND GAP: there is no confirmed "GET /api/Opportunities/{id}"
+// (single-item) endpoint. Same workaround already used in
+// InstitutionPublicProfile.jsx: fetch the full published list and find
+// this one opportunity client-side. Swap this for a direct call if/when
+// the backend adds a single-opportunity route.
 const InternshipDetail = () => {
-
-
-    const navigate = useNavigate();
-
-    const { id } = useParams();
-
-
-
-    const internship = {
-
-
-        id,
-
-        title: "Frontend React Developer Intern",
-
-        company: "Tech Solutions Company",
-
-        location: "Remote",
-
-        type: "Full Time",
-
-        duration: "3 Months",
-
-        paid: true,
-
-
-        description:
-        "We are looking for a passionate Frontend Developer Intern to join our team and work on modern web applications using React.js.",
-
-
-
-        requirements:[
-
-            "Knowledge of HTML, CSS, JavaScript",
-
-            "Basic React.js experience",
-
-            "Understanding of Git and GitHub",
-
-            "Ability to work in a team"
-
-        ],
-
-
-
-
-        skills:[
-
-            "React.js",
-
-            "JavaScript",
-
-            "Tailwind CSS",
-
-            "Git"
-
-        ]
-
+  const { id } = useParams();
+  const navigate = useNavigate();
+ 
+  const [internship, setInternship] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+ 
+  // idle | loading | applied | error
+  const [applyState, setApplyState] = useState("idle");
+  const [applyError, setApplyError] = useState("");
+ 
+  useEffect(() => {
+    const loadInternship = async () => {
+      setLoading(true);
+      setLoadError("");
+      try {
+        const response = await internshipService.getPublished();
+        const all = response.data || [];
+        const found = all.find(
+          (o) => String(o.opportunityID) === String(id)
+        );
+        if (!found) {
+          setLoadError("This internship could not be found.");
+        } else {
+          setInternship(found);
+        }
+      } catch (err) {
+        setLoadError("Something went wrong while loading this internship.");
+      } finally {
+        setLoading(false);
+      }
     };
-
-
-
-
-
-
+    loadInternship();
+  }, [id]);
+ 
+  const handleApply = async () => {
+    const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+    if (!token) {
+      navigate(ROUTES.LOGIN);
+      return;
+    }
+ 
+    // Best-effort read of the logged-in user's role. UNCONFIRMED: assumes
+    // the login flow stores this under localStorage "user" as JSON like
+    // { role: "Student", ... } — apiClient's 401 handler clears this same
+    // key, which is the only existing evidence of this convention.
+    let user = null;
+    try {
+      user = JSON.parse(localStorage.getItem("user"));
+    } catch {
+      user = null;
+    }
+ 
+    if (user?.role && user.role !== USER_ROLES.STUDENT) {
+      setApplyState("error");
+      setApplyError("Only students can apply to internships.");
+      return;
+    }
+ 
+    setApplyState("loading");
+    setApplyError("");
+    try {
+      await applicationService.applyToInternship(internship.opportunityID);
+      setApplyState("applied");
+    } catch (err) {
+      setApplyState("error");
+      setApplyError(
+        err.response?.data?.message ||
+          "Something went wrong while applying. Please try again."
+      );
+    }
+  };
+ 
+  const handleViewInstitution = () => {
+    if (!internship) return;
+    navigate(ROUTES.INSTITUTION_PROFILE_VIEW(internship.institutionID), {
+      state: { institution: internship.institution },
+    });
+  };
+ 
+  if (loading) {
     return (
-
-
-        <div className="internship-detail-page">
-
-
-
-
-
-            <div className="internship-container">
-
-
-
-
-
-
-                <section className="internship-header">
-
-
-
-                    <div>
-
-
-                        <h1>
-                            {internship.title}
-                        </h1>
-
-
-                        <h3>
-                            {internship.company}
-                        </h3>
-
-
-                        <div className="badges">
-
-
-                            <span>
-                                📍 {internship.location}
-                            </span>
-
-
-                            <span>
-                                💼 {internship.type}
-                            </span>
-
-
-                            <span>
-                                ⏳ {internship.duration}
-                            </span>
-
-
-                            <span>
-                                {
-                                    internship.paid
-                                    ?
-                                    "💰 Paid"
-                                    :
-                                    "Unpaid"
-                                }
-                            </span>
-
-
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-                    <button
-
-                        className="apply-btn"
-
-                        onClick={()=>navigate("/login")}
-
-                    >
-
-                        Apply Now
-
-                    </button>
-
-
-
-                </section>
-
-
-
-
-
-
-
-
-
-                <div className="detail-grid">
-
-
-
-
-
-                    <div className="detail-card">
-
-
-                        <h2>
-                            Internship Description
-                        </h2>
-
-
-                        <p>
-                            {internship.description}
-                        </p>
-
-
-                    </div>
-
-
-
-
-
-
-
-
-                    <div className="detail-card">
-
-
-                        <h2>
-                            Required Skills
-                        </h2>
-
-
-                        <div className="skills">
-
-
-                            {
-                                internship.skills.map(
-                                    (skill,index)=>(
-
-                                    <span key={index}>
-                                        {skill}
-                                    </span>
-
-                                    )
-
-                                )
-                            }
-
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-
-
-
-
-
-                    <div className="detail-card">
-
-
-                        <h2>
-                            Requirements
-                        </h2>
-
-
-                        <ul>
-
-
-                            {
-                                internship.requirements.map(
-                                    (item,index)=>(
-
-                                    <li key={index}>
-                                        {item}
-                                    </li>
-
-                                    )
-
-                                )
-                            }
-
-
-                        </ul>
-
-
-                    </div>
-
-
-
-
-
-                </div>
-
-
-
-
-
-            </div>
-
-
-
-
-        </div>
-
-
+      <div className="internship-detail-page">
+        <LoadingSpinner />
+      </div>
     );
-
-
+  }
+ 
+  if (loadError || !internship) {
+    return (
+      <div className="internship-detail-page">
+        <div className="internship-detail-missing">
+          <h2>{loadError || "This internship could not be found."}</h2>
+          <button onClick={() => navigate(-1)}>Go back</button>
+        </div>
+      </div>
+    );
+  }
+ 
+  return (
+    <div className="internship-detail-page">
+      <div className="internship-container">
+        <section className="internship-header">
+          <div>
+            <h1>{internship.title}</h1>
+ 
+            <h3
+              className="internship-detail-institution-link"
+              onClick={handleViewInstitution}
+              role="button"
+              tabIndex={0}
+            >
+              🏢 {internship.institution?.name || "Unknown Institution"}
+            </h3>
+ 
+            <div className="badges">
+              <span>{getStatusLabel(internship.status)}</span>
+ 
+              {internship.location && <span>📍 {internship.location}</span>}
+ 
+              {internship.startDate && (
+                <span>📅 Starts {formatDate(internship.startDate)}</span>
+              )}
+ 
+              {internship.endDate && (
+                <span>🏁 Ends {formatDate(internship.endDate)}</span>
+              )}
+ 
+              {internship.capacity != null && (
+                <span>👥 {internship.capacity} spots</span>
+              )}
+            </div>
+          </div>
+ 
+          <div className="internship-detail-apply">
+            <button
+              className="apply-btn"
+              onClick={handleApply}
+              disabled={applyState === "loading" || applyState === "applied"}
+            >
+              {applyState === "applied"
+                ? "Applied ✓"
+                : applyState === "loading"
+                ? "Applying..."
+                : "Apply Now"}
+            </button>
+ 
+            {applyState === "error" && (
+              <p className="internship-detail-apply-error">{applyError}</p>
+            )}
+          </div>
+        </section>
+ 
+        <div className="detail-grid">
+          <div className="detail-card">
+            <h2>Internship Description</h2>
+            <p>{internship.description}</p>
+          </div>
+ 
+          {Array.isArray(internship.skills) && internship.skills.length > 0 && (
+            <div className="detail-card">
+              <h2>Required Skills</h2>
+              <div className="skills">
+                {internship.skills.map((skill, index) => (
+                  <span key={index}>{skill}</span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
-
-
-
+ 
 export default InternshipDetail;

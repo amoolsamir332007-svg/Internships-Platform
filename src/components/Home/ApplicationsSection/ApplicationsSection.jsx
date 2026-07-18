@@ -2,12 +2,15 @@
 //
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import InternshipCard from '../../common/InternshipCards/InternshipCard';
 import * as internshipService from '../../../api/internshipService';
+import { ROUTES } from '../../../utils/constants';
 import './ApplicationsSection.css';
 
 const ApplicationsSection = () => {
+  const navigate = useNavigate();
   const [internships, setInternships] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -72,9 +75,9 @@ const ApplicationsSection = () => {
         <div className="internships-grid">
           {internships.map((internship) => (
             <InternshipCard 
-              key={internship._id || internship.id} 
+              key={internship.opportunityID} 
               internship={internship} 
-              onClick={() => window.location.href = `/internship/${internship._id || internship.id}`}
+              onClick={() => navigate(ROUTES.INTERNSHIP_DETAIL(internship.opportunityID))}
             />
           ))}
         </div>

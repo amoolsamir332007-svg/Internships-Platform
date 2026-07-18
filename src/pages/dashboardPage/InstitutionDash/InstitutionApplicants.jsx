@@ -20,18 +20,22 @@ const TABS = [
 const InstitutionApplicants = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [actionLoadingId, setActionLoadingId] = useState(null);
- 
-  const statusFilter = activeTab === "all" ? undefined : activeTab;
- 
+
+  // The status/opportunityId query params on this endpoint are UNCONFIRMED
+  // (the route itself is confirmed, its filtering isn't) — so we always
+  // fetch everything and filter client-side by tab instead of trusting
+  // the server to filter for us.
   const {
-    data: applicants,
+    data: allApplicants,
     loading,
     error,
     refetch,
-  } = useFetch(
-    () => getApplicantsForInstitution({ status: statusFilter }),
-    [activeTab]
-  );
+  } = useFetch(() => getApplicantsForInstitution(), []);
+
+  const applicants =
+    activeTab === "all"
+      ? allApplicants
+      : allApplicants?.filter((a) => a.status === activeTab);
  
   const handleAccept = async (applicationId) => {
     setActionLoadingId(applicationId);

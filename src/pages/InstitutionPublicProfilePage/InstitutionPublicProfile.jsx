@@ -25,6 +25,7 @@ import "./InstitutionPublicProfile.css";
 //
 // To fully support this page (deep links, refresh, etc.) the backend
 // needs something like: GET /api/Institution/{id}/profile (public).
+
 const InstitutionPublicProfile = () => {
   const { id } = useParams();
   const location = useLocation();
