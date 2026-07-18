@@ -4,10 +4,6 @@ import InstitutionProfileForm from "../../components/profile/InstitutionProfileF
 import LoadingSpinner from "../../components/common/LoadingSpinner/LoadingSpinner";
 import "./InstitutionProfile.css";
 
-// This is the INSTITUTION'S OWN editable profile page (dashboard route
-// /dashboard/institution/profile). It is intentionally a separate
-// component from the public-facing institution view students see — see
-// InstitutionPublicProfile.jsx for that one.
 const InstitutionProfile = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,7 +19,6 @@ const InstitutionProfile = () => {
       setHasProfile(true);
     } catch (err) {
       if (err.response?.status === 404) {
-        // No profile created yet — show the empty form, not an error.
         setHasProfile(false);
         setProfile(null);
       } else {

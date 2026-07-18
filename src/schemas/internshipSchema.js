@@ -1,10 +1,5 @@
 import * as yup from "yup";
 
-// Fields match the confirmed backend schema for
-// POST /api/Institution/opportunities:
-// { title, description, capacity, startDate, endDate, location }
-// (previous version had requirements/duration/deadline/isPaid, which the
-// backend doesn't accept at all)
 export const internshipSchema = yup.object().shape({
   title: yup
     .string()

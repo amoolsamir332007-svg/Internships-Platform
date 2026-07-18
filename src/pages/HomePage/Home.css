@@ -3,10 +3,6 @@
     background:var(--color-bg-subtle);
 }
 
-/* ===================================================================
-   HERO — premium, layered, glassmorphic, animated
-=================================================================== */
-
 .hero-section{
     position:relative;
     padding:130px 0 110px;
@@ -184,7 +180,6 @@
     font-size:14px;
 }
 
-/* ================= IMAGE ================= */
 
 .hero-image{
     position:relative;
@@ -227,7 +222,6 @@
     50%     { transform:translateY(-14px) scale(1.02); }
 }
 
-/* ================= FLOATING CARDS ================= */
 
 .floating-card{
     position:absolute;
@@ -273,11 +267,8 @@
     right:0;
 }
 
-/* ===================================================================
-   RESPONSIVE
-=================================================================== */
 
-/* Tablets */
+
 @media (max-width: 992px) {
 
     .hero-section {
@@ -323,37 +314,31 @@
 }
 
 
-/* Mobile */
 @media (max-width: 600px) {
 
     .hero-section {
         padding: 70px 0;
     }
     
-
     .hero-container {
         width: 92%;
         gap: 40px;
     }
-
 
     .hero-badge {
         font-size: 14px;
         padding: 8px 15px;
     }
 
-
     .hero-content h1 {
         font-size: 38px;
         line-height: 1.2;
     }
 
-
     .hero-content p {
         font-size: 16px;
         line-height: 1.7;
     }
-
 
     .hero-buttons {
         flex-direction: column;
@@ -361,13 +346,11 @@
         gap: 15px;
     }
 
-
     .primary-btn,
     .secondary-btn {
         width: 100%;
         padding: 14px 25px;
     }
-
 
     .hero-features {
         flex-direction: column;
@@ -375,21 +358,17 @@
         margin-top: 35px;
     }
 
-
     .hero-features div {
         align-items: center;
     }
-
 
     .hero-features strong {
         font-size: 25px;
     }
 
-
     .hero-image img {
         width: 280px;
     }
-
 
     .image-circle {
         width: 250px;
@@ -406,24 +385,16 @@
     }
 }
 
-/* ================= COMPANIES ================= */
-
-
 
 .companies-section{
     padding:70px 0;
     text-align:center;
     background:white;
 }
+
 .companies-section h3{
-
-
     color:var(--color-text-secondary);
-
-
     margin-bottom:40px;
-
-
 }
 
 
@@ -446,7 +417,6 @@
     opacity:.7;
 }
 
-/* ================= FEATURED INTERNSHIPS ================= */
 
 
 .featured-section{
@@ -455,47 +425,27 @@
 }
 
 .section-header{
-
-
     text-align:center;
-
-
     margin-bottom:60px;
-
-
 }
+
 .section-header span{
     display:inline-block;
     padding:8px 20px;
     border-radius:30px;
-
     background:var(--color-primary-light);
-
     color:var(--color-primary);
-
-
     font-weight:700;
-
-
     margin-bottom:20px;
-
-
 }
 
 .section-header h2{
     font-size:40px;
-
-
     color:var(--color-text);
-
-
     margin-bottom:15px;
-
-
     font-weight:900;
-
-
 }
+
 .section-header h2 .linetitle {
   display: block;
   background: none;
@@ -511,27 +461,14 @@
 }
 
 .section-header p{
-
-
     max-width:650px;
-
-
     margin:auto;
-
-
     color:var(--color-text-secondary);
-
-
     font-size:18px;
-
-
     line-height:1.7;
-
-
 }
 
 
-/* ================= WHY CHOOSE US ================= */
 
 
 .why-section{
@@ -550,123 +487,58 @@
 
 .feature-card{
     background:white;
-
-
     padding:35px 25px;
-
-
     border-radius:25px;
-
-
     text-align:center;
-
-
     box-shadow:
-
-
     0 15px 35px rgba(0,0,0,.06);
-
-
     transition:.35s;
-
-
 }
+
 .feature-card:hover{
-
-
     transform:translateY(-10px);
-
-
     box-shadow:0 25px 45px rgba(124,58,237,.15);
 }
+
 .feature-icon{
-
-
     width:70px;
-
-
     height:70px;
-
-
     margin:0 auto 25px;
-
-
     border-radius:20px;
-
-
     display:flex;
-
-
     align-items:center;
-
-
     justify-content:center;
-
-
     font-size:35px;
-
-
     background:
-
-
     linear-gradient(
         135deg,
         var(--color-primary-light),
         var(--color-secondary-light)
     );
-
-
 }
+
 .feature-card h3{
-
-
     font-size:22px;
-
-
     margin-bottom:15px;
-
-
     color:var(--color-text);
-
-
 }
 
 .feature-card p{
-
-
     color:var(--color-text-secondary);
-
-
     line-height:1.7;
-
-
 }
+
 @media(max-width:1000px){
-
-
     .features-container{
-
-
         grid-template-columns:repeat(2,1fr);
-
-
     }
 }
+
 @media(max-width:600px){
-
-
     .features-container{
-
-
         grid-template-columns:1fr;
-
-
     }
 }
-
-
-/* ================= STATISTICS SECTION ================= */
-
 
 
 .stats-section{
@@ -691,19 +563,15 @@
 
 
 }
+
 .stat-item{
     text-align:center;
-
-
     color:white;
-
-
     padding:30px;
 }
 
 .stat-item h2{
     font-size:55px;
-
     font-weight:900;
     margin-bottom:10px;
 
@@ -717,93 +585,47 @@
 
 .stat-item::after{
     content:"";
-
-
     display:block;
-
-
     width:50px;
-
-
     height:4px;
-
-
     background:white;
-
-
     margin:20px auto 0;
-
-
     border-radius:10px;
-
-
 }
+
 @media(max-width:900px){
-
-
     .stats-container{
-
-
         grid-template-columns:repeat(2,1fr);
-
-
     }
-
-
 }
+
 @media(max-width:500px){
-
-
     .stats-container{
-
-
         grid-template-columns:1fr;
-
-
     }
+
     .section-header h2{
      font-size:35px;}
 
 }
 
 
-    /* ================= HOW IT WORKS ================= */
-
-
 .how-section{
-
-
     padding:100px 0;
     background:white;
 }
+
 .steps-container{
-
-
     width:90%;
-
-
     max-width:1200px;
-
-
     margin:60px auto 0;
-
-
     display:grid;
-
-
     grid-template-columns:repeat(3,1fr);
-
-
     gap:35px;
-
-
     position:relative;
-
-
 }
+
 .step-card{
-
-
     position:relative;
     background:#ffffff;
     padding:45px 30px;
@@ -812,71 +634,32 @@
     border:1px solid var(--color-secondary-lighter);
     transition:.35s;
 }
+
 .step-card:hover{
-
-
     transform:translateY(-12px);
-
-
     box-shadow:
-
     0 25px 50px rgba(79,70,229,.15);
-
-
 }
 
 .step-number{
-
-
     position:absolute;
-
-
     top:20px;
-
-
     right:25px;
-
-
     font-size:45px;
-
-
     font-weight:900;
-
-
     color:var(--color-secondary-lighter);
-
-
 }
+
 .step-icon{
-
-
     width:90px;
-
-
     height:90px;
-
-
     margin:auto;
-
-
     border-radius:50%;
-
-
     display:flex;
-
-
     justify-content:center;
-
-
     align-items:center;
-
-
     font-size:40px;
-
-
     background:
-
-
     linear-gradient(
         135deg,
         var(--color-primary-light),
@@ -902,8 +685,6 @@
     }
 
 }
-
-/* ================= TESTIMONIALS ================= */
 
 
 .testimonials-section{
@@ -974,7 +755,7 @@
 grid-template-columns:1fr;
 }
 }
-/* ================= CTA ================= */
+
 .cta-section{
     padding:100px 20px;
     background:
@@ -1029,9 +810,6 @@ font-size:30px;
 }
 }
 
-/* ================= HERO ANIMATION ================= */
-
-
 .hero-content{
 animation:slideLeft 1s ease;
 }
@@ -1048,9 +826,7 @@ transform:translateX(-50px);
 
 
 to{
-
 opacity:1;
-
 transform:translateX(0);
 }
 }

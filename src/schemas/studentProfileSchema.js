@@ -1,10 +1,5 @@
 import * as yup from "yup";
 
-// Fields match the CONFIRMED backend schema for PUT /api/Student/profile:
-// { name, level, phoneNumber, gpa, bio }
-// (the previous version had university/major/skills/linkedin/github,
-// none of which exist on the backend — removed rather than sent as dead
-// weight the API would ignore or reject)
 export const studentProfileSchema = yup.object().shape({
   name: yup
     .string()

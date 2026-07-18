@@ -23,10 +23,7 @@ function Login() {
  
         try {
             const res = await api.post('Account/login', { email, password });
- 
-            // الباك اند بيرجع بس { email, token } من غير كائن user،
-            // فبنبني الـ user object إحنا من الـ JWT نفسه.
-            const decoded = jwtDecode(res.data.token);
+             const decoded = jwtDecode(res.data.token);
             const role =
                 decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role"] ||
                 decoded.role;
@@ -34,14 +31,11 @@ function Login() {
             const userData = {
                 email: res.data.email,
                 fullName: decoded.FullName,
-                role, // "Student" أو "Institution" بنفس الكازينج اللي جاي من الباك اند
-            };
+                role, 
+             };
  
             login(userData, res.data.token);
- 
-            // مهم: ما منعمل toLowerCase هون لأنه مفاتيح DASHBOARD_ROUTE_BY_ROLE
-            // بالـ constants.js هي "Student" / "Institution" بحرف كبير (نفس الـ role)
-            const targetRoute = DASHBOARD_ROUTE_BY_ROLE[role];
+             const targetRoute = DASHBOARD_ROUTE_BY_ROLE[role];
             navigate(targetRoute || ROUTES.HOME);
  
         } catch (er) {

@@ -4,16 +4,6 @@ import StudentProfileForm from "../../components/profile/StudentProfileForm/Stud
 import LoadingSpinner from "../../components/common/LoadingSpinner/LoadingSpinner";
 import "./StudentProfile.css";
 
-// Real profile page — no hardcoded data. Fields shown/edited match the
-// CONFIRMED backend schema for the Student profile:
-// { name, level, phoneNumber, gpa, bio }
-//
-// KNOWN GAP: the project brief asked for University, Major, and a
-// tag-based Skills list. The backend's Student profile has no matching
-// fields for any of these (only name/level/phoneNumber/gpa/bio are
-// accepted by PUT /api/Student/profile), so they can't be implemented
-// without either: (a) the backend adding those fields, or (b) a
-// separate endpoint for them. See the summary for exactly what's needed.
 const StudentProfile = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,10 +21,9 @@ const StudentProfile = () => {
       setHasProfile(true);
     } catch (err) {
       if (err.response?.status === 404) {
-        // No profile created yet — not a real error, just an empty state.
         setHasProfile(false);
         setProfile(null);
-        setIsEditing(true); // go straight to the form so they can create one
+        setIsEditing(true); 
       } else {
         setError(
           err.response?.data?.title ||

@@ -25,7 +25,7 @@ import StudentProfile from "../pages/StudentProfilePage/StudentProfile";
 import StudentPublicProfile from "../pages/StudentPublicProfilePage/StudentPublicProfile";
  
 import { USER_ROLES, ROUTES } from "../utils/constants";
-
+ 
 const PublicLayout = () => (
   <>
     <Navbar />
@@ -35,11 +35,10 @@ const PublicLayout = () => (
     <Footer />
   </>
 );
-
+ 
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* ---------- Public routes ---------- */}
       <Route element={<PublicLayout />}>
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.GET_STARTED} element={<GetStarted />} />
@@ -54,18 +53,9 @@ const AppRoutes = () => {
           path={ROUTES.INSTITUTION_PROFILE_VIEW()}
           element={<InstitutionPublicProfile />}
         />
-        {/* ---------- Fallback (kept inside PublicLayout so it still gets the Navbar/Footer) ---------- */}
         <Route path="*" element={<NotFound />} />
       </Route>
- 
-      {/*
-        ---------- Institution-only routes ----------
-        ProtectedRoute here expects `children` (not <Outlet/>) and a single
-        `allowedRole` string — matches the real ProtectedRoute.jsx signature.
-        DashboardLayout is passed in as those children, and DashboardLayout's
-        own <Outlet/> is what renders each nested child route below.
-      */}
-      <Route
+       <Route
         element={
           <ProtectedRoute allowedRole={USER_ROLES.INSTITUTION}>
             <DashboardLayout />
@@ -97,9 +87,7 @@ const AppRoutes = () => {
           element={<StudentPublicProfile />}
         />
       </Route>
- 
-      {/* ---------- Student-only routes ---------- */}
-      <Route
+       <Route
         element={
           <ProtectedRoute allowedRole={USER_ROLES.STUDENT}>
             <DashboardLayout />
@@ -110,13 +98,13 @@ const AppRoutes = () => {
           path={ROUTES.STUDENT_DASHBOARD}
           element={<StudentDashboard />}
         />
+        <Route
+          path={ROUTES.STUDENT_APPLICATIONS}
+          element={<StudentApplications />}
+        />
         <Route path={ROUTES.STUDENT_PROFILE} element={<StudentProfile />} />
       </Route>
-      // جوا بلوك الـ Student-only routes:
-<Route path={ROUTES.STUDENT_DASHBOARD} element={<StudentDashboard />} />
-<Route path={ROUTES.STUDENT_APPLICATIONS} element={<StudentApplications />} />
-<Route path={ROUTES.STUDENT_PROFILE} element={<StudentProfile />} />
-     </Routes>
+    </Routes>
   );
 };
  

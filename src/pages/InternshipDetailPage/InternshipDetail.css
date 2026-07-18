@@ -1,294 +1,114 @@
 .internship-detail-page{
-
-
     min-height:100vh;
-
     background:var(--color-bg-subtle);
-
     padding:40px;
-
-
 }
-
 
 
 .internship-container{
-
-
     max-width:1200px;
-
     margin:auto;
-
-
 }
 
-
-
-
-
 .internship-header{
-
-
     background:
-
     linear-gradient(
         135deg,
         #4338ca,
         var(--color-primary)
     );
-
-
-    padding:45px;
-
+   padding:45px;
     border-radius:25px;
-
     color:white;
-
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
-
     gap:30px;
-
-
 }
-
-
-
 
 
 .internship-header h1{
-
-
     font-size:40px;
-
     margin-bottom:10px;
-
-
 }
-
 
 
 .internship-header h3{
-
-
     opacity:.9;
-
     margin-bottom:25px;
-
-
 }
-
-
-
-
 
 .badges{
-
-
     display:flex;
-
     flex-wrap:wrap;
-
     gap:12px;
-
-
 }
-
-
-
 
 .badges span{
-
-
     background:rgba(255,255,255,.2);
-
     padding:10px 16px;
-
     border-radius:20px;
-
-
 }
-
-
-
-
-
-
 
 .apply-btn{
-
-
-    background:white;
-
+   background:white;
     color:var(--color-primary-dark);
-
-
     border:none;
-
     padding:15px 35px;
-
-
     border-radius:12px;
-
-
     font-size:18px;
-
     font-weight:bold;
-
-
     cursor:pointer;
-
-
 }
-
-
-
-
 
 .apply-btn:hover{
-
-
     transform:translateY(-3px);
-
-
 }
-
-
-
-
-
-
-
-
 .detail-grid{
-
-
     margin-top:30px;
-
-
     display:grid;
-
-
     grid-template-columns:
-
     repeat(2,1fr);
-
-
     gap:25px;
-
-
 }
-
-
-
-
-
-
 
 .detail-card{
-
-
-    background:white;
-
-
+ background:white;
     padding:30px;
-
-
     border-radius:20px;
-
-
     box-shadow:
-
     0 10px 25px rgba(0,0,0,.06);
-
-
 }
-
-
-
-
 
 .detail-card h2{
-
-
     color:var(--color-text);
-
     margin-bottom:20px;
-
-
 }
-
-
-
-
 
 .detail-card p,
-
-
 .detail-card li{
-
-
     color:var(--color-text-secondary);
-
     line-height:1.8;
-
-
 }
-
-
-
 
 .skills{
-
-
     display:flex;
-
     flex-wrap:wrap;
-
     gap:10px;
-
-
 }
-
-
 
 .skills span{
-
-
-    padding:8px 15px;
-
+   padding:8px 15px;
     border-radius:20px;
-
-
     background:var(--color-secondary-lighter);
-
     color:var(--color-primary-dark);
-
     font-weight:600;
-
-
 }
 
-
-
-
-
 @media(max-width:800px){
-
-
 .internship-header{
-
-
     flex-direction:column;
-
     align-items:flex-start;
-
-
 }
 
 .internship-header h1{
@@ -298,6 +118,4 @@
 .detail-grid{
     grid-template-columns:1fr;
 }
-
-
 }

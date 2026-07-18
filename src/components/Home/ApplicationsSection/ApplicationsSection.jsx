@@ -1,6 +1,3 @@
-// ApplicationsSection.jsx Section جوا صفحة Home بيعرض شبكة (grid) من 9 تدريبات منشورة كحد أقصى. لفلترة النتائج SearchBar بيستخدم - عند التحميل الأولي (internshipService.getPublished(9 بيستخدم - عند البحث (internshipService.searchPublished(q بيستخدم - InternshipCard بيعرض كل نتيجة عن طريق -
-//
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
@@ -15,7 +12,6 @@ const ApplicationsSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // دالة جلب البيانات الأساسية (9 تدريبات منشورة كحد أقصى)
   const fetchInitialInternships = async () => {
     try {
       setLoading(true);
@@ -34,7 +30,6 @@ const ApplicationsSection = () => {
     fetchInitialInternships();
   }, []);
 
-  // دالة البحث والفلترة
   const handleSearch = async (query) => {
     if (!query.trim()) {
       fetchInitialInternships();
@@ -61,10 +56,8 @@ const ApplicationsSection = () => {
         <p> Explore the available internship opportunities and kickstart your career </p>
       </div>
 
-      {/* مكون البحث */}
       <SearchBar onSearch={handleSearch} />
 
-      {/* عرض حالات التحميل والأخطاء أو البيانات */}
       {loading ? (
         <div className="section-message">Loading available opportunities...</div>
       ) : error ? (

@@ -8,6 +8,7 @@ import {
 import StatusTabs from "../../../components/dashboard/StatusTabs/StatusTabs";
 import ApplicantCard from "../../../components/dashboard/ApplicantCard/ApplicantCard";
 import LoadingSpinner from "../../../components/common/LoadingSpinner/LoadingSpinner";
+import { normalizeApplicationStatus } from "../../../utils/helpers";
 import "./InstitutionDash.css";
  
 const TABS = [
@@ -21,10 +22,6 @@ const InstitutionApplicants = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [actionLoadingId, setActionLoadingId] = useState(null);
 
-  // The status/opportunityId query params on this endpoint are UNCONFIRMED
-  // (the route itself is confirmed, its filtering isn't) — so we always
-  // fetch everything and filter client-side by tab instead of trusting
-  // the server to filter for us.
   const {
     data: allApplicants,
     loading,
@@ -35,7 +32,9 @@ const InstitutionApplicants = () => {
   const applicants =
     activeTab === "all"
       ? allApplicants
-      : allApplicants?.filter((a) => a.status === activeTab);
+      : allApplicants?.filter(
+          (a) => normalizeApplicationStatus(a.status) === activeTab
+        );
  
   const handleAccept = async (applicationId) => {
     setActionLoadingId(applicationId);
@@ -85,11 +84,11 @@ const InstitutionApplicants = () => {
         {!loading &&
           applicants?.map((applicant) => (
             <ApplicantCard
-              key={applicant.id}
+              key={applicant.applicationID}
               applicant={applicant}
               onAccept={handleAccept}
               onReject={handleReject}
-              isLoading={actionLoadingId === applicant.id}
+              isLoading={actionLoadingId === applicant.applicationID}
             />
           ))}
       </div>

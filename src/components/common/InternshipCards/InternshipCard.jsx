@@ -1,14 +1,3 @@
-// عرض عنوان التدريب
-// اسم المؤسسة
-// وصف مختصر
-// تاريخ النشر
-// حالة التدريب
-// زر التفاصيل
-
-// InternshipCard.jsx
-// Reusable card component for displaying internship information.
-// Used in Home, Search results and Dashboard pages.
-
 import "./InternshipCard.css";
 import { formatDate , truncateText , getStatusColor, getStatusLabel} from "../../../utils/helpers";
 const InternshipCard = ({internship,onClick}) => {

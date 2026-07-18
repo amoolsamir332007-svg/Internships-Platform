@@ -7,9 +7,12 @@ import {
 } from "../../../api/applicationService";
 import StatusTabs from "../../../components/dashboard/StatusTabs/StatusTabs";
 import LoadingSpinner from "../../../components/common/LoadingSpinner/LoadingSpinner";
-import { getStatusColor, formatDate } from "../../../utils/helpers";
+import {
+  getApplicationStatusLabel,
+  normalizeApplicationStatus,
+  formatDate,
+} from "../../../utils/helpers";
 import { ROUTES } from "../../../utils/constants";
-import "./StudentApplications.css";
 import "./StudentDash.css";
 
 const TABS = [
@@ -24,16 +27,20 @@ const StudentApplications = () => {
   const [withdrawingId, setWithdrawingId] = useState(null);
   const navigate = useNavigate();
 
-  const statusFilter = activeTab === "all" ? undefined : activeTab;
 
   const {
-    data: applications,
+    data: allApplications,
     loading,
     error,
     refetch,
-  } = useFetch(() => getMyApplications(statusFilter), [activeTab]);
+  } = useFetch(() => getMyApplications(), []);
 
-  const applicationsList = applications || [];
+  const applicationsList =
+    activeTab === "all"
+      ? allApplications || []
+      : (allApplications || []).filter(
+          (item) => normalizeApplicationStatus(item.status) === activeTab
+        );
 
   const handleWithdraw = async (applicationId) => {
     setWithdrawingId(applicationId);
@@ -66,43 +73,45 @@ const StudentApplications = () => {
       )}
 
       {!loading && applicationsList.length > 0 && (
-        <div className="applications-table">
-          <div className="table-header">
-            <span>Internship</span>
-            <span>Company</span>
-            <span>Applied on</span>
-            <span>Status</span>
-            <span></span>
-          </div>
+        <div className="applications-cards-grid">
+          {applicationsList.map((item) => {
+            const normalizedStatus = normalizeApplicationStatus(item.status);
+            const itemId = item.applicationID;
+            const title = item.opportunity?.title || "-";
+            const company = item.opportunity?.institution?.name || "Unknown Institution";
 
-          {applicationsList.map((item) => (
-            <div className="table-row" key={item._id || item.id}>
-              <span>{item.internship?.title || item.title || "-"}</span>
-              <span>
-                {item.internship?.institution?.name ||
-                  item.institution?.name ||
-                  item.company ||
-                  "-"}
-              </span>
-              <span>{formatDate(item.createdAt || item.appliedAt)}</span>
-              <span className={`status ${getStatusColor(item.status)}`}>
-                {item.status}
-              </span>
-              <span>
-                {item.status === "pending" && (
-                  <button
-                    className="withdraw-btn"
-                    disabled={withdrawingId === (item._id || item.id)}
-                    onClick={() => handleWithdraw(item._id || item.id)}
-                  >
-                    {withdrawingId === (item._id || item.id)
-                      ? "Withdrawing..."
-                      : "Withdraw"}
-                  </button>
-                )}
-              </span>
-            </div>
-          ))}
+            return (
+              <div className="application-card" key={itemId}>
+                <div className="application-card-header">
+                  <h3>{title}</h3>
+                  <span className={`status ${normalizedStatus}`}>
+                    {getApplicationStatusLabel(item.status)}
+                  </span>
+                </div>
+
+                <div className="application-card-company">
+                  <span className="application-card-company-icon">🏢</span>
+                  <p>{company}</p>
+                </div>
+
+                <div className="application-card-footer">
+                  <span className="application-card-date">
+                    📅 {formatDate(item.appliedAt)}
+                  </span>
+
+                  {normalizedStatus === "pending" && (
+                    <button
+                      className="withdraw-btn"
+                      disabled={withdrawingId === itemId}
+                      onClick={() => handleWithdraw(itemId)}
+                    >
+                      {withdrawingId === itemId ? "Withdrawing..." : "Withdraw"}
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
 

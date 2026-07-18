@@ -1,23 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import "./StudentPublicProfile.css";
 
-// Public, READ-ONLY student profile view (e.g. for an institution
-// reviewing an applicant) — separate from StudentProfile.jsx (the
-// student's own edit form).
-//
-// IMPORTANT BACKEND GAP: there is no confirmed "GET student profile by
-// id" endpoint, so — same as the institution public view — this page
-// can only render data it's handed directly via router state
-// (`navigate(url, { state: { student } })`) from somewhere that already
-// has that student's info (e.g. an application response, IF that
-// response embeds full student profile data — this hasn't been
-// confirmed against the live backend yet).
-//
-// To support this properly, the backend needs one of:
-//  - a public GET /api/Student/{id}/profile endpoint, or
-//  - the Institution applications endpoints to embed full student
-//    profile fields (name, level, phoneNumber, gpa, bio) the same way
-//    opportunities embed the institution object.
 const StudentPublicProfile = () => {
   const location = useLocation();
   const navigate = useNavigate();

@@ -7,7 +7,6 @@ import heroImage from "../../assets/images/studying (1).svg";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import "./Home.css";
 
-/* Entrance animation variants — staggered reveal for hero content */
 const heroContainerVariants = {
     hidden: {},
     show: {
@@ -31,7 +30,6 @@ const Home = () => {
 
     const navigate = useNavigate();
 
-    /* Mouse parallax — normalized -0.5..0.5 offsets from hero-section center */
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
     const springX = useSpring(mouseX, { stiffness: 80, damping: 20, mass: 0.6 });
@@ -62,7 +60,6 @@ const Home = () => {
     return (
 
         <div className="home-page">
-            {/* ================= HERO SECTION ================= */}
             <section
                 className="hero-section"
                 onMouseMove={handleHeroMouseMove}
@@ -149,7 +146,6 @@ const Home = () => {
                             }}
                         />
 
-                        {/* Floating Cards */}
                         <motion.div
                             className="floating-card card-one"
                             style={{ x: cardOneX, y: cardOneY }}
@@ -188,7 +184,6 @@ const Home = () => {
                     </motion.div>
                 </motion.div>
             </section>
-            {/* ================= TRUSTED COMPANIES ================= */}
             <section className="companies-section">
                 <h3> Trusted by students from leading companies </h3>
                 <div className="companies-container">
@@ -213,7 +208,6 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ================= FEATURED INTERNSHIPS ================= */}
 <section className="featured-section">
     <div className="section-header">
         <span>
@@ -230,7 +224,6 @@ const Home = () => {
     <ApplicationsSection />
 </section>
 
-{/* ================= WHY CHOOSE US ================= */}
 <section className="why-section">
     <div className="section-header">
         <span>
@@ -301,7 +294,6 @@ const Home = () => {
         </div>
     </div>
 </section>
-{/* ================= STATISTICS SECTION ================= */}
 <section className="stats-section">
     <div className="stats-container">
         <div className="stat-item">
@@ -326,16 +318,12 @@ const Home = () => {
         </div>
     </div>
 </section>
-{/* ================= HOW IT WORKS ================= */}
 <section className="how-section">
     <div className="section-header">
         <span>
             How It Works
         </span>
-        {/* <h2>
-            Start Your Internship Journey In 3 Simple Steps
-        </h2> */}
-
+       
         <h2>
   <span className="linetitle">Start Your Internship Journey</span>
   <span className="linespan">In 3 Simple Steps</span>
@@ -386,7 +374,6 @@ const Home = () => {
         </div>
     </div>
 </section>
-{/* ================= TESTIMONIALS ================= */}
 <section className="testimonials-section">
     <div className="section-header">
         <span>
@@ -474,7 +461,6 @@ const Home = () => {
     </div>
 </section>
 
-{/* ================= CTA SECTION ================= */}
 
 
 <section className="cta-section">

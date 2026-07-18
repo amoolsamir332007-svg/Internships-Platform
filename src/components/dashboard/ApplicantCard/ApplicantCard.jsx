@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../utils/constants";
+import { normalizeApplicationStatus, formatDate } from "../../../utils/helpers";
 import "./ApplicantCard.css";
  
 const STATUS_LABELS = {
@@ -8,50 +9,51 @@ const STATUS_LABELS = {
   rejected: { text: "rejected", className: "applicant-card-status-rejected" },
 };
  
+// CONFIRMED real shape (from GET /api/Institution/applications):
+// {
+//   applicationID, opportunityID,
+//   opportunity: { title, description, location, ..., institution },
+//   studentID,
+//   student: { studentID, name, level, phoneNumber, gpa, bio, cvPath, profileImagePath },
+//   appliedAt, notes, status
+// }
 const ApplicantCard = ({ applicant, onAccept, onReject, isLoading }) => {
   const navigate = useNavigate();
-  const statusInfo = STATUS_LABELS[applicant.status] || STATUS_LABELS.pending;
-
-  // UNCONFIRMED: the applications endpoint's confirmed fields are just
-  // studentName / studentUniversity / studentMajor / cvUrl — there's no
-  // confirmed studentId, bio, gpa, or phoneNumber field yet. This passes
-  // through whatever exists so StudentPublicProfile can render it; fields
-  // that don't exist on `applicant` will just show up blank until the
-  // real response shape is confirmed against the Network tab.
+  const normalizedStatus = normalizeApplicationStatus(applicant.status);
+  const statusInfo = STATUS_LABELS[normalizedStatus] || STATUS_LABELS.pending;
+ 
+  const student = applicant.student || {};
+  const internshipTitle = applicant.opportunity?.title || "-";
+ 
   const handleShowApplicant = () => {
-    navigate(
-      ROUTES.STUDENT_PROFILE_VIEW(applicant.studentId ?? applicant.id),
-      {
-        state: {
-          student: {
-            name: applicant.studentName,
-            level: [applicant.studentUniversity, applicant.studentMajor]
-              .filter(Boolean)
-              .join(" - "),
-            bio: applicant.studentBio,
-            phoneNumber: applicant.studentPhoneNumber,
-            gpa: applicant.studentGpa,
-          },
+    navigate(ROUTES.STUDENT_PROFILE_VIEW(student.studentID), {
+      state: {
+        student: {
+          name: student.name,
+          level: student.level,
+          bio: student.bio,
+          phoneNumber: student.phoneNumber,
+          gpa: student.gpa,
         },
-      }
-    );
+      },
+    });
   };
  
   return (
     <div className="applicant-card">
       <div className="applicant-card-info">
-        <h3 className="applicant-card-name">{applicant.studentName}</h3>
-        <p className="applicant-card-university">
-          {applicant.studentUniversity} - {applicant.studentMajor}
-        </p>
+        <h3 className="applicant-card-name">{student.name || "-"}</h3>
+        <p className="applicant-card-university">{student.level}</p>
         <p className="applicant-card-internship">
-         applied for <strong>{applicant.internshipTitle}</strong>
+         applied for <strong>{internshipTitle}</strong>
         </p>
-        <p className="applicant-card-date">Date of Application: {applicant.appliedAt}</p>
+        <p className="applicant-card-date">
+          Date of Application: {formatDate(applicant.appliedAt)}
+        </p>
  
-        {applicant.cvUrl && (
+        {student.cvPath && (
           <a
-            href={applicant.cvUrl}
+            href={student.cvPath}
             target="_blank"
             rel="noopener noreferrer"
             className="applicant-card-cv-link"
@@ -65,7 +67,7 @@ const ApplicantCard = ({ applicant, onAccept, onReject, isLoading }) => {
         <span className={`applicant-card-status ${statusInfo.className}`}>
           {statusInfo.text}
         </span>
-
+ 
         <button
           className="applicant-card-btn-show"
           onClick={handleShowApplicant}
@@ -73,19 +75,19 @@ const ApplicantCard = ({ applicant, onAccept, onReject, isLoading }) => {
           Show applicant
         </button>
  
-        {applicant.status === "pending" && (
+        {normalizedStatus === "pending" && (
           <div className="applicant-card-buttons">
             <button
               className="applicant-card-btn-accept"
               disabled={isLoading}
-              onClick={() => onAccept(applicant.id)}
+              onClick={() => onAccept(applicant.applicationID)}
             >
              Accept
             </button>
             <button
               className="applicant-card-btn-reject"
               disabled={isLoading}
-              onClick={() => onReject(applicant.id)}
+              onClick={() => onReject(applicant.applicationID)}
             >
               Reject
             </button>

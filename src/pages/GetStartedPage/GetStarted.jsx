@@ -9,23 +9,7 @@ const GetStarted = () => {
     };
     return (
         <div className="getstarted-page">
-            {/* <nav className="getstarted-navbar">
-                <div className="brand">
-                    <div className="brand-icon">
-                        💼
-                    </div>
-                    <div>
-                        <h3>Internship</h3>
-                        <span>Platform</span>
-                    </div>
-                </div>
-                <div className="login-area">
-                    <span>Already have an account?</span>
-                    <button onClick={() => navigate("/login")}>
-                        Login
-                    </button>
-                </div>
-            </nav> */}
+          
 
             <section className="welcome-section">
                 <h1>Welcome to <span>Internship Platform</span></h1>
@@ -58,7 +42,6 @@ const GetStarted = () => {
                         </button>
                 </div>
 
-                {/* Student */}
 
 
 

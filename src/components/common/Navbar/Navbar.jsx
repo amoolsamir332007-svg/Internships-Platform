@@ -16,25 +16,17 @@ const NAV_LINKS = [
 
 
 const Navbar = () => {
-
   const { user, isAuthenticated, logout } = useAuth();
   const { isInstitution, isStudent } = useRole();
-
   const navigate = useNavigate();
   const location = useLocation();
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
   const menuRef = useRef(null);
 
-
-
   useEffect(() => {
-
     const handleClickOutside = (event) => {
-
       if (
         menuRef.current &&
         !menuRef.current.contains(event.target)
@@ -44,12 +36,10 @@ const Navbar = () => {
 
     };
 
-
     document.addEventListener(
       "mousedown",
       handleClickOutside
     );
-
 
     return () => {
       document.removeEventListener(
@@ -62,7 +52,6 @@ const Navbar = () => {
   }, []);
 
 
-  // Sticky glass intensifies slightly on scroll — visual only, no functional change
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 12);
@@ -73,8 +62,6 @@ const Navbar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-
 
   const dashboardPath = isInstitution
     ? "/dashboard/institution"
@@ -87,8 +74,6 @@ const Navbar = () => {
     ? "/dashboard/institution/profile"
     : "/dashboard/student/profile";
 
-
-
   const handleLogout = () => {
 
     setMenuOpen(false);
@@ -97,12 +82,9 @@ const Navbar = () => {
 
   };
 
-
-
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
-
 
   const resolveLinkPath = (to) =>
     to === "__dashboard__" ? dashboardPath : to;
@@ -113,32 +95,17 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
 
       <div className="navbar-container">
-
-
-        {/* Brand */}
-
         <Link to="/" className="brand" onClick={closeMobileMenu}>
-
           <span className="brand-icon">
             💼
           </span>
-
-
           <div>
           <h2 className="footer-logo navbar-brand-title">
             Intern<span>Ship</span>
 
           </h2>
-            {/* <span>
-              Platform
-            </span> */}
-          </div>
+            </div>
         </Link>
-
-
-
-
-        {/* Navigation Links */}
 
         <div
           className={`navbar-links ${
@@ -165,15 +132,8 @@ const Navbar = () => {
             );
           })}
 
-
-
-          {/* Mobile Auth Buttons */}
-
           <div className="mobile-auth-buttons">
-
-
             {!isAuthenticated && (
-
               <>
                 <Link
                   to="/login"
@@ -182,8 +142,6 @@ const Navbar = () => {
                 >
                   Login
                 </Link>
-
-
                 <Link
                   to="/get-started"
                   className="signup-btn"
@@ -191,75 +149,40 @@ const Navbar = () => {
                 >
                   Sign Up
                 </Link>
-
               </>
-
             )}
-
-
           </div>
-
-
         </div>
 
-
-
-
-
-        {/* Desktop Auth Buttons */}
-
         {!isAuthenticated && (
-
           <div className="nav-auth-buttons">
-
-
             <Link
               to="/login"
               className="login-btn"
             >
               Login
             </Link>
-
-
             <Link
               to="/get-started"
               className="signup-btn"
             >
               Sign Up
             </Link>
-
-
           </div>
 
         )}
 
-
-
-
-
-
-        {/* User Menu */}
-
         {isAuthenticated && (
-
           <div
             className="navbar-auth"
             ref={menuRef}
           >
-
-
             <div className="navbar-user">
-
-
               <button
                 type="button"
                 className="navbar-user-trigger"
-                onClick={() => setMenuOpen(!menuOpen)}
-              >
-
-
+                onClick={() => setMenuOpen(!menuOpen)}>
                 <span className="navbar-user-avatar">
-
                   {
                     (
                       user?.institutionName ||
@@ -269,13 +192,8 @@ const Navbar = () => {
                     .charAt(0)
                     .toUpperCase()
                   }
-
                 </span>
-
-
-
                 <span className="navbar-user-name">
-
                   {
                     user?.institutionName ||
                     user?.name ||
@@ -283,14 +201,9 @@ const Navbar = () => {
                   }
 
                 </span>
-
-
               </button>
 
-
-
-
-              <AnimatePresence>
+             <AnimatePresence>
                 {menuOpen && (
 
                   <motion.div
@@ -300,8 +213,6 @@ const Navbar = () => {
                     exit={{ opacity: 0, y: -8, scale: 0.96 }}
                     transition={{ duration: 0.18, ease: "easeOut" }}
                   >
-
-
                     <Link
                       to={profilePath}
                       className="navbar-user-dropdown-item"
@@ -309,9 +220,6 @@ const Navbar = () => {
                     >
                       Profile
                     </Link>
-
-
-
                     <button
                       type="button"
                       className="navbar-user-dropdown-item navbar-user-dropdown-item-danger"
@@ -319,42 +227,16 @@ const Navbar = () => {
                     >
                       Logout
                     </button>
-
-
                   </motion.div>
-
                 )}
               </AnimatePresence>
-
-
-
             </div>
-
-
           </div>
-
         )}
 
-
-
-
-
-
-
-        {/* Mobile Menu Button */}
-
-        <button
-
-          className="menu-toggle"
-
-          onClick={() =>
-            setMobileMenuOpen(!mobileMenuOpen)
-          }
-
+        <button  className="menu-toggle"  onClick={() =>setMobileMenuOpen(!mobileMenuOpen) }
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-
         >
-
           {
             mobileMenuOpen
               ?
@@ -362,19 +244,10 @@ const Navbar = () => {
               :
               <FaBars />
           }
-
-
         </button>
-
-
-
       </div>
-
-
     </nav>
-
   );
-
 };
 
 

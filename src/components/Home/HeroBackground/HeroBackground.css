@@ -6,7 +6,6 @@
   z-index: 0;
 }
 
-/* subtle grid pattern */
 .hero-bg-grid {
   position: absolute;
   inset: -1px;
@@ -18,7 +17,6 @@
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 85%);
 }
 
-/* animated gradient blobs */
 .hero-blob {
   position: absolute;
   border-radius: 50%;
@@ -52,7 +50,6 @@
   opacity: 0.35;
 }
 
-/* floating particles */
 .hero-particle {
   position: absolute;
   border-radius: 50%;

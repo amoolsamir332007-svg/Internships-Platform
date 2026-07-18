@@ -12,21 +12,7 @@ const DEFAULT_VALUES = {
   bio: "",
 };
 
-/**
- * Editable form for a student's profile.
- * Fields match the confirmed backend schema for PUT /api/Student/profile:
- * { name, level, phoneNumber, gpa, bio }
- *
- * NOTE: the project brief also asked for University, Major, and Skills
- * fields. Those aren't part of the backend's Student profile schema (the
- * only confirmed fields are the five above), so they're intentionally
- * left out here rather than invented — sending them would either be
- * ignored or rejected by the API. See the summary for what's needed on
- * the backend to support them.
- *
- * @param {object} [initialData] - existing profile fetched from the API
- * @param {(formData: object) => Promise<void>} onSave - called with the form values on submit
- */
+
 const StudentProfileForm = ({ initialData, onSave }) => {
   const {
     register,
@@ -69,7 +55,6 @@ const StudentProfileForm = ({ initialData, onSave }) => {
         </div>
       </div>
 
-      {/* Academic Information */}
       <div className="student-profile-form-section">
         <h3 className="student-profile-form-section-title">Academic Information</h3>
 
@@ -88,7 +73,6 @@ const StudentProfileForm = ({ initialData, onSave }) => {
         </div>
       </div>
 
-      {/* About Me */}
       <div className="student-profile-form-section">
         <h3 className="student-profile-form-section-title">About Me</h3>
 

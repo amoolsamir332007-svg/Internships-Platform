@@ -7,11 +7,6 @@ import { formatDate, getStatusLabel } from "../../utils/helpers";
 import { ROUTES, STORAGE_KEYS, USER_ROLES } from "../../utils/constants";
 import "./InternshipDetail.css";
  
-// IMPORTANT BACKEND GAP: there is no confirmed "GET /api/Opportunities/{id}"
-// (single-item) endpoint. Same workaround already used in
-// InstitutionPublicProfile.jsx: fetch the full published list and find
-// this one opportunity client-side. Swap this for a direct call if/when
-// the backend adds a single-opportunity route.
 const InternshipDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -20,7 +15,6 @@ const InternshipDetail = () => {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
  
-  // idle | loading | applied | error
   const [applyState, setApplyState] = useState("idle");
   const [applyError, setApplyError] = useState("");
  
@@ -55,10 +49,6 @@ const InternshipDetail = () => {
       return;
     }
  
-    // Best-effort read of the logged-in user's role. UNCONFIRMED: assumes
-    // the login flow stores this under localStorage "user" as JSON like
-    // { role: "Student", ... } — apiClient's 401 handler clears this same
-    // key, which is the only existing evidence of this convention.
     let user = null;
     try {
       user = JSON.parse(localStorage.getItem("user"));

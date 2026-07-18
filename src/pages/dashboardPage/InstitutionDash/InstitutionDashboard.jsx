@@ -6,12 +6,6 @@ import StatCard from "../../../components/dashboard/StatCard/StatCard";
 import LoadingSpinner from "../../../components/common/LoadingSpinner/LoadingSpinner";
 import "./InstitutionDash.css";
 
-// NOTE: the "Total internships / Published / Drafts" stats used to come
-// from getMyInternships(), which has no matching backend endpoint (the
-// API only exposes POST /Institution/opportunities, not a GET to list
-// them). Those stats are removed until that endpoint exists; only
-// "Pending applicants" is backed by a real route
-// (GET /Institution/applications).
 const InstitutionDashboard = () => {
   const { user } = useAuth();
 

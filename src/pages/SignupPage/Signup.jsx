@@ -19,12 +19,12 @@ const Signup = () => {
   const [formData, setFormData] = useState({
   email: "",
   password: "",
-  fullName: "",       // 🟢 Changed from 'name' to 'fullName'
-  accountType: selectedRole === "institution" ? 2 : 1,    // 🟢 Integer: 1 for Student, 2 for Employer, etc.
-  level: "Freshman",  // 🟢 Added missing field
-  gpa: 4.0,           // 🟢 Decimal/Number
-  address: "bb",        // 🟢 Added missing field
-  phoneNumber: "0533869500"     // 🟢 Added missing field
+  fullName: "",      
+  accountType: selectedRole === "institution" ? 2 : 1,    
+    level: "Freshman",  
+  gpa: 4.0,          
+  address: "bb",        
+  phoneNumber: "0533869500"     
 });
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
@@ -43,12 +43,10 @@ const Signup = () => {
       ...errors,
       [name]: "",
     });
- 
-    setApiError("");
+     setApiError("");
   };
  
- 
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
     setApiError("");
     setIsSubmitting(true);
@@ -56,11 +54,6 @@ const Signup = () => {
     try {
       const res = await api.post('Account/register', formData);
       console.log(res.data);
-      // Only navigate away on a CONFIRMED success — previously this
-      // navigated to /Login unconditionally, even when register()
-      // failed, which made failed signups look like they worked and
-      // then "Invalid email or password" on the next login (because the
-      // account was never actually created).
       navigate("/Login");
     } catch (er) {
       console.log(er.response?.data);
@@ -76,76 +69,40 @@ const Signup = () => {
  
   return (
     <div className="signup-page">
- 
-      <div className="signup-card">
- 
-        <div className="signup-header">
- 
-          <h1>
+       <div className="signup-card">
+         <div className="signup-header">
+           <h1>
             Create Your Account
           </h1>
- 
-          <p>
+           <p>
             Join Internship Platform as a
             <span> {selectedRole} </span>
           </p>
  
         </div>
- 
- 
-        <form onSubmit={handleSubmit}>
- 
- 
-          <div className="input-group">
+         <form onSubmit={handleSubmit}>
+           <div className="input-group">
             <label> Full Name </label>
-           <input
-  name="fullName"        // ✅ matches state key
-  value={formData.fullName}
-  onChange={handleChange}
-  placeholder="Enter your name"
-/>
-            <p> {errors.name} </p>
+           <input name="fullName"  value={formData.fullName}  onChange={handleChange}  placeholder="Enter your name"/>
+            <p> {errors.fullName} </p>
           </div>
- 
- 
- 
+  
           <div className="input-group">
- 
-            <label>
+             <label>
               Email Address
             </label>
- 
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="example@gmail.com"
-            />
- 
-            <p>
+             <input  type="email" name="email" value={formData.email}  onChange={handleChange} placeholder="example@gmail.com" />
+             <p>
               {errors.email}
             </p>
+           </div>
  
-          </div>
- 
- 
- 
-          <div className="input-group">
- 
-            <label>
+           <div className="input-group">
+             <label>
               Password
             </label>
- 
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="********"
-            />
- 
-            <p>
+             <input type="password"  name="password"  value={formData.password} onChange={handleChange} placeholder="********" />
+             <p>
               {errors.password}
             </p>
  
@@ -170,39 +127,24 @@ const Signup = () => {
               onChange={handleChange}
               placeholder="0590000000"
             />
-            <p>{errors.password}</p>
+            <p>{errors.phoneNumber}</p>
           </div>
- 
-       
- 
-          
+           
           {apiError && <p className="signup-api-error">{apiError}</p>}
  
           <button className="signup-btn" disabled={isSubmitting}>
             {isSubmitting ? "Creating Account..." : "Create Account"}
           </button>
         </form>
- 
- 
- 
-        <p className="login-link">
- 
-          Already have account?
- 
-          <button
-            type="button"
-            onClick={() => navigate("/login")}
-          >
+          <p className="login-link">
+           Already have account?
+           <button  type="button"  onClick={() => navigate("/login")}>
             Login
           </button>
- 
-        </p>
- 
- 
+         </p>
+  
       </div>
- 
- 
-      <ScrollToTop />
+       <ScrollToTop />
  
     </div>
   );

@@ -12,21 +12,6 @@ const DEFAULT_VALUES = {
   address: "",
 };
 
-/**
- * Editable form for an institution's profile.
- * Fields match the confirmed institution shape seen in backend
- * responses: { name, email, phoneNumber, address }.
- *
- * NOTE: the project brief also asked for a logo, description,
- * website, vision, and mission. None of those are confirmed to exist on
- * the backend (they don't appear anywhere the institution object shows
- * up), so they're intentionally left out rather than sent as fields the
- * API will likely ignore or reject. See the summary for what's needed
- * on the backend to support them.
- *
- * @param {object} [initialData] - existing profile fetched from the API
- * @param {(updatedProfile: object) => void} [onSuccess] - called after a successful save
- */
 const InstitutionProfileForm = ({ initialData, onSuccess }) => {
   const [serverError, setServerError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");

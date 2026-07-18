@@ -1,15 +1,6 @@
 import { motion } from "framer-motion";
 import "./HeroBackground.css";
 
-/**
- * Purely decorative background layer for the hero section:
- * animated gradient blobs, floating particles and a subtle grid.
- * Renders behind hero content (z-index handled in CSS) and has
- * no effect on layout, routes or functionality.
- *
- * Particle positions are fixed (not Math.random) so the component
- * stays pure/idempotent across re-renders.
- */
 const PARTICLES = [
   { id: 0, left: 6, top: 18, size: 5, duration: 14, delay: 0 },
   { id: 1, left: 14, top: 62, size: 4, duration: 18, delay: 1.2 },
@@ -36,10 +27,8 @@ const HeroBackground = () => {
   return (
     <div className="hero-bg" aria-hidden="true">
 
-      {/* subtle grid */}
       <div className="hero-bg-grid" />
 
-      {/* animated gradient blobs */}
       <motion.div
         className="hero-blob hero-blob-one"
         animate={{
@@ -69,7 +58,6 @@ const HeroBackground = () => {
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* floating particles */}
       {particles.map((p) => (
         <span
           key={p.id}

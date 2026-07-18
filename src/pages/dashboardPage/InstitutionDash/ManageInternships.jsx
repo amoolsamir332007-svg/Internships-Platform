@@ -1,12 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./InstitutionDash.css";
 
-// NOTE: this page used to call getMyInternships/publish/closeInternship/
-// deleteInternship — none of which exist on the backend (the swagger docs
-// only show POST /Institution/opportunities to create one, and no GET to
-// list your own opportunities, no PUT/PATCH/DELETE on an opportunity).
-// Rather than call endpoints that 404, this is shown as a "not available
-// yet" placeholder until those routes exist on the backend.
 const ManageInternships = () => {
   const navigate = useNavigate();
 
