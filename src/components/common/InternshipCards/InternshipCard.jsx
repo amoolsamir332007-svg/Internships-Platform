@@ -10,18 +10,8 @@
 // Used in Home, Search results and Dashboard pages.
 
 import "./InternshipCard.css";
-import { useNavigate } from "react-router-dom";
-import { formatDate , truncateText , getStatusColor} from "../../../utils/helpers";
+import { formatDate , truncateText , getStatusColor, getStatusLabel} from "../../../utils/helpers";
 const InternshipCard = ({internship,onClick}) => {
-const navigate = useNavigate();
-
-const goToInstitution = (e) => {
-    e.stopPropagation();
-    if (!internship.institution) return;
-    navigate(`/institution/${internship.institutionID}`, {
-        state: { institution: internship.institution },
-    });
-};
 
 return (
 <div className="internship-card">
@@ -30,10 +20,10 @@ return (
             {internship.title}
         </h3>
         <span className={`status ${getStatusColor(internship.status)}`} >
-            {internship.status}
+            {getStatusLabel(internship.status)}
         </span>
     </div>
-    <div className="company-info" onClick={goToInstitution} style={{ cursor: internship.institution ? "pointer" : "default" }}>
+    <div className="company-info">
         <span className="company-icon">
             🏢
         </span>

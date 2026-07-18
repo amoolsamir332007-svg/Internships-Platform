@@ -1,14 +1,33 @@
 import apiClient from "./apiClient";
 
-// Confirmed against the live swagger UI: GET /api/Opportunities/search?query=...
-// The endpoint's only documented parameter is "query" (not required), so
-// calling it with no query string returns everything.
+// Confirmed against the live swagger UI: GET /api/Student/opportunities
+// This endpoint takes NO parameters at all — it always returns the full
+// published list. There is no server-side search/filter route, so
+// "searching" has to be done client-side over this same list.
 export const getPublished = () => {
-  return apiClient.get(`/Opportunities/search`);
+  return apiClient.get(`/Student/opportunities`);
 };
 
-export const searchPublished = (q) => {
-  return apiClient.get(`/Opportunities/search?query=${encodeURIComponent(q || "")}`);
+// No dedicated search endpoint exists on the backend, so we fetch the
+// full list and filter it here by title/skills text matching the query.
+export const searchPublished = async (q) => {
+  const response = await apiClient.get(`/Student/opportunities`);
+  const query = (q || "").trim().toLowerCase();
+
+  if (!query) {
+    return response;
+  }
+
+  const allItems = response.data || [];
+  const filtered = allItems.filter((item) => {
+    const title = (item.title || "").toLowerCase();
+    const skills = Array.isArray(item.skills)
+      ? item.skills.join(" ").toLowerCase()
+      : (item.skills || "").toLowerCase();
+    return title.includes(query) || skills.includes(query);
+  });
+
+  return { ...response, data: filtered };
 };
 
 // Matches: POST /api/Institution/opportunities (confirmed in swagger)

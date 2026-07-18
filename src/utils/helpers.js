@@ -1,4 +1,3 @@
-
 // تنسيق التاريخ
 // تقصير النصوص الطويلة
 // ألوان حالات الطلبات
@@ -43,10 +42,24 @@ export const capitalize = (text) => {
 
 };
 // Return color class based on status
+// Handles status coming back as a string OR a number/enum from the API
+// without throwing, and also maps common numeric enum values.
 export const getStatusColor = (status) => {
 
+    // Some backends send status as a numeric enum (0, 1, 2...) instead
+    // of a string. Map the common cases here if that's what's happening.
+    const numericStatusMap = {
+        0: "draft",
+        1: "published",
+        2: "closed",
+    };
 
-    switch(status?.toLowerCase()){
+    const normalizedStatus =
+        typeof status === "number"
+            ? numericStatusMap[status]
+            : String(status ?? "").toLowerCase();
+
+    switch (normalizedStatus) {
 
 
         case "accepted":
@@ -93,6 +106,24 @@ export const getStatusColor = (status) => {
 
 };
 
+// Return a human-readable label for a status, whether it comes back
+// as a string or a numeric enum from the API.
+export const getStatusLabel = (status) => {
+ 
+    const numericStatusMap = {
+        0: "Draft",
+        1: "Published",
+        2: "Closed",
+    };
+ 
+    if (typeof status === "number") {
+        return numericStatusMap[status] || "Unknown";
+    }
+ 
+    return capitalize(String(status ?? ""));
+ 
+};
+ 
 // Check if email is valid
 export const validateEmail = (email)=>{
 
