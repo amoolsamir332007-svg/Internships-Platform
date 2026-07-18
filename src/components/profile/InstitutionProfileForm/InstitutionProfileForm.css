@@ -87,3 +87,19 @@
   background: #98a2b3;
   cursor: not-allowed;
 }
+.institution-profile-form-section {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.institution-profile-form-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}

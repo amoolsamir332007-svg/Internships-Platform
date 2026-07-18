@@ -1,125 +1,107 @@
-import React, { useState, useEffect } from "react";
-import { validateStudentProfile } from "../../../schemas/studentProfileSchema";
-import Button from "../../common/Buttons/Button";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { studentProfileSchema } from "../../../schemas/studentProfileSchema";
 import "./StudentProfileForm.css";
 
+const DEFAULT_VALUES = {
+  name: "",
+  level: "",
+  phoneNumber: "",
+  gpa: "",
+  bio: "",
+};
+
+/**
+ * Editable form for a student's profile.
+ * Fields match the confirmed backend schema for PUT /api/Student/profile:
+ * { name, level, phoneNumber, gpa, bio }
+ *
+ * NOTE: the project brief also asked for University, Major, and Skills
+ * fields. Those aren't part of the backend's Student profile schema (the
+ * only confirmed fields are the five above), so they're intentionally
+ * left out here rather than invented — sending them would either be
+ * ignored or rejected by the API. See the summary for what's needed on
+ * the backend to support them.
+ *
+ * @param {object} [initialData] - existing profile fetched from the API
+ * @param {(formData: object) => Promise<void>} onSave - called with the form values on submit
+ */
 const StudentProfileForm = ({ initialData, onSave }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    university: "",
-    major: "",
-    bio: "",
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(studentProfileSchema),
+    defaultValues: DEFAULT_VALUES,
   });
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (initialData) {
-      setFormData({
-        name: initialData.name || "",
-        university: initialData.university || "",
-        major: initialData.major || "",
-        bio: initialData.bio || "",
-      });
+      reset({ ...DEFAULT_VALUES, ...initialData });
     }
-  }, [initialData]);
+  }, [initialData, reset]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // التحقق من البيانات باستخدام الـ Schema
-    const validation = validateStudentProfile(formData);
-    if (!validation.isValid) {
-      setErrors(validation.errors);
-      return;
-    }
-
-    try {
-      setIsSubmitting(true);
-      await onSave(formData);
-    } catch (error) {
-      console.error("Somthing went wrong while saving the file :", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+  const submit = async (formData) => {
+    await onSave(formData);
   };
 
   return (
-    <form className="profile-form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="name">Full name </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className={errors.name ? "input-error" : ""}
-          placeholder=" full name "
-        />
-        {errors.name && <span className="error-text">{errors.name}</span>}
+    <form className="student-profile-form" onSubmit={handleSubmit(submit)} noValidate>
+      {/* Personal Information */}
+      <div className="student-profile-form-section">
+        <h3 className="student-profile-form-section-title">Personal Information</h3>
+
+        <div className="student-profile-form-field">
+          <label htmlFor="name">Full name</label>
+          <input id="name" type="text" {...register("name")} />
+          {errors.name && <span className="student-profile-form-error">{errors.name.message}</span>}
+        </div>
+
+        <div className="student-profile-form-field">
+          <label htmlFor="phoneNumber">Phone number</label>
+          <input id="phoneNumber" type="text" {...register("phoneNumber")} />
+          {errors.phoneNumber && (
+            <span className="student-profile-form-error">{errors.phoneNumber.message}</span>
+          )}
+        </div>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="university">University </label>
-        <input
-          type="text"
-          id="university"
-          name="university"
-          value={formData.university}
-          onChange={handleChange}
-          className={errors.university ? "input-error" : ""}
-          placeholder="ex:Al Aqsa University"
-        />
-        {errors.university && (
-          <span className="error-text">{errors.university}</span>
-        )}
+      {/* Academic Information */}
+      <div className="student-profile-form-section">
+        <h3 className="student-profile-form-section-title">Academic Information</h3>
+
+        <div className="student-profile-form-row">
+          <div className="student-profile-form-field">
+            <label htmlFor="level">Academic level</label>
+            <input id="level" type="text" placeholder="e.g. Junior, 3rd year" {...register("level")} />
+            {errors.level && <span className="student-profile-form-error">{errors.level.message}</span>}
+          </div>
+
+          <div className="student-profile-form-field">
+            <label htmlFor="gpa">GPA</label>
+            <input id="gpa" type="number" step="0.01" min="0" max="4" {...register("gpa")} />
+            {errors.gpa && <span className="student-profile-form-error">{errors.gpa.message}</span>}
+          </div>
+        </div>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="major">Your major</label>
-        <input
-          type="text"
-          id="major"
-          name="major"
-          value={formData.major}
-          onChange={handleChange}
-          className={errors.major ? "input-error" : ""}
-          placeholder="ex : Software engineer"
-        />
-        {errors.major && <span className="error-text">{errors.major}</span>}
+      {/* About Me */}
+      <div className="student-profile-form-section">
+        <h3 className="student-profile-form-section-title">About Me</h3>
+
+        <div className="student-profile-form-field">
+          <label htmlFor="bio">Bio</label>
+          <textarea id="bio" rows={5} {...register("bio")} />
+          {errors.bio && <span className="student-profile-form-error">{errors.bio.message}</span>}
+        </div>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="bio">Objective</label>
-        <textarea
-          id="bio"
-          name="bio"
-          rows="6"
-          value={formData.bio}
-          onChange={handleChange}
-          className={errors.bio ? "input-error" : ""}
-          placeholder=" "
-        ></textarea>
-        {errors.bio && <span className="error-text">{errors.bio}</span>}
-      </div>
-
-      <div className="form-actions">
-        <Button
-          text={isSubmitting ? " Saving..." : "Save "}
-          type="submit"
-          variant="primary"
-          disabled={isSubmitting}
-        />
-      </div>
+      <button type="submit" className="student-profile-form-submit" disabled={isSubmitting}>
+        {isSubmitting ? "Saving..." : "Save changes"}
+      </button>
     </form>
   );
 };

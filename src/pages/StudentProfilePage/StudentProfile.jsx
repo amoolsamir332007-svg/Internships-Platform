@@ -1,118 +1,136 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { getStudentProfile, updateStudentProfile } from "../../api/profileService";
+import StudentProfileForm from "../../components/profile/StudentProfileForm/StudentProfileForm";
+import LoadingSpinner from "../../components/common/LoadingSpinner/LoadingSpinner";
 import "./StudentProfile.css";
 
+// Real profile page — no hardcoded data. Fields shown/edited match the
+// CONFIRMED backend schema for the Student profile:
+// { name, level, phoneNumber, gpa, bio }
+//
+// KNOWN GAP: the project brief asked for University, Major, and a
+// tag-based Skills list. The backend's Student profile has no matching
+// fields for any of these (only name/level/phoneNumber/gpa/bio are
+// accepted by PUT /api/Student/profile), so they can't be implemented
+// without either: (a) the backend adding those fields, or (b) a
+// separate endpoint for them. See the summary for exactly what's needed.
 const StudentProfile = () => {
-    const [student] = useState({
-        name: "Ahmed Mohammed",
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [hasProfile, setHasProfile] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
-        email: "ahmed@gmail.com",
+  const loadProfile = useCallback(async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await getStudentProfile();
+      setProfile(res.data);
+      setHasProfile(true);
+    } catch (err) {
+      if (err.response?.status === 404) {
+        // No profile created yet — not a real error, just an empty state.
+        setHasProfile(false);
+        setProfile(null);
+        setIsEditing(true); // go straight to the form so they can create one
+      } else {
+        setError(
+          err.response?.data?.title ||
+          err.response?.data?.message ||
+          "Something went wrong while loading your profile."
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-        university: "Al-Azhar University",
+  useEffect(() => {
+    loadProfile();
+  }, [loadProfile]);
 
-        major: "Software Engineering",
+  const handleSave = async (formData) => {
+    setError("");
+    setSuccessMessage("");
+    try {
+      const res = await updateStudentProfile(formData);
+      setProfile(res.data || formData);
+      setHasProfile(true);
+      setIsEditing(false);
+      setSuccessMessage("Profile saved successfully.");
+    } catch (err) {
+      setError(
+        err.response?.data?.title ||
+        err.response?.data?.message ||
+        "Something went wrong while saving your profile."
+      );
+    }
+  };
 
-        location: "Gaza, Palestine",
-        skills:[
-            "React.js",
-            "JavaScript",
-            "Tailwind CSS",
-            "Git & GitHub"
-        ],
-        bio:
-        "Software Engineering student passionate about frontend development and building modern web applications."
-    });
+  if (loading) {
     return (
-        <div className="student-profile-page">
-            <div className="profile-container">
-                <div className="profile-header">
-                    <div className="profile-image">
-
-                        <span>
-                            AM
-                        </span>
-
-                    </div>
-
-                    <div className="profile-info">
-                        <h1>
-                            {student.name}
-                        </h1>
-                        <p>
-                            {student.major}
-                        </p>
-                        <span>
-                            🎓 {student.university}
-                        </span>
-                    </div>
-
-                    <button className="edit-btn">
-
-                        Edit Profile
-                    </button>
-                </div>
-                <div className="profile-grid">
-                    <div className="profile-card">
-                        <h2>
-                            About Me
-                        </h2>
-                        <p>
-                            {student.bio}
-                        </p>
-                    </div>
-                    <div className="profile-card">
-                        <h2>
-                            Contact Information
-                        </h2>
-                        <div className="info-item">
-
-                            📧 {student.email}
-
-                        </div>
-                        <div className="info-item">
-
-                            📍 {student.location}
-
-                        </div>
-                    </div>
-
-                    <div className="profile-card">
-                        <h2>
-                            Skills
-                        </h2>
-
-                        <div className="skills">
-                            {
-                                student.skills.map(
-                                    (skill,index)=>(
-
-                                    <span key={index}>
-
-                                        {skill}
-
-                                    </span>
-
-                                    )
-
-                                )
-                            }
-                        </div>
-                    </div>
-
-                    <div className="profile-card cv-card">
-
-                        <h2>
-                            Resume / CV
-                        </h2>
-                        <p>
-                            Upload your CV to increase your chances of getting accepted.
-                        </p>
-                        <button>
-                            Upload CV
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div className="student-profile-page">
+        <LoadingSpinner />
+      </div>
     );
+  }
+
+  return (
+    <div className="student-profile-page">
+      <div className="profile-container">
+        <div className="student-profile-page-header">
+          <h1>My Profile</h1>
+          <p>Keep your information up to date so institutions know who they're reviewing.</p>
+        </div>
+
+        {error && <div className="student-profile-page-error">{error}</div>}
+        {successMessage && <div className="student-profile-page-success">{successMessage}</div>}
+
+        {!hasProfile && !error && (
+          <div className="student-profile-page-empty">
+            You haven't created your profile yet. Fill in the form below to get started.
+          </div>
+        )}
+
+        {isEditing ? (
+          <StudentProfileForm initialData={profile} onSave={handleSave} />
+        ) : (
+          profile && (
+            <div className="student-profile-view">
+              <div className="student-profile-view-header">
+                <div className="student-profile-view-avatar">
+                  {profile.name?.charAt(0)?.toUpperCase() || "?"}
+                </div>
+                <div>
+                  <h2>{profile.name}</h2>
+                  <p>{profile.level}</p>
+                </div>
+                <button className="student-profile-edit-btn" onClick={() => setIsEditing(true)}>
+                  Edit Profile
+                </button>
+              </div>
+
+              <div className="student-profile-view-grid">
+                <div className="student-profile-view-card">
+                  <h3>About Me</h3>
+                  <p>{profile.bio}</p>
+                </div>
+
+                <div className="student-profile-view-card">
+                  <h3>Contact & Academic Info</h3>
+                  <div className="student-profile-view-item">📞 {profile.phoneNumber}</div>
+                  <div className="student-profile-view-item">🎓 Level: {profile.level}</div>
+                  <div className="student-profile-view-item">📊 GPA: {profile.gpa}</div>
+                </div>
+              </div>
+            </div>
+          )
+        )}
+      </div>
+    </div>
+  );
 };
+
 export default StudentProfile;

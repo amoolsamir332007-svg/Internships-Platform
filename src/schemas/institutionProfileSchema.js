@@ -1,37 +1,31 @@
 import * as yup from "yup";
- 
+
+// Fields match what's CONFIRMED to exist on the backend's institution
+// object (seen nested inside the live GET /api/Opportunities/search
+// response: { instituationID, name, address, phoneNumber, email, ... }).
+// We don't have a captured example of the PUT /api/Institution/profile
+// request body itself, but these are the only institution fields we've
+// actually seen the backend return, so the edit form is built around
+// them rather than inventing description/website/logo/vision/mission
+// fields the backend has no confirmed support for.
 export const institutionProfileSchema = yup.object().shape({
-  institutionName: yup
+  name: yup
     .string()
     .required("The institution name is required")
     .min(2, "The institution name must be at least 2 characters")
     .max(100, "The institution name is too long"),
- 
-  description: yup
+
+  email: yup
     .string()
-    .required("The institution description is required")
-    .min(20, "The institution description must be at least 20 characters")
-    .max(1000, "The institution description is too long"),
- 
-  website: yup
-    .string()
-    .url("Url is not valid")
-    .nullable()
-    .notRequired(),
- 
-  phone: yup
+    .email("Enter a valid email")
+    .required("Email is required"),
+
+  phoneNumber: yup
     .string()
     .required("Phone number is required")
-    .matches(/^[0-9+\-\s]{7,15}$/, "Phone Number must be 7-15 digits and can include +, -, and spaces"),
- 
-  location: yup
+    .matches(/^[0-9+\-\s]{7,15}$/, "Phone number must be 7-15 digits and can include +, -, and spaces"),
+
+  address: yup
     .string()
-    .required("location is required "),
- 
-  
-  logo: yup
-    .string()
-    .nullable()
-    .notRequired(),
+    .required("Address is required"),
 });
- 

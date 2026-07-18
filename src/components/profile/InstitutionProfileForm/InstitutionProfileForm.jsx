@@ -4,18 +4,25 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { institutionProfileSchema } from "../../../schemas/institutionProfileSchema";
 import { updateInstitutionProfile } from "../../../api/profileService";
 import "./InstitutionProfileForm.css";
- 
+
 const DEFAULT_VALUES = {
-  institutionName: "",
-  description: "",
-  website: "",
-  phone: "",
-  location: "",
-  logo: "",
+  name: "",
+  email: "",
+  phoneNumber: "",
+  address: "",
 };
- 
+
 /**
- * Editable form for an institution's public profile.
+ * Editable form for an institution's profile.
+ * Fields match the confirmed institution shape seen in backend
+ * responses: { name, email, phoneNumber, address }.
+ *
+ * NOTE: the project brief also asked for a logo, description,
+ * website, vision, and mission. None of those are confirmed to exist on
+ * the backend (they don't appear anywhere the institution object shows
+ * up), so they're intentionally left out rather than sent as fields the
+ * API will likely ignore or reject. See the summary for what's needed
+ * on the backend to support them.
  *
  * @param {object} [initialData] - existing profile fetched from the API
  * @param {(updatedProfile: object) => void} [onSuccess] - called after a successful save
@@ -23,7 +30,7 @@ const DEFAULT_VALUES = {
 const InstitutionProfileForm = ({ initialData, onSuccess }) => {
   const [serverError, setServerError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
- 
+
   const {
     register,
     handleSubmit,
@@ -33,29 +40,30 @@ const InstitutionProfileForm = ({ initialData, onSuccess }) => {
     resolver: yupResolver(institutionProfileSchema),
     defaultValues: DEFAULT_VALUES,
   });
- 
+
   useEffect(() => {
     if (initialData) {
       reset({ ...DEFAULT_VALUES, ...initialData });
     }
   }, [initialData, reset]);
- 
+
   const onSubmit = async (formData) => {
     setServerError("");
     setSuccessMessage("");
- 
+
     try {
       const response = await updateInstitutionProfile(formData);
       setSuccessMessage("Profile updated successfully");
       onSuccess?.(response.data);
     } catch (err) {
       setServerError(
+        err.response?.data?.title ||
         err.response?.data?.message ||
-          "Something went wrong while updating the profile"
+        "Something went wrong while updating the profile"
       );
     }
   };
- 
+
   return (
     <form
       className="institution-profile-form"
@@ -72,80 +80,53 @@ const InstitutionProfileForm = ({ initialData, onSuccess }) => {
           {successMessage}
         </div>
       )}
- 
-      <div className="institution-profile-form-field">
-        <label htmlFor="institutionName">Institution name</label>
-        <input
-          id="institutionName"
-          type="text"
-          {...register("institutionName")}
-        />
-        {errors.institutionName && (
-          <span className="institution-profile-form-error">
-            {errors.institutionName.message}
-          </span>
-        )}
-      </div>
- 
-      <div className="institution-profile-form-field">
-        <label htmlFor="description">Description</label>
-        <textarea id="description" rows={5} {...register("description")} />
-        {errors.description && (
-          <span className="institution-profile-form-error">
-            {errors.description.message}
-          </span>
-        )}
-      </div>
- 
-      <div className="institution-profile-form-row">
+
+      {/* Basic Information */}
+      <div className="institution-profile-form-section">
+        <h3 className="institution-profile-form-section-title">Basic Information</h3>
         <div className="institution-profile-form-field">
-          <label htmlFor="phone">Phone</label>
-          <input id="phone" type="text" {...register("phone")} />
-          {errors.phone && (
-            <span className="institution-profile-form-error">
-              {errors.phone.message}
-            </span>
-          )}
-        </div>
- 
-        <div className="institution-profile-form-field">
-          <label htmlFor="location">Location</label>
-          <input id="location" type="text" {...register("location")} />
-          {errors.location && (
-            <span className="institution-profile-form-error">
-              {errors.location.message}
-            </span>
+          <label htmlFor="name">Institution name</label>
+          <input id="name" type="text" {...register("name")} />
+          {errors.name && (
+            <span className="institution-profile-form-error">{errors.name.message}</span>
           )}
         </div>
       </div>
- 
-      <div className="institution-profile-form-row">
-        <div className="institution-profile-form-field">
-          <label htmlFor="website">Website</label>
-          <input
-            id="website"
-            type="text"
-            placeholder="https://example.com"
-            {...register("website")}
-          />
-          {errors.website && (
-            <span className="institution-profile-form-error">
-              {errors.website.message}
-            </span>
-          )}
+
+      {/* Contact Information */}
+      <div className="institution-profile-form-section">
+        <h3 className="institution-profile-form-section-title">Contact Information</h3>
+        <div className="institution-profile-form-row">
+          <div className="institution-profile-form-field">
+            <label htmlFor="email">Email</label>
+            <input id="email" type="email" {...register("email")} />
+            {errors.email && (
+              <span className="institution-profile-form-error">{errors.email.message}</span>
+            )}
+          </div>
+
+          <div className="institution-profile-form-field">
+            <label htmlFor="phoneNumber">Phone</label>
+            <input id="phoneNumber" type="text" {...register("phoneNumber")} />
+            {errors.phoneNumber && (
+              <span className="institution-profile-form-error">{errors.phoneNumber.message}</span>
+            )}
+          </div>
         </div>
- 
+      </div>
+
+      {/* Location */}
+      <div className="institution-profile-form-section">
+        <h3 className="institution-profile-form-section-title">Location</h3>
         <div className="institution-profile-form-field">
-          <label htmlFor="logo">Logo URL</label>
-          <input id="logo" type="text" {...register("logo")} />
-          {errors.logo && (
-            <span className="institution-profile-form-error">
-              {errors.logo.message}
-            </span>
+          <label htmlFor="address">Address</label>
+          <input id="address" type="text" {...register("address")} />
+          {errors.address && (
+            <span className="institution-profile-form-error">{errors.address.message}</span>
           )}
         </div>
       </div>
- 
+
       <button
         type="submit"
         className="institution-profile-form-submit"
@@ -156,5 +137,5 @@ const InstitutionProfileForm = ({ initialData, onSuccess }) => {
     </form>
   );
 };
- 
+
 export default InstitutionProfileForm;

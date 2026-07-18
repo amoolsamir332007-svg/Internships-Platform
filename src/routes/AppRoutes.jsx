@@ -1,5 +1,5 @@
 import { Routes, Route, Outlet } from "react-router-dom";
- 
+import StudentApplications from "../pages/dashboardPage/StudentDash/StudentApplications";
 import Navbar from "../components/common/Navbar/Navbar";
 import Footer from "../components/common/Footer/Footer";
 import DashboardLayout from "../components/dashboard/DashboardLayout/DashboardLayout";
@@ -12,6 +12,7 @@ import Signup from "../pages/SignupPage/Signup";
 import Contact from "../pages/ContactPage/Contact";
 import InternshipDetail from "../pages/InternshipDetailPage/InternshipDetail";
 import InstitutionProfile from "../pages/InstitutionProfilePage/InstitutionProfile";
+import InstitutionPublicProfile from "../pages/InstitutionPublicProfilePage/InstitutionPublicProfile";
 import NotFound from "../pages/NotFoundPage/NotFound";
  
 import InstitutionDashboard from "../pages/dashboardPage/InstitutionDash/InstitutionDashboard";
@@ -21,6 +22,7 @@ import InstitutionApplicants from "../pages/dashboardPage/InstitutionDash/Instit
  
 import StudentDashboard from "../pages/dashboardPage/StudentDash/StudentDashboard";
 import StudentProfile from "../pages/StudentProfilePage/StudentProfile";
+import StudentPublicProfile from "../pages/StudentPublicProfilePage/StudentPublicProfile";
  
 import { USER_ROLES, ROUTES } from "../utils/constants";
 
@@ -50,7 +52,7 @@ const AppRoutes = () => {
         />
         <Route
           path={ROUTES.INSTITUTION_PROFILE_VIEW()}
-          element={<InstitutionProfile />}
+          element={<InstitutionPublicProfile />}
         />
         {/* ---------- Fallback (kept inside PublicLayout so it still gets the Navbar/Footer) ---------- */}
         <Route path="*" element={<NotFound />} />
@@ -86,18 +88,13 @@ const AppRoutes = () => {
           path={ROUTES.INSTITUTION_APPLICANTS}
           element={<InstitutionApplicants />}
         />
-        {/*
-          NOTE: institution's own "edit profile" page and the public
-          "view institution" page currently point at the SAME component
-          (InstitutionProfile.jsx, which calls getInstitutionProfile()). That's
-          fine for editing your own profile, but it won't yet show a
-          different institution's profile when visited via /institution/:id.
-          Flag this to your teammate if the public view needs to support
-          viewing OTHER institutions by id.
-        */}
         <Route
           path={ROUTES.INSTITUTION_PROFILE}
           element={<InstitutionProfile />}
+        />
+        <Route
+          path={ROUTES.STUDENT_PROFILE_VIEW()}
+          element={<StudentPublicProfile />}
         />
       </Route>
  
@@ -115,6 +112,10 @@ const AppRoutes = () => {
         />
         <Route path={ROUTES.STUDENT_PROFILE} element={<StudentProfile />} />
       </Route>
+      // جوا بلوك الـ Student-only routes:
+<Route path={ROUTES.STUDENT_DASHBOARD} element={<StudentDashboard />} />
+<Route path={ROUTES.STUDENT_APPLICATIONS} element={<StudentApplications />} />
+<Route path={ROUTES.STUDENT_PROFILE} element={<StudentProfile />} />
      </Routes>
   );
 };

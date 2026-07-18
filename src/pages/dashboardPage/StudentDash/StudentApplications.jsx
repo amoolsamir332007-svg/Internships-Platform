@@ -9,6 +9,7 @@ import StatusTabs from "../../../components/dashboard/StatusTabs/StatusTabs";
 import LoadingSpinner from "../../../components/common/LoadingSpinner/LoadingSpinner";
 import { getStatusColor, formatDate } from "../../../utils/helpers";
 import { ROUTES } from "../../../utils/constants";
+import "./StudentApplications.css";
 import "./StudentDash.css";
 
 const TABS = [

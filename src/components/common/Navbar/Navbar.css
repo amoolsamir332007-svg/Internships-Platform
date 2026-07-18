@@ -1,33 +1,40 @@
 /* ===================================================================
    PREMIUM NAVBAR — glass, blur, animated underline, luxury micro-UX
-   Same class names / structure contract as before: nothing that other
-   components depend on (routes, ids, functionality) has changed.
+   Fixed on every page (public + dashboard). Height/blur increased per
+   request. Pairs with:
+     - index.css:      --navbar-height variable + `main { padding-top }`
+     - DashboardLayout.css: `.dashboard-layout { padding-top: var(--navbar-height) }`
+   so nothing (sidebar included) ever sits under the fixed bar.
 =================================================================== */
 
 .navbar {
-  background: rgba(255, 255, 255, 0.62);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  background: rgba(255, 255, 255, 0.66);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
   border-bottom: 1px solid rgba(124, 58, 237, 0.08);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
+  height: var(--navbar-height, 92px);
+  display: flex;
+  align-items: center;
   z-index: 1000;
   transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .navbar-scrolled {
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 8px 30px rgba(17, 24, 39, 0.06);
-  border-bottom: 1px solid rgba(124, 58, 237, 0.14);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8px 34px rgba(17, 24, 39, 0.08);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.16);
 }
 
 .navbar-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,13 +52,13 @@
 }
 
 .brand-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 21px;
+  font-size: 23px;
   background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   box-shadow: 0 6px 18px rgba(124, 58, 237, 0.28);
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
@@ -63,7 +70,7 @@
 }
 
 .navbar-brand-title {
-  font-size: 28px !important;
+  font-size: 29px !important;
   font-weight: 800;
   margin: 0 !important;
   color: var(--color-text);
@@ -93,7 +100,7 @@
   font-weight: 600;
   color: var(--color-text-secondary);
   text-decoration: none;
-  padding: 8px 14px;
+  padding: 10px 16px;
   border-radius: 10px;
   transition: color 0.3s ease, background 0.3s ease;
 }
@@ -101,9 +108,9 @@
 .navbar-link::after {
   content: "";
   position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 3px;
+  left: 16px;
+  right: 16px;
+  bottom: 4px;
   height: 2px;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
@@ -139,7 +146,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 26px;
+  padding: 11px 28px;
   border-radius: 50px !important;
   font-weight: 700;
   font-size: 14.5px;
@@ -149,7 +156,6 @@
   will-change: transform;
 }
 
-/* Login */
 .login-btn {
   border: 1.5px solid rgba(124, 58, 237, 0.35);
   color: var(--color-primary);
@@ -164,7 +170,6 @@
   box-shadow: 0 10px 22px rgba(124, 58, 237, 0.28);
 }
 
-/* Sign Up */
 .signup-btn {
   border: 1.5px solid transparent;
   background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
@@ -202,7 +207,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px 12px 5px 5px;
+  padding: 6px 14px 6px 6px;
   border-radius: 30px;
   transition: background 0.3s ease;
 }
@@ -212,15 +217,15 @@
 }
 
 .navbar-user-avatar {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
@@ -235,10 +240,10 @@
 .navbar-user-dropdown {
   position: absolute;
   right: 0;
-  top: calc(100% + 10px);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  top: calc(100% + 12px);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(124, 58, 237, 0.1);
   border-radius: 14px;
   box-shadow: 0 20px 45px rgba(16, 24, 40, 0.14);
@@ -312,11 +317,9 @@
    RESPONSIVE
 =================================================================== */
 
-/* Tablet */
 @media (max-width: 900px) {
-
   .navbar-container {
-    padding: 14px 18px;
+    padding: 0 18px;
   }
 
   .navbar-links {
@@ -326,11 +329,12 @@
   .navbar-link {
     font-size: 13px;
   }
-
 }
 
-/* Mobile */
 @media (max-width: 720px) {
+  .navbar {
+    height: var(--navbar-height-mobile, 76px);
+  }
 
   .navbar-container {
     position: relative;
@@ -353,7 +357,6 @@
     flex-shrink: 0;
   }
 
-  /* hide desktop buttons */
   .nav-auth-buttons {
     display: none;
   }
@@ -364,16 +367,15 @@
     margin-top: 14px;
   }
 
-  /* mobile menu */
   .navbar-links {
     position: absolute;
-    top: 68px;
+    top: var(--navbar-height-mobile, 76px);
     left: 0;
     width: 100%;
 
     background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
 
     flex-direction: column;
     align-items: center;

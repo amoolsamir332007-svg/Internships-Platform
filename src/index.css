@@ -25,7 +25,8 @@
   --shadow-sm: 0 4px 12px rgba(16, 24, 40, 0.08);
   --shadow-md: 0 15px 35px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
- 
+  --navbar-height: 92px;
+  --navbar-height-mobile: 76px;
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
  
   font: 16px/145% var(--sans);
@@ -58,10 +59,16 @@ body {
 
 main {
   padding-top: 76px;
+   padding-top: var(--navbar-height);
 }
  
 img,
 svg {
   max-width: 100%;
   display: block;
+}
+@media (max-width: 720px) {
+  main {
+    padding-top: var(--navbar-height-mobile);
+  }
 }

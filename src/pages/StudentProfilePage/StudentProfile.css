@@ -150,3 +150,124 @@
     grid-template-columns:1fr;
 }
 }
+/* ---- Added: real profile page states (loading/error/empty/success + view mode) ---- */
+
+.student-profile-page-header {
+  margin-bottom: 24px;
+}
+
+.student-profile-page-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.student-profile-page-header p {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.student-profile-page-error {
+  background: #fef3f2;
+  color: var(--color-danger, #ef4444);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.student-profile-page-success {
+  background: #ecfdf5;
+  color: #059669;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.student-profile-page-empty {
+  background: #f0f4ff;
+  color: var(--color-text);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.student-profile-view-header {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+.student-profile-view-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary), #7c3aed);
+  color: white;
+  font-size: 26px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.student-profile-view-header h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.student-profile-view-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.student-profile-edit-btn {
+  margin-left: auto;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.student-profile-view-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.student-profile-view-card {
+  background: white;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.student-profile-view-card h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+}
+
+.student-profile-view-item {
+  padding: 6px 0;
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+@media (max-width: 720px) {
+  .student-profile-view-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,148 @@
+.applications-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.applications-page h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #1f1b3a;
+}
+
+.page-desc {
+  margin: 0;
+  color: #8b869e;
+  font-size: 14px;
+}
+
+.applications-table {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(31, 27, 58, 0.05);
+  overflow: hidden;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.2fr 1fr 1fr;
+  align-items: center;
+  padding: 14px 20px;
+  gap: 12px;
+}
+
+.table-header {
+  background: #f9f8fd;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8b869e;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.table-row {
+  border-top: 1px solid #f2f0fa;
+  font-size: 14px;
+  color: #1f1b3a;
+}
+
+.table-row:hover {
+  background: #fbfaff;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  width: fit-content;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  background: #fff3e6;
+  color: #b56b12;
+}
+
+.status.accepted {
+  background: #e6f7ee;
+  color: #12a150;
+}
+
+.status.rejected {
+  background: #fdecec;
+  color: #e5484d;
+}
+
+.status.withdrawn {
+  background: #f1f0f5;
+  color: #6f6b8a;
+}
+
+.withdraw-btn {
+  background: #fdecec;
+  color: #e5484d;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.withdraw-btn:hover {
+  background: #fbdada;
+}
+
+.withdraw-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dashboard-empty {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  color: #8b869e;
+  font-size: 14px;
+  box-shadow: 0 6px 20px rgba(31, 27, 58, 0.05);
+}
+
+.browse-internships-btn {
+  background: linear-gradient(135deg, #7c5cff, #5b3df0);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 0;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.browse-internships-btn:hover {
+  opacity: 0.92;
+}
+
+@media (max-width: 800px) {
+  .table-header {
+    display: none;
+  }
+
+  .table-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 16px 20px;
+  }
+
+  .table-row span:nth-child(2)::before { content: "Company: "; color: #8b869e; }
+  .table-row span:nth-child(3)::before { content: "Applied: "; color: #8b869e; }
+}

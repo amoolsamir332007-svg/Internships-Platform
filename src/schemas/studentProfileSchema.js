@@ -1,121 +1,37 @@
-// studentProfileSchema.js
-// Validation schema for student profile form.
-// Validates student information before updating profile data.
+import * as yup from "yup";
 
-// الاسم الكامل
-// الجامعة
-// التخصص
-// رقم الهاتف
-// نبذة عن الطالب
-// المهارات
-// رابط LinkedIn (اختياري)
-// رابط GitHub (اختياري)
+// Fields match the CONFIRMED backend schema for PUT /api/Student/profile:
+// { name, level, phoneNumber, gpa, bio }
+// (the previous version had university/major/skills/linkedin/github,
+// none of which exist on the backend — removed rather than sent as dead
+// weight the API would ignore or reject)
+export const studentProfileSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Full name is required")
+    .min(3, "Name must be at least 3 characters")
+    .max(100, "Name is too long"),
 
-import * as Yup from "yup";
+  level: yup
+    .string()
+    .required("Academic level is required")
+    .max(50, "That's too long for an academic level"),
 
-const studentProfileSchema = Yup.object({
-    // Student name
-    name: Yup.string()
+  phoneNumber: yup
+    .string()
+    .required("Phone number is required")
+    .matches(/^[0-9+\-\s]{7,15}$/, "Phone number must be 7-15 digits and can include +, -, and spaces"),
 
-        .required(
-            "Full name is required"
-        )
+  gpa: yup
+    .number()
+    .typeError("GPA must be a number")
+    .required("GPA is required")
+    .min(0, "GPA can't be negative")
+    .max(4, "GPA can't be higher than 4.0"),
 
-        .min(
-            3,
-            "Name must be at least 3 characters"
-        ),
-    // University name
-    university: Yup.string()
-
-        .required(
-            "University is required"
-        )
-
-        .min(
-            3,
-            "University name is too short"
-        ),
-    // Major / Field
-    major: Yup.string()
-
-        .required(
-            "Major is required"
-        ),
-    // Phone number
-    phone: Yup.string()
-
-        .required(
-            "Phone number is required"
-        )
-
-        .matches(
-
-            /^[0-9]{9,15}$/,
-
-            "Please enter a valid phone number"
-
-        ),
-    // Student bio
-    bio: Yup.string()
-
-        .required(
-            "Bio is required"
-        )
-
-        .min(
-
-            20,
-
-            "Bio must contain at least 20 characters"
-
-        )
-
-        .max(
-
-            500,
-
-            "Bio cannot exceed 500 characters"
-
-        ),
-    // Skills
-    skills: Yup.string()
-
-        .required(
-            "Please add your skills"
-        ),
-    // LinkedIn URL (optional)
-    linkedin: Yup.string()
-
-        .url(
-            "Enter a valid LinkedIn URL"
-        )
-
-        .nullable(),
-
-    // Github URL (optional)
-    github: Yup.string()
-
-        .url(
-            "Enter a valid Github URL"
-        )
-
-        .nullable()
+  bio: yup
+    .string()
+    .required("Bio is required")
+    .min(20, "Bio must be at least 20 characters")
+    .max(500, "Bio can't exceed 500 characters"),
 });
-
-export const validateStudentProfile = (formData) => {
-    try {
-        studentProfileSchema.validateSync(formData, { abortEarly: false });
-        return { isValid: true, errors: {} };
-    } catch (err) {
-        const errors = {};
-        (err.inner || []).forEach((e) => {
-            if (e.path && !errors[e.path]) {
-                errors[e.path] = e.message;
-            }
-        });
-        return { isValid: false, errors };
-    }
-};
-
-export default studentProfileSchema;

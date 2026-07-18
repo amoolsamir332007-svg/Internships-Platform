@@ -1,59 +1,83 @@
-/* StudentProfileForm.css - ستايل فورم تعديل بيانات بروفايل الطالب */
-
-.profile-form {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+.student-profile-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 100%;
+  gap: 24px;
+  max-width: 640px;
 }
 
-.profile-form .form-group {
+.student-profile-form-section {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  text-align: right;
+  gap: 16px;
 }
 
-.profile-form label {
+.student-profile-form-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.student-profile-form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.student-profile-form-row .student-profile-form-field {
+  flex: 1;
+}
+
+.student-profile-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.student-profile-form-field label {
+  font-size: 14px;
   font-weight: 600;
-  color: #2c3e50;
-  font-size: 0.95rem;
+  color: var(--color-text);
 }
 
-.profile-form input,
-.profile-form textarea {
-  padding: 12px;
-  border: 1px solid #cbd5e0;
+.student-profile-form-field input,
+.student-profile-form-field textarea {
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  font-size: 1rem;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--color-text);
+  font-family: inherit;
+  resize: vertical;
+}
+
+.student-profile-form-field input:focus,
+.student-profile-form-field textarea:focus {
   outline: none;
-  transition: border-color 0.2s;
-  background-color: var(--color-bg-subtle);
+  border-color: var(--color-primary);
 }
 
-.profile-form input:focus,
-.profile-form textarea:focus {
-  border-color: var(--color-secondary);
-  background-color: #ffffff;
+.student-profile-form-error {
+  color: var(--color-danger, #ef4444);
+  font-size: 13px;
 }
 
-.profile-form .input-error {
-  border-color: var(--color-danger) !important;
-  background-color: #fff5f5;
+.student-profile-form-submit {
+  align-self: flex-start;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.profile-form .error-text {
-  color: var(--color-danger);
-  font-size: 0.85rem;
-  margin-top: -2px;
-}
-
-.profile-form .form-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
+.student-profile-form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

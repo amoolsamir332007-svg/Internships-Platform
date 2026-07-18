@@ -1,16 +1,40 @@
+/* The navbar is `position: fixed`, so it's taken out of normal flow.
+   The global `main { padding-top: var(--navbar-height) }` rule (see
+   index.css.snippet.css) only compensates for <main> elements — but the
+   sidebar (<aside>) is a SIBLING of <main>, not inside it, so without
+   this rule its top portion sits underneath the fixed navbar.
+   This is what was causing the sidebar to look broken/cut off. */
+
+.dashboard-shell {
+  min-height: 100vh;
+  background: var(--color-bg-subtle);
+}
+
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
+  padding-top: var(--navbar-height);
 }
- 
+
+/* .dashboard-layout-content is a <main> tag, so it would otherwise ALSO
+   get padding-top from the global `main` rule — stacking on top of the
+   padding-top already applied to its parent .dashboard-layout above.
+   Cancel that here so there's exactly one navbar-height gap, not two. */
 .dashboard-layout-content {
   flex: 1;
   min-width: 0;
-  background-color: #fafafa;
+  padding: 32px;
+  padding-top: 0 !important;
 }
 
 @media (max-width: 800px) {
   .dashboard-layout {
     flex-direction: column;
+    padding-top: var(--navbar-height-mobile, 76px);
+  }
+
+  .dashboard-layout-content {
+    padding: 20px;
+    padding-top: 0 !important;
   }
 }
