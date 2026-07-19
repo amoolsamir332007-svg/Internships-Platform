@@ -56,7 +56,7 @@ Internships-Platform/
 ### Clone the repository
 
 ```bash
-git clone https://github.com/USERNAME/Internships-Platform.git
+git clone https://github.com/amoolsamir332007-svg/Internships-Platform.git
 ```
 
 ### Frontend
