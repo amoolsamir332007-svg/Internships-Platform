@@ -1,61 +1,608 @@
+/* =====================================
+   PREMIUM STAT CARD
+===================================== */
+
+
 .stat-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 18px 20px;
-  box-shadow: 0 6px 20px rgba(31, 27, 58, 0.06);
-  flex: 1;
-  min-width: 180px;
+
+  position:relative;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
+
+
+  min-height:130px;
+
+  padding:26px;
+
+
+  overflow:hidden;
+
+
+  background:
+
+  linear-gradient(
+  145deg,
+  rgba(255,255,255,.95),
+  rgba(248,250,255,.85)
+  );
+
+
+  border-radius:30px;
+
+
+  border:
+
+  1px solid rgba(124,58,237,.08);
+
+
+  box-shadow:
+
+  0 20px 45px rgba(31,27,58,.08);
+
+
+  backdrop-filter:
+
+  blur(20px);
+
+
+  transition:
+
+  transform .4s ease,
+  box-shadow .4s ease;
+
+
+  animation:
+
+  statReveal .7s ease both;
+
+
 }
+
+
+
+/* Big curved shape */
+
+
+.stat-card::before {
+
+
+content:"";
+
+
+position:absolute;
+
+
+width:170px;
+
+height:170px;
+
+
+right:-70px;
+
+top:-70px;
+
+
+border-radius:50%;
+
+
+opacity:.18;
+
+
+filter:
+
+blur(5px);
+
+
+transition:.5s;
+
+
+}
+
+
+
+
+.stat-card::after {
+
+
+content:"";
+
+
+position:absolute;
+
+
+width:90px;
+
+height:90px;
+
+
+left:-40px;
+
+bottom:-40px;
+
+
+border-radius:50%;
+
+
+background:
+
+rgba(124,58,237,.05);
+
+
+}
+
+
+
+
+.stat-card:hover {
+
+
+transform:
+
+translateY(-10px)
+rotateX(4deg);
+
+
+box-shadow:
+
+
+0 35px 70px rgba(31,27,58,.18);
+
+
+}
+
+
+
+.stat-card:hover::before {
+
+
+transform:
+
+scale(1.5);
+
+
+}
+
+
+
+
+/* ICON */
+
 
 .stat-card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
+
+
+position:relative;
+
+
+z-index:2;
+
+
+width:65px;
+
+height:65px;
+
+
+border-radius:22px;
+
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+
+font-size:27px;
+
+
+box-shadow:
+
+
+0 15px 30px rgba(0,0,0,.12);
+
+
+transition:.4s;
+
+
 }
+
+
+
+.stat-card:hover .stat-card-icon {
+
+
+transform:
+
+translateY(-5px)
+rotate(-10deg)
+scale(1.12);
+
+
+}
+
+
+
+
+/* TEXT */
+
 
 .stat-card-value {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 800;
-  color: #1f1b3a;
+
+
+position:relative;
+
+z-index:2;
+
+
+margin:0;
+
+
+font-size:38px;
+
+
+font-weight:950;
+
+
+letter-spacing:-1.5px;
+
+
+line-height:1;
+
+
+color:#171329;
+
+
+animation:
+
+numberPop .8s ease;
+
+
 }
+
+
+
 
 .stat-card-label {
-  margin: 2px 0 0;
-  font-size: 13px;
-  color: #8b869e;
+
+
+position:relative;
+
+z-index:2;
+
+
+margin-top:10px;
+
+
+font-size:14px;
+
+
+font-weight:700;
+
+
+color:#88839d;
+
+
 }
+
+
+
+
+
+/* =====================================
+ COLORS
+===================================== */
+
+
+.stat-card-purple::before {
+
+background:
+
+linear-gradient(
+135deg,
+#8b5cf6,
+#c084fc
+);
+
+}
+
 
 .stat-card-purple .stat-card-icon {
-  background: #efe9ff;
-  color: #5b3df0;
+
+
+background:
+
+linear-gradient(
+135deg,
+#ede9fe,
+#ddd6fe
+);
+
+
+color:#7c3aed;
+
+
 }
+
+
+
+
+.stat-card-green::before {
+
+
+background:
+
+linear-gradient(
+135deg,
+#22c55e,
+#86efac
+);
+
+
+}
+
+
 
 .stat-card-green .stat-card-icon {
-  background: #e6f7ee;
-  color: #12a150;
+
+
+background:
+
+linear-gradient(
+135deg,
+#dcfce7,
+#bbf7d0
+);
+
+
+color:#16a34a;
+
+
 }
+
+
+
+
+.stat-card-orange::before {
+
+
+background:
+
+linear-gradient(
+135deg,
+#f97316,
+#fdba74
+);
+
+
+}
+
+
 
 .stat-card-orange .stat-card-icon {
-  background: #fff3e6;
-  color: #e07a1f;
+
+
+background:
+
+linear-gradient(
+135deg,
+#ffedd5,
+#fed7aa
+);
+
+
+color:#ea580c;
+
+
 }
+
+
+
+
+
+.stat-card-blue::before {
+
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#93c5fd
+);
+
+
+}
+
+
+
 
 .stat-card-blue .stat-card-icon {
-  background: #e8f1ff;
-  color: #2f6fed;
+
+
+background:
+
+linear-gradient(
+135deg,
+#dbeafe,
+#bfdbfe
+);
+
+
+color:#2563eb;
+
+
 }
 
-@media (max-width: 700px) {
-  .stat-card {
-    min-width: 45%;
-  }
+
+
+
+
+/* Bottom animated line */
+
+
+.stat-card-purple {
+
+border-bottom:
+
+3px solid #8b5cf6;
+
+}
+
+
+.stat-card-green {
+
+border-bottom:
+
+3px solid #22c55e;
+
+}
+
+
+.stat-card-orange {
+
+border-bottom:
+
+3px solid #f97316;
+
+}
+
+
+.stat-card-blue {
+
+border-bottom:
+
+3px solid #2563eb;
+
+}
+
+
+
+
+/* =====================================
+ ANIMATION
+===================================== */
+
+
+@keyframes statReveal {
+
+
+from {
+
+
+opacity:0;
+
+transform:
+
+translateY(40px)
+scale(.95);
+
+
+}
+
+
+
+to {
+
+
+opacity:1;
+
+transform:
+
+translateY(0)
+scale(1);
+
+
+}
+
+
+}
+
+
+
+@keyframes numberPop {
+
+
+from {
+
+
+opacity:0;
+
+transform:
+
+scale(.7);
+
+
+}
+
+
+to {
+
+
+opacity:1;
+
+transform:
+
+scale(1);
+
+
+}
+
+
+}
+
+
+
+/* =====================================
+ RESPONSIVE
+===================================== */
+
+
+@media(max-width:700px){
+
+
+.stat-card {
+
+
+min-height:110px;
+
+
+padding:20px;
+
+
+border-radius:24px;
+
+
+}
+
+
+
+.stat-card-icon {
+
+
+width:55px;
+
+height:55px;
+
+
+font-size:22px;
+
+
+}
+
+
+
+.stat-card-value {
+
+
+font-size:30px;
+
+
+}
+
+
+
 }

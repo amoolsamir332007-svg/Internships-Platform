@@ -1,250 +1,207 @@
-.student-profile-page{
-    min-height:100vh;
-    background:var(--color-bg-subtle);
-    padding:40px;
-}
-.profile-container{
-    max-width:1100px;
-    margin:auto;
+/* Import Premium Corporate Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+.student-profile-page {
+  min-height: 100vh;
+  background-color: #f4f6f8; 
+  padding: 40px 20px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #1e293b;
 }
 
-.profile-header{
-    background:white;
-    padding:35px;
-    border-radius:25px;
-    display:flex;
-    align-items:center;
-    gap:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+.profile-container {
+  max-width: 950px;
+  margin: 0 auto;
 }
 
-.profile-image{
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:
-    linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-primary)
-    );
-    color:white;
-    font-size:35px;
-    font-weight:bold;
-}
-
-.profile-info{
-    flex:1;
-}
-
-.profile-info h1{
-    margin:0;
-    font-size:32px;
-    color:var(--color-text);
-}
-
-.profile-info p{
-    color:var(--color-primary);
-    font-weight:600;
-}
-
-.edit-btn{
-    padding:14px 25px;
-    border:none;
-    border-radius:12px;
-    background:var(--color-text);
-    color:white;
-    cursor:pointer;
-}
-
-.profile-grid{
-    margin-top:30px;
-    display:grid;
-    grid-template-columns:
-    repeat(2,1fr);
-    gap:25px;
-}
-
-.profile-card{
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:
-    0 10px 25px rgba(0,0,0,.06);
-}
-.profile-card h2{
-    margin-bottom:15px;
-    color:var(--color-text);
-}
-
-.profile-card p{
-    color:var(--color-text-secondary);
-    line-height:1.7;
-}
-
-.info-item{
-    margin:15px 0;
-    color:var(--color-text);
-}
-
-.skills{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.skills span{
-    background:var(--color-secondary-lighter);
-    color:var(--color-primary-dark);
-    padding:8px 15px;
-    border-radius:20px;
-    font-weight:600;
-}
-
-.cv-card button{
-    margin-top:15px;
-    padding:12px 25px;
-    border:none;
-    border-radius:10px;
-    background:
-    linear-gradient(
-    90deg,
-    var(--color-primary),
-    var(--color-primary)
-    );
-    color:white;
-    cursor:pointer;
-}
-
-@media(max-width:800px){
-.profile-header{
-    flex-direction:column;
-    text-align:center;
-}
-
-.profile-grid{
-    grid-template-columns:1fr;
-}
-}
 .student-profile-page-header {
   margin-bottom: 24px;
 }
 
 .student-profile-page-header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 4px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin: 0 0 4px 0;
 }
 
 .student-profile-page-header p {
-  color: var(--color-text-secondary);
+  color: #64748b;
+  font-size: 14px;
   margin: 0;
 }
 
-.student-profile-page-error {
-  background: #fef3f2;
-  color: var(--color-danger, #ef4444);
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.student-profile-page-success {
-  background: #ecfdf5;
-  color: #059669;
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.student-profile-page-empty {
-  background: #f0f4ff;
-  color: var(--color-text);
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 20px;
-  font-size: 14px;
-}
-
 .student-profile-view-header {
-  background: white;
-  padding: 30px;
+  background: #ffffff;
   border-radius: 20px;
   display: flex;
-  align-items: center;
-  gap: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  margin-bottom: 20px;
+  align-items: flex-end; 
+  gap: 24px;
+  padding: 30px;
+  padding-top: 140px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.01);
+  margin-bottom: 24px;
+  position: relative; 
+  border: 1px solid #e2e8f0;
 }
 
+
+.student-profile-view-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #6366f1 100%);
+  border-top-left-radius: 19px;
+  border-top-right-radius: 19px;
+  z-index: 1;
+}
 .student-profile-view-avatar {
-  width: 72px;
-  height: 72px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+  background: #ffffff;
+  color: #4f46e5;
+  font-size: 36px;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--color-primary), #7c3aed);
-  color: white;
-  font-size: 26px;
-  font-weight: 700;
-  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  border: 4px solid #ffffff; 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.student-profile-view-header > div:nth-child(2) {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 5px;
+  flex: 1; 
 }
 
 .student-profile-view-header h2 {
-  margin: 0 0 4px;
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px 0;
 }
 
 .student-profile-view-header p {
   margin: 0;
-  color: var(--color-text-secondary);
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .student-profile-edit-btn {
-  margin-left: auto;
-  background: var(--color-primary);
-  color: white;
-  border: none;
+  align-self: flex-end; 
+  width: max-content !important; 
+  min-width: 120px; 
+  height: fit-content;
+  background: #ffffff;
+  color: #475569;
+  border: 1px solid #cbd5e1;
   border-radius: 10px;
   padding: 10px 20px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 2;
+  margin-left: auto;
+  white-space: nowrap; 
 }
 
+.student-profile-edit-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+/* --- Content Cards Grid --- */
 .student-profile-view-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
 }
 
 .student-profile-view-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
-  padding: 22px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  padding: 30px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
 }
 
 .student-profile-view-card h3 {
-  margin: 0 0 12px;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.student-profile-view-card p {
+  color: #475569;
+  font-size: 14.5px;
+  line-height: 1.7;
+  margin: 0;
 }
 
 .student-profile-view-item {
-  padding: 6px 0;
-  color: var(--color-text);
+  padding: 10px 14px;
+  color: #334155;
   font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
 }
 
-@media (max-width: 720px) {
+/* Status Messages */
+.student-profile-page-error,
+.student-profile-page-success,
+.student-profile-page-empty {
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.student-profile-page-error { background: #fef2f2; color: #dc2626; border: 1px solid #fee2e2; }
+.student-profile-page-success { background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; }
+.student-profile-page-empty { background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .student-profile-view-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 120px;
+  }
+  
+  .student-profile-view-avatar {
+    margin-bottom: 10px;
+  }
+
+  .student-profile-edit-btn {
+    width: 100% !important; 
+    margin-top: 15px;
+  }
+
   .student-profile-view-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }

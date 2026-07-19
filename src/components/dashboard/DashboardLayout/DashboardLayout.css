@@ -1,28 +1,152 @@
+/* ================================
+   DASHBOARD MAIN SHELL
+================================ */
+
 .dashboard-shell {
-  min-height: 100vh;
-  background: var(--color-bg-subtle);
+
+  min-height:100vh;
+
+  background:
+  var(--color-bg-subtle);
+
 }
+
+
+/* ================================
+   SIDEBAR + CONTENT AREA
+================================ */
 
 .dashboard-layout {
-  display: flex;
-  min-height: 100vh;
-  padding-top: var(--navbar-height);
+
+  display:flex;
+
+  min-height:100vh;
+
+  padding-top:var(--navbar-height);
+
+  overflow:hidden;
+
 }
+
+
+
 .dashboard-layout-content {
-  flex: 1;
-  min-width: 0;
-  padding: 32px;
-  padding-top: 0 !important;
+
+  flex:1;
+
+  min-width:0;
+
+
+  height:calc(100vh - var(--navbar-height));
+
+
+  overflow-y:auto;
+
+  overflow-x:hidden;
+
+
+  padding:32px;
+
+
+  padding-top:20px !important;
+
+
+  box-sizing:border-box;
+
 }
 
-@media (max-width: 800px) {
-  .dashboard-layout {
-    flex-direction: column;
-    padding-top: var(--navbar-height-mobile, 76px);
-  }
+/* custom scrollbar */
 
-  .dashboard-layout-content {
-    padding: 20px;
-    padding-top: 0 !important;
-  }
+
+.dashboard-layout-content::-webkit-scrollbar {
+
+
+  width:8px;
+
+
+}
+
+
+
+.dashboard-layout-content::-webkit-scrollbar-track {
+
+
+  background:transparent;
+
+
+}
+
+
+
+.dashboard-layout-content::-webkit-scrollbar-thumb {
+
+
+  background:
+
+  linear-gradient(
+  180deg,
+  var(--color-primary),
+  var(--color-secondary)
+  );
+
+
+  border-radius:20px;
+
+
+}
+
+
+
+/* ================================
+   MOBILE
+================================ */
+
+
+@media(max-width:800px){
+
+
+.dashboard-layout {
+
+
+  flex-direction:column;
+
+
+  height:auto;
+
+
+  min-height:calc(100vh - var(--navbar-height-mobile,76px));
+
+
+  overflow:visible;
+
+
+  padding-top:var(--navbar-height-mobile,76px);
+
+
+}
+
+
+
+.dashboard-layout-content {
+
+
+  height:auto;
+
+
+  overflow:visible;
+
+
+  padding:20px;
+
+
+  padding-top:0 !important;
+
+
+}
+
+
+}
+
+.dashboard-layout-content > * {
+  min-height:0;
 }
