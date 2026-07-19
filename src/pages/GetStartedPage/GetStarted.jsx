@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import "./GetStarted.css";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
+import { USER_ROLES } from "../../utils/constants";
+ 
 const GetStarted = () => {
-
+ 
     const navigate = useNavigate();
     const handleRoleSelect = (role) => {
         navigate(`/signup?role=${role}`);
@@ -10,7 +12,7 @@ const GetStarted = () => {
     return (
         <div className="getstarted-page">
           
-
+ 
             <section className="welcome-section">
                 <h1>Welcome to <span>Internship Platform</span></h1>
                 <p className="subtitle">
@@ -20,31 +22,31 @@ const GetStarted = () => {
                     Choose the option that best fits you
                     to get started.</p>
             </section>
-
+ 
             <section className="roles-container">
-
+ 
                 <div className="role-card institution">
-
+ 
                     <div className="role-icon">
                         🏢
                     </div>
-
+ 
                     <h2>Institution</h2>
                     <h4>Post opportunities & hire</h4>
                     <p>
                         Find and recruit talented students
                         for internships and traineeships.</p>
-                    <button onClick={() => handleRoleSelect("institution")}>
+                    <button onClick={() => handleRoleSelect(USER_ROLES.INSTITUTION)}>
                         I'm an Institution
                         <span>
                             →
                         </span>
                         </button>
                 </div>
-
-
-
-
+ 
+ 
+ 
+ 
                 <div className="role-card student">
                     <div className="role-icon">
                         🎓
@@ -55,9 +57,9 @@ const GetStarted = () => {
                         Discover internships and traineeships
                         that match your skills and career goals.
                     </p>
-
+ 
                     <button
-                    onClick={() => handleRoleSelect("student")}
+                    onClick={() => handleRoleSelect(USER_ROLES.STUDENT)}
                     >
                         I'm a Student
                         <span>
@@ -69,11 +71,11 @@ const GetStarted = () => {
             <div className="security-message">
                 🔒 Your information is secure and never shared.
             </div>
-
+ 
             <ScrollToTop />
         </div>
         
     );
-
+ 
 };
 export default GetStarted;

@@ -1,36 +1,38 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import signupSchema from "../../schemas/signupSchema";
 import { USER_ROLES } from "../../utils/constants";
+import { DASHBOARD_ROUTE_BY_ROLE, ROUTES } from "../../utils/constants";
 import { useAuth } from "../../hooks/useAuth";
 import { extractErrorMessage } from "../../utils/helpers";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
-import api from "../../utils/api";
+import { registerUser, loginUser } from "../../api/authService";
 import "./Signup.css";
+
+const LEVEL_OPTIONS = ["Freshman", "Sophomore", "Junior", "Senior", "Graduate"];
 
 const Signup = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
-  const { signup } = useAuth();
+  const { login } = useAuth();
 
   const selectedRole =
     searchParams.get("role") || USER_ROLES.STUDENT;
+  const isStudent = selectedRole !== "Institution";
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     fullName: "",
-    accountType: selectedRole === "institution" ? 2 : 1,
-    level: "Freshman",
-    gpa: 4.0,
-    address: "bb",
-    phoneNumber: "0533869500"
+    accountType: selectedRole === "Institution" ? 2 : 1,
+    level: "",
+    address: "",
+    phoneNumber: "",
   });
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  console.log(selectedRole)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,15 +52,55 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setApiError("");
+
+    try {
+      await signupSchema.validate(formData, { abortEarly: false });
+    } catch (validationError) {
+      const newErrors = {};
+      validationError.inner?.forEach((err) => {
+        newErrors[err.path] = err.message;
+      });
+      setErrors(newErrors);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      const res = await api.post('Account/register', formData);
-      console.log(res.data);
-      navigate("/Login");
+      const payload = {
+        ...formData,
+        level: formData.accountType === 1 ? formData.level : null,
+      };
+
+      await registerUser(payload);
+      try {
+        const res = await loginUser({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        const decoded = jwtDecode(res.data.token);
+        const role =
+          decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role"] ||
+          decoded.role;
+
+        const userData = {
+          email: res.data.email,
+          fullName: decoded.FullName,
+          role,
+        };
+
+        login(userData, res.data.token);
+
+        const targetRoute = DASHBOARD_ROUTE_BY_ROLE[role];
+        navigate(targetRoute || ROUTES.HOME);
+      } catch (autoLoginError) {
+       console.log(autoLoginError.response?.data);
+        navigate("/Login");
+      }
     } catch (er) {
       console.log(er.response?.data);
-           setApiError(
+      setApiError(
         extractErrorMessage(
           er,
           "Something went wrong while creating your account. Please check your details and try again."
@@ -112,7 +154,7 @@ const Signup = () => {
           <div className="input-group">
             <label> address </label>
             <input
-              type="address"
+              type="text"
               name="address"
               value={formData.address}
               onChange={handleChange}
@@ -123,7 +165,7 @@ const Signup = () => {
           <div className="input-group">
             <label> phoneNumber </label>
             <input
-              type="phoneNumber"
+              type="text"
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
@@ -131,6 +173,19 @@ const Signup = () => {
             />
             <p>{errors.phoneNumber}</p>
           </div>
+
+          {isStudent && (
+            <div className="input-group">
+              <label> Level </label>
+              <select name="level" value={formData.level} onChange={handleChange}>
+                <option value="" disabled>Select level</option>
+                {LEVEL_OPTIONS.map((lvl) => (
+                  <option key={lvl} value={lvl}>{lvl}</option>
+                ))}
+              </select>
+              <p>{errors.level}</p>
+            </div>
+          )}
 
           {apiError && <p className="signup-api-error">{apiError}</p>}
 

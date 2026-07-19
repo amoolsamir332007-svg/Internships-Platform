@@ -8,15 +8,7 @@ const STATUS_LABELS = {
   accepted: { text: "accepted", className: "applicant-card-status-accepted" },
   rejected: { text: "rejected", className: "applicant-card-status-rejected" },
 };
- 
-// CONFIRMED real shape (from GET /api/Institution/applications):
-// {
-//   applicationID, opportunityID,
-//   opportunity: { title, description, location, ..., institution },
-//   studentID,
-//   student: { studentID, name, level, phoneNumber, gpa, bio, cvPath, profileImagePath },
-//   appliedAt, notes, status
-// }
+
 const ApplicantCard = ({ applicant, onAccept, onReject, isLoading }) => {
   const navigate = useNavigate();
   const normalizedStatus = normalizeApplicationStatus(applicant.status);

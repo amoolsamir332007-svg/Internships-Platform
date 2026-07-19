@@ -49,13 +49,13 @@ export const getStatusColor = (status) => {
     }
 };
 export const getStatusLabel = (status) => {
-
+ 
     const numericStatusMap = {
         0: "Draft",
         1: "Published",
         2: "Closed",
     };
-
+ 
     if (typeof status === "number") {
         return numericStatusMap[status] || "Unknown";
     }
@@ -66,7 +66,7 @@ const APPLICATION_STATUS_NUMERIC_MAP = {
     1: "accepted",
     2: "rejected",
 };
-
+ 
 export const normalizeApplicationStatus = (status) => {
      if (typeof status === "number") {
         return APPLICATION_STATUS_NUMERIC_MAP[status] || "pending";
@@ -75,11 +75,11 @@ export const normalizeApplicationStatus = (status) => {
      if (normalized === "submitted") return "pending";
     if (normalized === "approved") return "accepted";
      return normalized || "pending";
-
+ 
 };
-
+ 
 export const getApplicationStatusColor = (status) => {
-
+ 
     switch (normalizeApplicationStatus(status)) {
         case "accepted":
             return "status-success";
@@ -89,13 +89,13 @@ export const getApplicationStatusColor = (status) => {
         default:
             return "status-warning";
     }
-
+ 
 };
-
+ 
 export const getApplicationStatusLabel = (status) => {
     return capitalize(normalizeApplicationStatus(status));
 };
-
+ 
 export const validateEmail = (email)=>{
 const regex =
 /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -119,24 +119,29 @@ func(...args);
 },delay);
 };
 };
-
+ 
 export const extractErrorMessage = (err, fallback = "Something went wrong. Please try again.") => {
   const data = err?.response?.data;
   if (!data) return fallback;
 
+  if (typeof data === "string") {
+    const trimmed = data.trim();
+    return trimmed || fallback;
+  }
+ 
   if (Array.isArray(data) && data.length > 0) {
     const joined = data.map((e) => e.description || e.code).filter(Boolean).join(" ");
     if (joined) return joined;
   }
-
+ 
   if (data?.errors && typeof data.errors === "object") {
     const allMessages = Object.values(data.errors).flat();
     if (allMessages.length > 0) return allMessages.join(" ");
   }
-
+ 
   if (data?.title) return data.title;
   if (data?.message) return data.message;
   if (data?.description) return data.description;
-
+ 
   return fallback;
 };

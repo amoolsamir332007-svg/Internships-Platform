@@ -1,53 +1,41 @@
 import * as Yup from "yup";
+
 const signupSchema = Yup.object({
+  fullName: Yup.string()
+    .required("Full name is required")
+    .min(3, "Name must be at least 3 characters"),
 
-    name: Yup.string()
-        .required("Full name is required")
-        .min(
-            3,
-            "Name must be at least 3 characters"
-        ),
+  email: Yup.string()
+    .required("Email is required")
+    .email("Please enter a valid email address"),
 
-       email: Yup.string()
-        .required("Email is required")
-        .email(
-            "Please enter a valid email address"
-        ),
-    password: Yup.string()
-        .required("Password is required")
-        .min(
-            8,
-            "Password must be at least 8 characters"
-        )
-        .matches(
-            /^(?=.*[A-Za-z])(?=.*\d)/,
-            "Password must contain letters and numbers"
-        ),
+  password: Yup.string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)/,
+      "Password must contain letters and numbers"
+    ),
 
-    confirmPassword: Yup.string()
-        .required(
-            "Please confirm your password"
-        )
+  accountType: Yup.number()
+    .required("Please select account type")
+    .oneOf([1, 2], "Invalid account type"),
 
-        .oneOf(
-            [Yup.ref("password")],
-            "Passwords do not match"
+  address: Yup.string()
+    .required("Address is required"),
 
-        ),
-    role: Yup.string()
-        .required(
-            "Please select account type"
-        )
-        .oneOf(
-            [
-                "Student",
-                "Institution"
-            ],
+  phoneNumber: Yup.string()
+    .required("Phone number is required")
+    .matches(
+      /^[0-9+\-\s]{7,15}$/,
+      "Phone number must be 7-15 digits and can include +, -, and spaces"
+    ),
 
-           "Invalid account type"
-        )
+  level: Yup.string().when("accountType", {
+    is: 1,
+    then: (schema) => schema.required("Academic level is required"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
 });
-
-
 
 export default signupSchema;

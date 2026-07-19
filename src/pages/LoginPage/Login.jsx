@@ -5,7 +5,7 @@ import { DASHBOARD_ROUTE_BY_ROLE, ROUTES } from "../../utils/constants";
 import { jwtDecode } from "jwt-decode";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import "./Login.css";
-import api from "../../utils/api";
+import { loginUser } from "../../api/authService";
  
 function Login() {
     const navigate = useNavigate();
@@ -22,8 +22,12 @@ function Login() {
         setLoading(true);
  
         try {
-            const res = await api.post('Account/login', { email, password });
-             const decoded = jwtDecode(res.data.token);
+            // FIX: loginUser expects a single "credentials" object,
+            // not two separate arguments. Passing (email, password)
+            // silently dropped the password before this fix.
+            const res = await loginUser({ email, password });
+ 
+            const decoded = jwtDecode(res.data.token);
             const role =
                 decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role"] ||
                 decoded.role;
@@ -31,11 +35,12 @@ function Login() {
             const userData = {
                 email: res.data.email,
                 fullName: decoded.FullName,
-                role, 
-             };
+                role,
+            };
  
             login(userData, res.data.token);
-             const targetRoute = DASHBOARD_ROUTE_BY_ROLE[role];
+ 
+            const targetRoute = DASHBOARD_ROUTE_BY_ROLE[role];
             navigate(targetRoute || ROUTES.HOME);
  
         } catch (er) {
