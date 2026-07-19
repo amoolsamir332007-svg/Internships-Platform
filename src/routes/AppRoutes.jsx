@@ -1,5 +1,5 @@
 import { Routes, Route, Outlet } from "react-router-dom";
-import StudentApplications from "../pages/dashboardPage/StudentDash/StudentApplications";
+ 
 import Navbar from "../components/common/Navbar/Navbar";
 import Footer from "../components/common/Footer/Footer";
 import DashboardLayout from "../components/dashboard/DashboardLayout/DashboardLayout";
@@ -21,11 +21,13 @@ import ManageInternships from "../pages/dashboardPage/InstitutionDash/ManageInte
 import InstitutionApplicants from "../pages/dashboardPage/InstitutionDash/InstitutionApplicants";
  
 import StudentDashboard from "../pages/dashboardPage/StudentDash/StudentDashboard";
+
+import StudentApplications from "../pages/dashboardPage/StudentDash/StudentApplications";
 import StudentProfile from "../pages/StudentProfilePage/StudentProfile";
 import StudentPublicProfile from "../pages/StudentPublicProfilePage/StudentPublicProfile";
  
 import { USER_ROLES, ROUTES } from "../utils/constants";
- 
+
 const PublicLayout = () => (
   <>
     <Navbar />
@@ -35,7 +37,7 @@ const PublicLayout = () => (
     <Footer />
   </>
 );
- 
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -55,7 +57,8 @@ const AppRoutes = () => {
         />
         <Route path="*" element={<NotFound />} />
       </Route>
-       <Route
+ 
+      <Route
         element={
           <ProtectedRoute allowedRole={USER_ROLES.INSTITUTION}>
             <DashboardLayout />
@@ -87,7 +90,8 @@ const AppRoutes = () => {
           element={<StudentPublicProfile />}
         />
       </Route>
-       <Route
+ 
+      <Route
         element={
           <ProtectedRoute allowedRole={USER_ROLES.STUDENT}>
             <DashboardLayout />
@@ -98,13 +102,13 @@ const AppRoutes = () => {
           path={ROUTES.STUDENT_DASHBOARD}
           element={<StudentDashboard />}
         />
-        <Route
+            <Route
           path={ROUTES.STUDENT_APPLICATIONS}
           element={<StudentApplications />}
         />
         <Route path={ROUTES.STUDENT_PROFILE} element={<StudentProfile />} />
       </Route>
-    </Routes>
+     </Routes>
   );
 };
  

@@ -7,10 +7,10 @@ import { ROUTES } from '../../../utils/constants';
 import './ApplicationsSection.css';
 
 const ApplicationsSection = () => {
-  const navigate = useNavigate();
   const [internships, setInternships] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const fetchInitialInternships = async () => {
     try {
@@ -67,9 +67,9 @@ const ApplicationsSection = () => {
       ) : (
         <div className="internships-grid">
           {internships.map((internship) => (
-            <InternshipCard 
-              key={internship.opportunityID} 
-              internship={internship} 
+            <InternshipCard
+              key={internship.opportunityID}
+              internship={internship}
               onClick={() => navigate(ROUTES.INTERNSHIP_DETAIL(internship.opportunityID))}
             />
           ))}

@@ -1,33 +1,15 @@
 import apiClient from "./apiClient";
 export const getPublished = () => {
-  return apiClient.get(`/Student/opportunities`);
+  return apiClient.get(`/Opportunities/search?query=e`);
 };
 
-
-export const searchPublished = async (q) => {
-  const response = await apiClient.get(`/Student/opportunities`);
-  const query = (q || "").trim().toLowerCase();
-
-  if (!query) {
-    return response;
-  }
-
-  const allItems = response.data || [];
-  const filtered = allItems.filter((item) => {
-    const title = (item.title || "").toLowerCase();
-    const skills = Array.isArray(item.skills)
-      ? item.skills.join(" ").toLowerCase()
-      : (item.skills || "").toLowerCase();
-    return title.includes(query) || skills.includes(query);
-  });
-
-  return { ...response, data: filtered };
+export const searchPublished = (q) => {
+  return apiClient.get(`/Opportunities/search?query=${encodeURIComponent(q || "")}`);
 };
 
 export const createInternship = (internshipData) => {
   return apiClient.post("/Institution/opportunities", internshipData);
 };
-
 
 const notSupportedByBackend = (featureName) => () =>
   Promise.reject(

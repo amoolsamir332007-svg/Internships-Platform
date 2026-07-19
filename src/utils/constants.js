@@ -60,8 +60,8 @@ export const ROUTES = {
   INSTITUTION_PROFILE: "/dashboard/institution/profile",
  
   STUDENT_DASHBOARD: "/dashboard/student",
-  STUDENT_PROFILE: "/dashboard/student/profile",
   STUDENT_APPLICATIONS: "/dashboard/student/applications",
+  STUDENT_PROFILE: "/dashboard/student/profile",
 };
  
 export const DASHBOARD_ROUTE_BY_ROLE = {

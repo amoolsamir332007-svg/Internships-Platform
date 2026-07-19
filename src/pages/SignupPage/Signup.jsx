@@ -3,109 +3,111 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import signupSchema from "../../schemas/signupSchema";
 import { USER_ROLES } from "../../utils/constants";
 import { useAuth } from "../../hooks/useAuth";
+import { extractErrorMessage } from "../../utils/helpers";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import api from "../../utils/api";
 import "./Signup.css";
- 
+
 const Signup = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
- 
+
   const { signup } = useAuth();
- 
+
   const selectedRole =
     searchParams.get("role") || USER_ROLES.STUDENT;
- 
+
   const [formData, setFormData] = useState({
-  email: "",
-  password: "",
-  fullName: "",      
-  accountType: selectedRole === "institution" ? 2 : 1,    
-    level: "Freshman",  
-  gpa: 4.0,          
-  address: "bb",        
-  phoneNumber: "0533869500"     
-});
+    email: "",
+    password: "",
+    fullName: "",
+    accountType: selectedRole === "institution" ? 2 : 1,
+    level: "Freshman",
+    gpa: 4.0,
+    address: "bb",
+    phoneNumber: "0533869500"
+  });
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   console.log(selectedRole)
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
- 
+
     setFormData({
       ...formData,
       [name]: value,
     });
- 
+
     setErrors({
       ...errors,
       [name]: "",
     });
-     setApiError("");
+    setApiError("");
   };
- 
-   const handleSubmit = async (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setApiError("");
     setIsSubmitting(true);
- 
+
     try {
       const res = await api.post('Account/register', formData);
       console.log(res.data);
       navigate("/Login");
     } catch (er) {
       console.log(er.response?.data);
-      setApiError(
-        er.response?.data?.message ||
-        er.response?.data?.title ||
-        "Something went wrong while creating your account. Please check your details and try again."
+           setApiError(
+        extractErrorMessage(
+          er,
+          "Something went wrong while creating your account. Please check your details and try again."
+        )
       );
     } finally {
       setIsSubmitting(false);
     }
   };
- 
+
   return (
     <div className="signup-page">
-       <div className="signup-card">
-         <div className="signup-header">
-           <h1>
+      <div className="signup-card">
+        <div className="signup-header">
+          <h1>
             Create Your Account
           </h1>
-           <p>
+          <p>
             Join Internship Platform as a
             <span> {selectedRole} </span>
           </p>
- 
+
         </div>
-         <form onSubmit={handleSubmit}>
-           <div className="input-group">
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
             <label> Full Name </label>
-           <input name="fullName"  value={formData.fullName}  onChange={handleChange}  placeholder="Enter your name"/>
+            <input name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Enter your name" />
             <p> {errors.fullName} </p>
           </div>
-  
+
           <div className="input-group">
-             <label>
+            <label>
               Email Address
             </label>
-             <input  type="email" name="email" value={formData.email}  onChange={handleChange} placeholder="example@gmail.com" />
-             <p>
+            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="example@gmail.com" />
+            <p>
               {errors.email}
             </p>
-           </div>
- 
-           <div className="input-group">
-             <label>
+          </div>
+
+          <div className="input-group">
+            <label>
               Password
             </label>
-             <input type="password"  name="password"  value={formData.password} onChange={handleChange} placeholder="********" />
-             <p>
+            <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="********" />
+            <p>
               {errors.password}
             </p>
- 
+
           </div>
           <div className="input-group">
             <label> address </label>
@@ -129,26 +131,26 @@ const Signup = () => {
             />
             <p>{errors.phoneNumber}</p>
           </div>
-           
+
           {apiError && <p className="signup-api-error">{apiError}</p>}
- 
+
           <button className="signup-btn" disabled={isSubmitting}>
             {isSubmitting ? "Creating Account..." : "Create Account"}
           </button>
         </form>
-          <p className="login-link">
-           Already have account?
-           <button  type="button"  onClick={() => navigate("/login")}>
+        <p className="login-link">
+          Already have account?
+          <button type="button" onClick={() => navigate("/login")}>
             Login
           </button>
-         </p>
-  
+        </p>
+
       </div>
-       <ScrollToTop />
- 
+      <ScrollToTop />
+
     </div>
   );
 };
- 
- 
+
+
 export default Signup;
