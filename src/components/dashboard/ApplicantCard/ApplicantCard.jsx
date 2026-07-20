@@ -7,6 +7,7 @@ const STATUS_LABELS = {
   pending: { text: "waiting", className: "applicant-card-status-pending" },
   accepted: { text: "accepted", className: "applicant-card-status-accepted" },
   rejected: { text: "rejected", className: "applicant-card-status-rejected" },
+  withdrawn: { text: "withdrawn", className: "applicant-card-status-withdrawn" },
 };
 
 const ApplicantCard = ({ applicant, onAccept, onReject, isLoading }) => {
@@ -60,7 +61,7 @@ const ApplicantCard = ({ applicant, onAccept, onReject, isLoading }) => {
         </p>
 
         {student.cvPath && (
-          <a
+         <a 
             href={student.cvPath}
             target="_blank"
             rel="noopener noreferrer"

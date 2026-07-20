@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetch } from "../../../hooks/useFetch";
 import {
   getApplicantsForInstitution,
@@ -10,79 +10,115 @@ import ApplicantCard from "../../../components/dashboard/ApplicantCard/Applicant
 import LoadingSpinner from "../../../components/common/LoadingSpinner/LoadingSpinner";
 import { normalizeApplicationStatus } from "../../../utils/helpers";
 import "./InstitutionDash.css";
- 
+
 const TABS = [
   { label: "all", value: "all" },
   { label: "pending", value: "pending" },
   { label: "accepted", value: "accepted" },
   { label: "rejected", value: "rejected" },
 ];
- 
+
 const InstitutionApplicants = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [actionLoadingId, setActionLoadingId] = useState(null);
+  const [applicantsData, setApplicantsData] = useState([]);
 
   const {
     data: allApplicants,
     loading,
     error,
-    refetch,
   } = useFetch(() => getApplicantsForInstitution(), []);
+
+  useEffect(() => {
+    if (allApplicants) {
+      const visibleApplicants = allApplicants.filter(
+        (applicant) => normalizeApplicationStatus(applicant.status) !== "withdrawn"
+      );
+      setApplicantsData(visibleApplicants);
+    }
+  }, [allApplicants]);
 
   const applicants =
     activeTab === "all"
-      ? allApplicants
-      : allApplicants?.filter(
-          (a) => normalizeApplicationStatus(a.status) === activeTab
+      ? applicantsData
+      : applicantsData.filter(
+          (applicant) =>
+            normalizeApplicationStatus(applicant.status) === activeTab
         );
- 
+
   const handleAccept = async (applicationId) => {
     setActionLoadingId(applicationId);
+
     try {
       await acceptApplication(applicationId);
-      refetch();
+
+      setApplicantsData((previousApplicants) =>
+        previousApplicants.map((applicant) =>
+          applicant.applicationID === applicationId
+            ? { ...applicant, status: "accepted" }
+            : applicant
+        )
+      );
     } catch (err) {
-      alert("Something went wrong while accepting the application");
+      alert(
+        err.response?.data?.message ||
+          "Something went wrong while accepting the application"
+      );
     } finally {
       setActionLoadingId(null);
     }
   };
- 
+
   const handleReject = async (applicationId) => {
     setActionLoadingId(applicationId);
+
     try {
       await rejectApplication(applicationId);
-      refetch();
+
+      setApplicantsData((previousApplicants) =>
+        previousApplicants.map((applicant) =>
+          applicant.applicationID === applicationId
+            ? { ...applicant, status: "rejected" }
+            : applicant
+        )
+      );
     } catch (err) {
-      alert("Something went wrong while rejecting the application");
+      alert(
+        err.response?.data?.message ||
+          "Something went wrong while rejecting the application"
+      );
     } finally {
       setActionLoadingId(null);
     }
   };
- 
+
   return (
     <div className="institution-applicants">
       <h1 className="institution-applicants-title">Applicants</h1>
- 
+
       <StatusTabs
         tabs={TABS}
         activeTab={activeTab}
         onTabChange={setActiveTab}
       />
- 
+
       {loading && <LoadingSpinner />}
- 
-      {error && <p className="institution-applicants-error">{error}</p>}
- 
-      {!loading && !error && applicants?.length === 0 && (
+
+      {error && (
+        <p className="institution-applicants-error">
+          {error}
+        </p>
+      )}
+
+      {!loading && !error && applicants.length === 0 && (
         <p className="institution-applicants-empty">
           No applicants found for the selected status.
         </p>
       )}
- 
+
       <div className="institution-applicants-list">
         {!loading &&
-          applicants?.map((applicant) => (
+          applicants.map((applicant) => (
             <ApplicantCard
               key={applicant.applicationID}
               applicant={applicant}
@@ -95,5 +131,5 @@ const InstitutionApplicants = () => {
     </div>
   );
 };
- 
+
 export default InstitutionApplicants;

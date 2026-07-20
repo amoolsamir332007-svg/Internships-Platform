@@ -48,7 +48,12 @@ const ApplicationsSection = () => {
       setLoading(false);
     }
   };
-
+console.log(
+  internships.map(i => ({
+    id: i.opportunityID,
+    title: i.title
+  }))
+);
   return (
     <section id="applications" className="applications-section">
       <div className="section-header">

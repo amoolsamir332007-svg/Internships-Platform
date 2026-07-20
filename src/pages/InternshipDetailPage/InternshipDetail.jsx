@@ -3,7 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as internshipService from "../../api/internshipService";
 import * as applicationService from "../../api/applicationService";
 import LoadingSpinner from "../../components/common/LoadingSpinner/LoadingSpinner";
-import { formatDate, getStatusLabel, extractErrorMessage } from "../../utils/helpers";
+import {
+  formatDate,
+  getStatusLabel,
+  extractErrorMessage,
+} from "../../utils/helpers";
 import { ROUTES, STORAGE_KEYS, USER_ROLES } from "../../utils/constants";
 import "./InternshipDetail.css";
 
@@ -25,9 +29,14 @@ const InternshipDetail = () => {
       try {
         const response = await internshipService.getPublished();
         const all = response.data || [];
-        const found = all.find(
-          (o) => String(o.opportunityID) === String(id)
-        );
+        console.log("Route ID:", id);
+console.log("All opportunities:", all);
+console.log(
+  "IDs:",
+  all.map(o => o.opportunityID)
+);
+        const found = all.find((o) => String(o.opportunityID) === String(id));
+        console.log("Found:", found);
         if (!found) {
           setLoadError("This internship could not be found.");
         } else {
@@ -70,7 +79,10 @@ const InternshipDetail = () => {
     } catch (err) {
       setApplyState("error");
       setApplyError(
-        extractErrorMessage(err, "Something went wrong while applying. Please try again.")
+        extractErrorMessage(
+          err,
+          "Something went wrong while applying. Please try again.",
+        ),
       );
     }
   };
@@ -145,8 +157,8 @@ const InternshipDetail = () => {
               {applyState === "applied"
                 ? "Applied ✓"
                 : applyState === "loading"
-                ? "Applying..."
-                : "Apply Now"}
+                  ? "Applying..."
+                  : "Apply Now"}
             </button>
 
             {applyState === "error" && (

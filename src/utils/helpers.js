@@ -65,37 +65,37 @@ const APPLICATION_STATUS_NUMERIC_MAP = {
     0: "pending",
     1: "accepted",
     2: "rejected",
+    3: "withdrawn",
 };
- 
+
 export const normalizeApplicationStatus = (status) => {
-     if (typeof status === "number") {
+    if (typeof status === "number") {
         return APPLICATION_STATUS_NUMERIC_MAP[status] || "pending";
     }
-     const normalized = String(status ?? "").toLowerCase();
-     if (normalized === "submitted") return "pending";
+    const normalized = String(status ?? "").toLowerCase();
+    if (normalized === "submitted") return "pending";
     if (normalized === "approved") return "accepted";
-     return normalized || "pending";
- 
+    return normalized || "pending";
 };
- 
+
 export const getApplicationStatusColor = (status) => {
- 
     switch (normalizeApplicationStatus(status)) {
         case "accepted":
             return "status-success";
         case "rejected":
             return "status-danger";
+        case "withdrawn":
+            return "status-default";
         case "pending":
         default:
             return "status-warning";
     }
- 
 };
- 
+
 export const getApplicationStatusLabel = (status) => {
     return capitalize(normalizeApplicationStatus(status));
 };
- 
+  
 export const validateEmail = (email)=>{
 const regex =
 /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

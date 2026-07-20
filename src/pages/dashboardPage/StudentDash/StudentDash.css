@@ -2075,3 +2075,67 @@ font-size:14px;
     font-size: 26px;
   }
 } */
+ .withdrawn-applications-section {
+  margin-bottom: 24px;
+}
+
+.applications-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Compact grid: smaller cards, more per row, less visual weight */
+.applications-cards-grid-compact {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+/* Compact card style for withdrawn applications */
+.application-card-compact {
+  padding: 14px 16px;
+  gap: 10px;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(31, 27, 58, 0.05);
+  opacity: 0.85;
+}
+
+.application-card-compact::before {
+  display: none;
+}
+
+.application-card-compact:hover {
+  transform: none;
+  box-shadow: 0 8px 20px rgba(31, 27, 58, 0.08);
+}
+
+.application-card-compact .application-card-header h3 {
+  font-size: 14px;
+}
+
+.application-card-compact .application-card-company {
+  padding: 8px 10px;
+  gap: 8px;
+}
+
+.application-card-compact .application-card-company-icon {
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+}
+
+.application-card-compact .application-card-company p {
+  font-size: 12px;
+}
+
+.application-card-compact .application-card-footer {
+  padding-top: 10px;
+}
+
+.application-card-compact .status {
+  padding: 4px 10px;
+  font-size: 10px;
+}

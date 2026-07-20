@@ -20,6 +20,7 @@ const TABS = [
   { label: "Pending", value: "pending" },
   { label: "Accepted", value: "accepted" },
   { label: "Rejected", value: "rejected" },
+  { label: "Withdrawn", value: "withdrawn" },
 ];
 
 const StudentApplications = () => {
@@ -45,13 +46,6 @@ const StudentApplications = () => {
 
     const normalizedStatus = normalizeApplicationStatus(item.status);
 
-    if (
-      activeTab === "all" &&
-      normalizedStatus === "withdrawn"
-    ) {
-      return false;
-    }
-
     if (activeTab !== "all") {
       return normalizedStatus === activeTab;
     }
@@ -59,124 +53,132 @@ const StudentApplications = () => {
     return true;
   });
 
+  const STATUS_SECTIONS = [
+    { key: "withdrawn", title: "Withdrawn Applications" },
+    { key: "pending", title: "Pending Applications" },
+    { key: "accepted", title: "Accepted Applications" },
+    { key: "rejected", title: "Rejected Applications" },
+  ];
+
+  const groupedSections =
+    activeTab === "all"
+      ? STATUS_SECTIONS.map((section) => ({
+          ...section,
+          items: applicationsList.filter(
+            (item) => normalizeApplicationStatus(item.status) === section.key
+          ),
+        })).filter((section) => section.items.length > 0)
+      : [];
+
   const handleWithdraw = async (applicationId) => {
     setWithdrawingId(applicationId);
 
     try {
       await withdrawApplication(applicationId);
 
-      setHiddenApplicationIds((prev) => [
-        ...prev,
-        applicationId,
-      ]);
+      setHiddenApplicationIds((prev) => [...prev, applicationId]);
 
       await refetch();
     } catch (err) {
       console.error(err);
 
-      alert(
-        "Something went wrong while withdrawing the application"
-      );
+      alert("Something went wrong while withdrawing the application");
     } finally {
       setWithdrawingId(null);
     }
+  };
+
+  const renderApplicationCard = (item, { compact = false } = {}) => {
+    const normalizedStatus = normalizeApplicationStatus(item.status);
+    const itemId = item.applicationID;
+    const title = item.opportunity?.title || "-";
+    const company =
+      item.opportunity?.institution?.name || "Unknown Institution";
+
+    return (
+      <div
+        className={`application-card${compact ? " application-card-compact" : ""}`}
+        key={itemId}
+      >
+        <div className="application-card-header">
+          <h3>{title}</h3>
+
+          <span className={`status ${normalizedStatus}`}>
+            {getApplicationStatusLabel(item.status)}
+          </span>
+        </div>
+
+        <div className="application-card-company">
+          <span className="application-card-company-icon">🏢</span>
+
+          <p>{company}</p>
+        </div>
+
+        <div className="application-card-footer">
+          <span className="application-card-date">
+            📅 {formatDate(item.appliedAt)}
+          </span>
+
+          {normalizedStatus === "pending" && (
+            <button
+              className="withdraw-btn"
+              disabled={withdrawingId === itemId}
+              onClick={() => handleWithdraw(itemId)}
+            >
+              {withdrawingId === itemId ? "Withdrawing..." : "Withdraw"}
+            </button>
+          )}
+        </div>
+      </div>
+    );
   };
 
   return (
     <div className="applications-page">
       <h1>My Applications</h1>
 
-      <p className="page-desc">
-        Track your internship applications status.
-      </p>
+      <p className="page-desc">Track your internship applications status.</p>
 
-      <StatusTabs
-        tabs={TABS}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-      />
+      <StatusTabs tabs={TABS} activeTab={activeTab} onTabChange={setActiveTab} />
 
       {loading && <LoadingSpinner />}
 
-      {error && (
+      {error && <p className="dashboard-empty">{error}</p>}
+
+      {!loading && !error && applicationsList.length === 0 && (
         <p className="dashboard-empty">
-          {error}
+          No applications found for the selected status.
         </p>
       )}
 
-      {!loading &&
-        !error &&
-        applicationsList.length === 0 && (
-          <p className="dashboard-empty">
-            No applications found for the selected status.
-          </p>
-        )}
+      {!loading && applicationsList.length > 0 && (
+        <>
+          {activeTab === "all" ? (
+            groupedSections.map((section) => (
+              <div
+                className="withdrawn-applications-section"
+                key={section.key}
+              >
+                <h2 className="applications-section-title">
+                  {section.title}
+                </h2>
 
-      {!loading &&
-        applicationsList.length > 0 && (
-          <div className="applications-cards-grid">
-            {applicationsList.map((item) => {
-              const normalizedStatus =
-                normalizeApplicationStatus(item.status);
-
-              const itemId = item.applicationID;
-
-              const title =
-                item.opportunity?.title || "-";
-
-              const company =
-                item.opportunity?.institution?.name ||
-                "Unknown Institution";
-
-              return (
-                <div
-                  className="application-card"
-                  key={itemId}
-                >
-                  <div className="application-card-header">
-                    <h3>{title}</h3>
-
-                    <span
-                      className={`status ${normalizedStatus}`}
-                    >
-                      {getApplicationStatusLabel(item.status)}
-                    </span>
-                  </div>
-
-                  <div className="application-card-company">
-                    <span className="application-card-company-icon">
-                      🏢
-                    </span>
-
-                    <p>{company}</p>
-                  </div>
-
-                  <div className="application-card-footer">
-                    <span className="application-card-date">
-                      📅 {formatDate(item.appliedAt)}
-                    </span>
-
-                    {normalizedStatus === "pending" && (
-                      <button
-                        className="withdraw-btn"
-                        disabled={
-                          withdrawingId === itemId
-                        }
-                        onClick={() =>
-                          handleWithdraw(itemId)
-                        }
-                      >
-                        {withdrawingId === itemId
-                          ? "Withdrawing..."
-                          : "Withdraw"}
-                      </button>
-                    )}
-                  </div>
+                <div className="applications-cards-grid applications-cards-grid-compact">
+                  {section.items.map((item) =>
+                    renderApplicationCard(item, { compact: true })
+                  )}
                 </div>
-              );
-            })}
-          </div>
-        )}
+              </div>
+            ))
+          ) : (
+            <div className="applications-cards-grid applications-cards-grid-compact">
+              {applicationsList.map((item) =>
+                renderApplicationCard(item, { compact: true })
+              )}
+            </div>
+          )}
+        </>
+      )}
 
       <button
         className="browse-internships-btn"
