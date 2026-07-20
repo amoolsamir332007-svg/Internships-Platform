@@ -5,26 +5,33 @@ import { useNavigate } from "react-router-dom";
 import { internshipSchema } from "../../../schemas/internshipSchema";
 import { createInternship } from "../../../api/internshipService";
 import "./InstitutionDash.css";
- 
+
+const DESCRIPTION_MAX_LENGTH = 500;
+
 const PostInternship = () => {
   const navigate = useNavigate();
- 
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
- 
+
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(internshipSchema),
+    defaultValues: {
+      description: "",
+    },
   });
- 
+
+  const descriptionValue = watch("description") || "";
+
   const onCreate = async (formData) => {
     setIsSubmitting(true);
     setSubmitError(null);
     try {
-     
       const payload = {
         ...formData,
         startDate: new Date(formData.startDate).toISOString(),
@@ -43,30 +50,44 @@ const PostInternship = () => {
       setIsSubmitting(false);
     }
   };
- 
+
   return (
     <div className="post-internship">
       <h1 className="post-internship-title">Add New Internship</h1>
- 
+
       {submitError && <p className="post-internship-error">{submitError}</p>}
- 
+
       <form className="post-internship-form">
-        {/* عنوان التدريب */}
         <div className="post-internship-field">
           <label htmlFor="title">Title</label>
           <input id="title" type="text" {...register("title")} />
           {errors.title && <span className="post-internship-error-text">{errors.title.message}</span>}
         </div>
- 
-        {/* وصف التدريب */}
+
         <div className="post-internship-field">
           <label htmlFor="description">Description</label>
-          <textarea id="description" rows="5" {...register("description")} />
-          {errors.description && (
-            <span className="post-internship-error-text">{errors.description.message}</span>
-          )}
+          <textarea
+            id="description"
+            rows="5"
+            maxLength={DESCRIPTION_MAX_LENGTH}
+            {...register("description")}
+          />
+          <div className="post-internship-field-footer">
+            {errors.description && (
+              <span className="post-internship-error-text">{errors.description.message}</span>
+            )}
+            <span
+              className={`post-internship-char-counter ${
+                descriptionValue.length >= DESCRIPTION_MAX_LENGTH
+                  ? "post-internship-char-counter-limit"
+                  : ""
+              }`}
+            >
+              {descriptionValue.length}/{DESCRIPTION_MAX_LENGTH}
+            </span>
+          </div>
         </div>
- 
+
         <div className="post-internship-row">
           <div className="post-internship-field">
             <label htmlFor="capacity">Capacity</label>
@@ -75,7 +96,7 @@ const PostInternship = () => {
               <span className="post-internship-error-text">{errors.capacity.message}</span>
             )}
           </div>
- 
+
           <div className="post-internship-field">
             <label htmlFor="location">Location</label>
             <input id="location" type="text" {...register("location")} />
@@ -84,7 +105,7 @@ const PostInternship = () => {
             )}
           </div>
         </div>
- 
+
         <div className="post-internship-row">
           <div className="post-internship-field">
             <label htmlFor="startDate">Start Date</label>
@@ -93,7 +114,7 @@ const PostInternship = () => {
               <span className="post-internship-error-text">{errors.startDate.message}</span>
             )}
           </div>
- 
+
           <div className="post-internship-field">
             <label htmlFor="endDate">End Date</label>
             <input id="endDate" type="date" {...register("endDate")} />
@@ -102,7 +123,7 @@ const PostInternship = () => {
             )}
           </div>
         </div>
- 
+
         <div className="post-internship-actions">
           <button
             type="button"
@@ -117,5 +138,5 @@ const PostInternship = () => {
     </div>
   );
 };
- 
+
 export default PostInternship;

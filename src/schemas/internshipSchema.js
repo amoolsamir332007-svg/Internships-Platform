@@ -6,12 +6,11 @@ export const internshipSchema = yup.object().shape({
     .required("The internship title is required")
     .min(5, "The title must be at least 5 characters")
     .max(100, "The title is too long"),
-
-  description: yup
-    .string()
-    .required("The internship description is required")
-    .min(30, "The description must be at least 30 characters")
-    .max(2000, "The description is too long"),
+    
+description: yup
+  .string()
+  .required("Description is required")
+  .max(500, "Description must be 500 characters or less"),
 
   capacity: yup
     .number()

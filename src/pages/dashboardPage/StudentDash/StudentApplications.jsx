@@ -25,8 +25,9 @@ const TABS = [
 const StudentApplications = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [withdrawingId, setWithdrawingId] = useState(null);
-  const navigate = useNavigate();
+  const [hiddenApplicationIds, setHiddenApplicationIds] = useState([]);
 
+  const navigate = useNavigate();
 
   const {
     data: allApplications,
@@ -35,21 +36,47 @@ const StudentApplications = () => {
     refetch,
   } = useFetch(() => getMyApplications(), []);
 
-  const applicationsList =
-    activeTab === "all"
-      ? allApplications || []
-      : (allApplications || []).filter(
-          (item) => normalizeApplicationStatus(item.status) === activeTab
-        );
+  const applicationsList = (allApplications || []).filter((item) => {
+    const itemId = item.applicationID;
+
+    if (hiddenApplicationIds.includes(itemId)) {
+      return false;
+    }
+
+    const normalizedStatus = normalizeApplicationStatus(item.status);
+
+    if (
+      activeTab === "all" &&
+      normalizedStatus === "withdrawn"
+    ) {
+      return false;
+    }
+
+    if (activeTab !== "all") {
+      return normalizedStatus === activeTab;
+    }
+
+    return true;
+  });
 
   const handleWithdraw = async (applicationId) => {
     setWithdrawingId(applicationId);
+
     try {
       await withdrawApplication(applicationId);
-      refetch();
+
+      setHiddenApplicationIds((prev) => [
+        ...prev,
+        applicationId,
+      ]);
+
+      await refetch();
     } catch (err) {
       console.error(err);
-      alert("Something went wrong while withdrawing the application");
+
+      alert(
+        "Something went wrong while withdrawing the application"
+      );
     } finally {
       setWithdrawingId(null);
     }
@@ -58,62 +85,98 @@ const StudentApplications = () => {
   return (
     <div className="applications-page">
       <h1>My Applications</h1>
-      <p className="page-desc">Track your internship applications status.</p>
 
-      <StatusTabs tabs={TABS} activeTab={activeTab} onTabChange={setActiveTab} />
+      <p className="page-desc">
+        Track your internship applications status.
+      </p>
+
+      <StatusTabs
+        tabs={TABS}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
 
       {loading && <LoadingSpinner />}
 
-      {error && <p className="dashboard-empty">{error}</p>}
-
-      {!loading && !error && applicationsList.length === 0 && (
+      {error && (
         <p className="dashboard-empty">
-          No applications found for the selected status.
+          {error}
         </p>
       )}
 
-      {!loading && applicationsList.length > 0 && (
-        <div className="applications-cards-grid">
-          {applicationsList.map((item) => {
-            const normalizedStatus = normalizeApplicationStatus(item.status);
-            const itemId = item.applicationID;
-            const title = item.opportunity?.title || "-";
-            const company = item.opportunity?.institution?.name || "Unknown Institution";
+      {!loading &&
+        !error &&
+        applicationsList.length === 0 && (
+          <p className="dashboard-empty">
+            No applications found for the selected status.
+          </p>
+        )}
 
-            return (
-              <div className="application-card" key={itemId}>
-                <div className="application-card-header">
-                  <h3>{title}</h3>
-                  <span className={`status ${normalizedStatus}`}>
-                    {getApplicationStatusLabel(item.status)}
-                  </span>
-                </div>
+      {!loading &&
+        applicationsList.length > 0 && (
+          <div className="applications-cards-grid">
+            {applicationsList.map((item) => {
+              const normalizedStatus =
+                normalizeApplicationStatus(item.status);
 
-                <div className="application-card-company">
-                  <span className="application-card-company-icon">🏢</span>
-                  <p>{company}</p>
-                </div>
+              const itemId = item.applicationID;
 
-                <div className="application-card-footer">
-                  <span className="application-card-date">
-                    📅 {formatDate(item.appliedAt)}
-                  </span>
+              const title =
+                item.opportunity?.title || "-";
 
-                  {normalizedStatus === "pending" && (
-                    <button
-                      className="withdraw-btn"
-                      disabled={withdrawingId === itemId}
-                      onClick={() => handleWithdraw(itemId)}
+              const company =
+                item.opportunity?.institution?.name ||
+                "Unknown Institution";
+
+              return (
+                <div
+                  className="application-card"
+                  key={itemId}
+                >
+                  <div className="application-card-header">
+                    <h3>{title}</h3>
+
+                    <span
+                      className={`status ${normalizedStatus}`}
                     >
-                      {withdrawingId === itemId ? "Withdrawing..." : "Withdraw"}
-                    </button>
-                  )}
+                      {getApplicationStatusLabel(item.status)}
+                    </span>
+                  </div>
+
+                  <div className="application-card-company">
+                    <span className="application-card-company-icon">
+                      🏢
+                    </span>
+
+                    <p>{company}</p>
+                  </div>
+
+                  <div className="application-card-footer">
+                    <span className="application-card-date">
+                      📅 {formatDate(item.appliedAt)}
+                    </span>
+
+                    {normalizedStatus === "pending" && (
+                      <button
+                        className="withdraw-btn"
+                        disabled={
+                          withdrawingId === itemId
+                        }
+                        onClick={() =>
+                          handleWithdraw(itemId)
+                        }
+                      >
+                        {withdrawingId === itemId
+                          ? "Withdrawing..."
+                          : "Withdraw"}
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+              );
+            })}
+          </div>
+        )}
 
       <button
         className="browse-internships-btn"
