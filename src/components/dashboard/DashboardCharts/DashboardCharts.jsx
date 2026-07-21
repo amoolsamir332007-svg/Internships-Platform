@@ -1,69 +1,183 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Area,
+  AreaChart,
+} from "recharts";
+
 import "./DashboardCharts.css";
 
-const MONTH_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-// Groups a list of items by month (based on a date field) and returns
-// cumulative counts across the last 6 months — real data derived from
-// whatever the API actually returned, no invented numbers.
-const buildMonthlySeries = (items, dateField) => {
-  const now = new Date();
-  const buckets = [];
+const applicationData = [
+  { month: "Jan", value: 4 },
+  { month: "Feb", value: 7 },
+  { month: "Mar", value: 12 },
+  { month: "Apr", value: 9 },
+  { month: "May", value: 15 },
+  { month: "Jun", value: 20 },
+];
 
-  for (let i = 5; i >= 0; i--) {
-    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    buckets.push({ key: `${d.getFullYear()}-${d.getMonth()}`, name: MONTH_LABELS[d.getMonth()], count: 0 });
-  }
 
-  (items || []).forEach((item) => {
-    const raw = item[dateField];
-    if (!raw) return;
-    const d = new Date(raw);
-    const key = `${d.getFullYear()}-${d.getMonth()}`;
-    const bucket = buckets.find((b) => b.key === key);
-    if (bucket) bucket.count += 1;
-  });
+const internshipData = [
+  { month: "Jan", value: 5 },
+  { month: "Feb", value: 7 },
+  { month: "Mar", value: 12 },
+  { month: "Apr", value: 9 },
+  { month: "May", value: 15 },
+  { month: "Jun", value: 20 },
+];
 
-  let running = 0;
-  return buckets.map((b) => {
-    running += b.count;
-    return { name: b.name, value: running };
-  });
-};
-
-export const DashboardCharts = ({ applications, internships }) => {
-  const applicationData = buildMonthlySeries(applications, "createdAt");
-  const internshipData = buildMonthlySeries(internships, "startDate");
-
+function ChartCard({ title, children }) {
   return (
-    <div className="dashboard-charts-grid">
-      <div className="dashboard-chart-card">
-        <h3>Application Growth</h3>
-        <ResponsiveContainer width="100%" height={220}>
-          <LineChart data={applicationData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0eefc" />
-            <XAxis dataKey="name" tick={{ fontSize: 12, fill: "#8b869e" }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fontSize: 12, fill: "#8b869e" }} axisLine={false} tickLine={false} />
-            <Tooltip />
-            <Line type="monotone" dataKey="value" stroke="#5b3df0" strokeWidth={3} dot={{ r: 4 }} />
-          </LineChart>
-        </ResponsiveContainer>
+    <div className="chart-card">
+
+      <h3>{title}</h3>
+
+      <div className="chart-container">
+        {children}
       </div>
 
-      <div className="dashboard-chart-card">
-        <h3>Internship Activity</h3>
-        <ResponsiveContainer width="100%" height={220}>
-          <LineChart data={internshipData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0eefc" />
-            <XAxis dataKey="name" tick={{ fontSize: 12, fill: "#8b869e" }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fontSize: 12, fill: "#8b869e" }} axisLine={false} tickLine={false} />
-            <Tooltip />
-            <Line type="monotone" dataKey="value" stroke="#7c5cff" strokeWidth={3} dot={{ r: 4 }} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
     </div>
   );
-};
+}
 
-export default DashboardCharts;
+export default function DashboardCharts() {
+
+  return (
+
+    <div className="charts-wrapper">
+
+
+      {/* Application Growth */}
+      <ChartCard title="Application Growth">
+
+        <ResponsiveContainer width="100%" height="100%">
+
+          <AreaChart data={applicationData}>
+            <defs>
+
+              <linearGradient
+                id="purpleGradient"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+
+                <stop
+                  offset="0%"
+                  stopColor="#8b5cf6"
+                  stopOpacity={0.35}
+                />
+
+                <stop
+                  offset="100%"
+                  stopColor="#8b5cf6"
+                  stopOpacity={0}
+                />
+
+              </linearGradient>
+
+            </defs>
+
+            <CartesianGrid
+              strokeDasharray="3 3"
+              vertical={true}
+              horizontal={true}
+            />
+
+            <XAxis
+              dataKey="month"
+              tick={{fontSize:12}}
+            />
+
+            <YAxis
+              domain={[0,20]}
+              ticks={[0,5,10,15,20]}
+              tick={{fontSize:12}}
+            />
+
+            <Tooltip />
+
+
+            <Area
+              type="monotone"
+              dataKey="value"
+              stroke="#7c3aed"
+              strokeWidth={3}
+              fill="url(#purpleGradient)"
+            />
+
+          </AreaChart>
+
+
+        </ResponsiveContainer>
+
+
+      </ChartCard>
+
+      {/* Internship Activity */}
+
+      <ChartCard title="Internship Activity">
+
+
+        <ResponsiveContainer width="100%" height="100%">
+
+          <LineChart data={internshipData}>
+
+
+            <CartesianGrid
+              strokeDasharray="3 3"
+            />
+
+
+            <XAxis
+              dataKey="month"
+              tick={{fontSize:12}}
+            />
+
+
+            <YAxis
+              domain={[0,20]}
+              ticks={[0,5,10,15,20]}
+              tick={{fontSize:12}}
+            />
+
+            <Tooltip />
+
+            <Line
+
+              type="monotone"
+
+              dataKey="value"
+
+              stroke="#8b5cf6"
+
+              strokeWidth={3}
+
+              dot={{
+                r:5,
+                stroke:"#8b5cf6",
+                strokeWidth:3,
+                fill:"#fff"
+              }}
+
+              activeDot={{
+                r:7
+              }}
+
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </ChartCard>
+
+
+    </div>
+
+  );
+}

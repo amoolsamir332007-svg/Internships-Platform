@@ -468,13 +468,11 @@
     line-height:1.7;
 }
 
-
-
-
 .why-section{
     padding:100px 0;
     background:var(--color-bg-subtle);
 }
+
 
 .features-container{
     width:90%;
@@ -605,7 +603,7 @@
     }
 
     .section-header h2{
-     font-size:35px;}
+    font-size:30px;}
 
 }
 
@@ -808,6 +806,8 @@ grid-template-columns:1fr;
 .cta-content h2{
 font-size:30px;
 }
+.section-header h2{
+      font-size:27px;}
 }
 
 .hero-content{

@@ -1,6 +1,3 @@
-/* ================================
-   STUDENT APPLICATIONS PAGE
-================================ */
 
 .applications-page {
   display: flex;
@@ -29,11 +26,6 @@
   color: var(--color-text-secondary);
 }
 
-
-/* ================================
-   APPLICATION CARDS GRID
-================================ */
-
 .applications-cards-grid {
 
   display: grid;
@@ -42,9 +34,6 @@
 
   gap: 24px;
 }
-
-
-/* Card */
 
 .application-card {
 
@@ -246,13 +235,6 @@
 
 }
 
-
-
-/* ================================
-   STATUS BADGES
-================================ */
-
-
 .status {
 
   display:flex;
@@ -353,12 +335,6 @@
 }
 
 
-
-/* ================================
-   WITHDRAW BUTTON
-================================ */
-
-
 .withdraw-btn {
 
 
@@ -414,13 +390,6 @@
 
 }
 
-
-
-/* ================================
- EMPTY STATE
-================================ */
-
-
 .dashboard-empty {
 
 
@@ -444,12 +413,6 @@
  cardReveal .5s ease;
 
 }
-
-
-
-/* ================================
- BROWSE BUTTON
-================================ */
 
 
 .browse-internships-btn {
@@ -2139,3 +2102,4 @@ font-size:14px;
   padding: 4px 10px;
   font-size: 10px;
 }
+

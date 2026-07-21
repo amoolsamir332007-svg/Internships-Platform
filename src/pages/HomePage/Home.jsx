@@ -231,8 +231,8 @@ const Home = () => {
         </span>
 
         <h2>
-  <span className="linetitle">Everything You Need To Start</span>
-  <span className="linespan">Your Career</span>
+  <span className="linetitle">Everything You Need To </span>
+  <span className="linespan"> Start Your Career</span>
 </h2>
 
 
@@ -395,7 +395,7 @@ const Home = () => {
                 </div>
                 <div>
                     <h4>
-                        Sarah Ahmed
+                        Bissan Naser
                     </h4>
                     <span>
                         Software Engineering Student
@@ -419,10 +419,10 @@ const Home = () => {
                 </div>
                 <div>
                     <h4>
-                        Omar Khaled
+                        Amal Hamdan
                     </h4>
                     <span>
-                        Computer Engineering Student
+                        Computer Science Student
                     </span>
                 </div>
             </div>
@@ -443,10 +443,10 @@ const Home = () => {
                 </div>
                 <div>
                     <h4>
-                        Lina Hassan
+                        Alaa Alzammar
                     </h4>
                     <span>
-                        Web Developer
+                        Full Stack Developer
                     </span>
                 </div>
             </div>
