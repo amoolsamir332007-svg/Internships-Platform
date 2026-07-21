@@ -2,8 +2,10 @@ import axios from "axios";
 
 const apiClient = axios.create({
   baseURL: "https://internshipapi-1.onrender.com/api",
-  headers: {
+  timeout: 60000, 
+    headers: {
     "Content-Type": "application/json",
+
   },
 });
 
