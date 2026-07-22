@@ -1,6 +1,12 @@
 import React from 'react';
 import ContactForm from '../../components/common/ContactForm/ContactForm';import './Contact.css';
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
+import {
+    FaLocationDot,
+    FaEnvelope,
+    FaPhone,
+    FaClock
+} from "react-icons/fa6";
 
 const ContactPage = () => {
         return (
@@ -19,7 +25,9 @@ const ContactPage = () => {
             
             <div className="info-items-list">
                 <div className="info-item">
-                <span className="info-icon">📍</span>
+                <span className="info-icon">
+    <FaLocationDot />
+</span>
                 <div className="info-text">
                     <strong>Location :</strong>
                     <span>Palestine, Gaza</span>
@@ -27,7 +35,9 @@ const ContactPage = () => {
                 </div>
 
                 <div className="info-item">
-                <span className="info-icon">📧</span>
+                <span className="info-icon">
+    <FaEnvelope />
+</span>
                 <div className="info-text">
                     <strong>Email:</strong>
                     <span>support@internshipplatform.com</span>
@@ -35,7 +45,9 @@ const ContactPage = () => {
                 </div>
 
                 <div className="info-item">
-                <span className="info-icon">📞</span>
+                <span className="info-icon">
+    <FaPhone />
+</span>
                 <div className="info-text">
                     <strong>Phone Number:</strong>
                     <span>+970 599 000 000</span>
@@ -43,7 +55,9 @@ const ContactPage = () => {
                 </div>
 
                 <div className="info-item">
-                <span className="info-icon">⏰</span>
+                <span className="info-icon">
+    <FaClock />
+</span>
                 <div className="info-text">
                     <strong>Working hours:</strong>
                     <span>From Sunday to Thursday (8:00 AM - 3:00 PM)</span>

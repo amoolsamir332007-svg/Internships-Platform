@@ -115,3 +115,51 @@
         font-size: 2rem;
     }
     }
+
+    .info-icon {
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #7c3aed,
+        #2563eb
+    );
+
+    color:white;
+
+    font-size:1.2rem;
+
+    flex-shrink:0;
+
+    box-shadow:
+    0 10px 25px rgba(124,58,237,.25);
+
+    transition:.3s ease;
+}
+
+
+.info-item:hover .info-icon {
+
+    transform:
+    translateY(-4px)
+    scale(1.08);
+
+    box-shadow:
+    0 15px 35px rgba(124,58,237,.35);
+}
+
+
+.info-icon svg {
+
+    font-size:20px;
+
+}

@@ -6,7 +6,23 @@ import HeroBackground from "../../components/Home/HeroBackground/HeroBackground"
 import heroImage from "../../assets/images/studying (1).svg";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import "./Home.css";
-
+import {
+  FaRocket,
+  FaBullseye,
+  FaBuilding,
+  FaBolt,
+  FaStar,
+  FaUserGraduate,
+  FaMagnifyingGlass,
+  FaUserTie,
+  FaUserAstronaut,
+  FaCode,
+  FaLaptopCode,
+  FaBriefcase,
+ FaUserGroup,
+ FaGraduationCap,
+ FaAward,
+} from "react-icons/fa6";
 const heroContainerVariants = {
     hidden: {},
     show: {
@@ -75,9 +91,18 @@ const Home = () => {
                 >
                     {/* Left Content */}
                     <div className="hero-content">
-                        <motion.span className="hero-badge" variants={heroItemVariants}>
-                            🚀 Start Your Career Journey
-                        </motion.span>
+                        <motion.div
+    className="hero-badge"
+    variants={heroItemVariants}
+>
+    <span className="hero-badge-icon-wrapper">
+        <FaRocket />
+    </span>
+
+    <span className="hero-badge-text">
+        Start Your Career Journey
+    </span>
+</motion.div>
 
                         <motion.h1 variants={heroItemVariants}>
                             Find Your Dream
@@ -105,25 +130,18 @@ const Home = () => {
 
                         <motion.div className="hero-features" variants={heroItemVariants}>
                             <div>
-                                <strong>
-                                    1000+
-                                </strong>
+                            <strong>1000+</strong>
+                            <span>Internships</span>
+                        </div>
+                                                    <div>
 
-                                <span>
-                                    Internships
-                                </span>
-
-                            </div>
-                            <div>
-                                <strong>
-                                    500+
-                                </strong>
-                                <span>Companies</span>
-                            </div>
-                            <div>
-                                <strong>10K+</strong>
-                                <span>Students</span>
-                            </div>
+                            <strong>500+</strong>
+                            <span>Companies</span>
+                        </div>
+                                                    <div>
+                            <strong>10K+</strong>
+                            <span>Students</span>
+                        </div>
                         </motion.div>
                     </div>
 
@@ -153,8 +171,8 @@ const Home = () => {
                             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                         >
                             <span>
-                                🎯
-                            </span>
+                                <FaBullseye />
+                                    </span>
                             <div>
                                 <h4>AI Matching</h4>
                                 <p>
@@ -170,8 +188,8 @@ const Home = () => {
                             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                         >
                             <span>
-                                ⭐
-                            </span>
+                                <FaStar />
+                                        </span>
                             <div>
                                 <h4>
                                     Top Companies
@@ -246,8 +264,8 @@ const Home = () => {
     <div className="features-container">
         <div className="feature-card">
             <div className="feature-icon">
-                🎯
-            </div>
+    <FaBullseye />
+</div>
             <h3>
                 Smart Matching
             </h3>
@@ -257,9 +275,9 @@ const Home = () => {
             </p>
         </div>
         <div className="feature-card">
-            <div className="feature-icon">
-                🏢
-            </div>
+                <div className="feature-icon">
+                            <FaBuilding />
+                                            </div>
             <h3>
                 Verified Companies
             </h3>
@@ -269,9 +287,9 @@ const Home = () => {
             </p>
         </div>
         <div className="feature-card">
-            <div className="feature-icon">
-                ⚡
-            </div>
+                <div className="feature-icon">
+                    <FaBolt />
+                            </div>
             <h3>
                 Easy Application
             </h3>
@@ -281,9 +299,9 @@ const Home = () => {
             </p>
         </div>
         <div className="feature-card">
-            <div className="feature-icon">
-                🚀
-            </div>
+                <div className="feature-icon">
+                        <FaRocket />
+                            </div>
             <h3>
                 Career Growth
             </h3>
@@ -341,8 +359,8 @@ const Home = () => {
                 01
             </div>
             <div className="step-icon">
-                👤
-            </div>
+    <FaUserGraduate />
+</div>
             <h3>
                 Create Your Account
             </h3>
@@ -355,9 +373,9 @@ const Home = () => {
             <div className="step-number">
                 02
             </div>
-            <div className="step-icon">
-                🔍
-            </div>
+          <div className="step-icon">
+    <FaMagnifyingGlass />
+</div>
             <h3>
                 Find Internship
             </h3>
@@ -368,7 +386,9 @@ const Home = () => {
         </div>
         <div className="step-card">
             <div className="step-number">03</div>
-            <div className="step-icon">🚀</div>
+           <div className="step-icon">
+    <FaRocket />
+</div>
             <h3>Start Your Career</h3>
             <p> Apply, gain experience and grow professionally.</p>
         </div>
@@ -390,9 +410,9 @@ const Home = () => {
     <div className="testimonials-container">
         <div className="testimonial-card">
             <div className="user-info">
-                <div className="user-image">
-                    👩‍💻
-                </div>
+                    <div className="user-image student-one">
+                            <FaUserGraduate />
+                                    </div>
                 <div>
                     <h4>
                         Bissan Naser
@@ -407,40 +427,56 @@ const Home = () => {
                 internship opportunity. The application
                 process was simple and professional."
             </p>
-            <div className="stars">
-                ⭐⭐⭐⭐⭐
-            </div>
+        <div className="stars">
+    <FaStar />
+    <FaStar />
+    <FaStar />
+    <FaStar />
+    <FaStar />
+</div>
         </div>
+
+         <div className="testimonial-card">
+    <div className="user-info">
+
+        <div className="user-image student-two">
+            <FaUserGraduate />
+        </div>
+
+        <div>
+            <h4>
+                Amal Hamdan
+            </h4>
+
+            <span>
+                Computer Science Student
+            </span>
+        </div>
+
+    </div>
+
+    <p>
+        "I connected with a great company and
+        gained real-world experience through
+        my internship."
+    </p>
+
+    <div className="stars">
+        <FaStar />
+        <FaStar />
+        <FaStar />
+        <FaStar />
+        <FaStar />
+    </div>
+
+</div>
 
         <div className="testimonial-card">
             <div className="user-info">
-                <div className="user-image">
-                    👨‍💻
-                </div>
-                <div>
-                    <h4>
-                        Amal Hamdan
-                    </h4>
-                    <span>
-                        Computer Science Student
-                    </span>
-                </div>
-            </div>
-            <p>
-                "I connected with a great company and
-                gained real-world experience through
-                my internship."
-            </p>
-            <div className="stars">
-                ⭐⭐⭐⭐⭐
-            </div>
-        </div>
-
-        <div className="testimonial-card">
-            <div className="user-info">
-                <div className="user-image">
-                    👩‍🚀
-                </div>
+                <div className="user-image student-three">
+    <FaUserGraduate />
+</div>
+                    
                 <div>
                     <h4>
                         Alaa Alzammar
@@ -455,8 +491,12 @@ const Home = () => {
                 internships to getting accepted."
             </p>
             <div className="stars">
-                ⭐⭐⭐⭐⭐
-            </div>
+    <FaStar />
+    <FaStar />
+    <FaStar />
+    <FaStar />
+    <FaStar />
+</div>
         </div>
     </div>
 </section>

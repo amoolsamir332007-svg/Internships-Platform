@@ -2,6 +2,13 @@ import { useNavigate } from "react-router-dom";
 import "./GetStarted.css";
 import ScrollToTop from "../../components/common/ScrollToTop/ScrollToTop";
 import { USER_ROLES } from "../../utils/constants";
+
+import {
+    FaBuilding,
+    FaUserGraduate,
+    FaShieldHalved,
+    FaArrowRight
+} from "react-icons/fa6";
  
 const GetStarted = () => {
  
@@ -11,7 +18,7 @@ const GetStarted = () => {
     };
     return (
         <div className="getstarted-page">
-          
+    
  
             <section className="welcome-section">
                 <h1>Welcome to <span>Internship Platform</span></h1>
@@ -28,8 +35,8 @@ const GetStarted = () => {
                 <div className="role-card institution">
  
                     <div className="role-icon">
-                        🏢
-                    </div>
+    <FaBuilding />
+</div>
  
                     <h2>Institution</h2>
                     <h4>Post opportunities & hire</h4>
@@ -39,8 +46,8 @@ const GetStarted = () => {
                     <button onClick={() => handleRoleSelect(USER_ROLES.INSTITUTION)}>
                         I'm an Institution
                         <span>
-                            →
-                        </span>
+                        <FaArrowRight />
+</span>
                         </button>
                 </div>
  
@@ -48,9 +55,9 @@ const GetStarted = () => {
  
  
                 <div className="role-card student">
-                    <div className="role-icon">
-                        🎓
-                    </div>
+                <div className="role-icon">
+    <FaUserGraduate />
+</div>
                     <h2>Student</h2>
                     <h4>Browse & apply</h4>
                     <p>
@@ -62,20 +69,23 @@ const GetStarted = () => {
                     onClick={() => handleRoleSelect(USER_ROLES.STUDENT)}
                     >
                         I'm a Student
-                        <span>
-                            →
-                        </span>
+                            <span>
+                        <FaArrowRight />
+                                    </span>
+                    
                     </button>
                 </div>
             </section>
+
             <div className="security-message">
-                🔒 Your information is secure and never shared.
-            </div>
- 
+    🔒 Your information is secure and never shared.
+        </div>
+        
+
             <ScrollToTop />
         </div>
         
     );
- 
+
 };
 export default GetStarted;

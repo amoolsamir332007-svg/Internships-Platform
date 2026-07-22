@@ -266,3 +266,70 @@ font-size:30px;
 .role-card{
 padding:30px 20px;
 }}
+
+.role-icon {
+
+    width:80px;
+    height:80px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:26px;
+
+    color:white;
+
+    font-size:2.3rem;
+
+    margin-bottom:20px;
+
+    transition:.35s ease;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.12);
+}
+
+
+/* Institution */
+
+.institution .role-icon {
+
+    background:
+    linear-gradient(
+        135deg,
+        #0f172a,
+        #2563eb
+    );
+
+    box-shadow:
+    0 15px 35px rgba(37,99,235,.3);
+}
+
+
+
+/* Student */
+
+.student .role-icon {
+
+    background:
+    linear-gradient(
+        135deg,
+        #7c3aed,
+        #ec4899
+    );
+
+    box-shadow:
+    0 15px 35px rgba(124,58,237,.3);
+}
+
+
+
+.role-card:hover .role-icon {
+
+    transform:
+    translateY(-8px)
+    rotate(-5deg)
+    scale(1.08);
+
+}
