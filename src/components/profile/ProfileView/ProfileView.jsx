@@ -1,4 +1,3 @@
-
     import React from 'react';
     import './ProfileView.css';
 
@@ -11,13 +10,103 @@
         <div className="profile-view-card">
         <div className="profile-view-header">
             <div className="profile-avatar">
-            {role === 'student' ? '👤' : '🏢'}
-            </div>
-            <div className="profile-title-info">
-            <h2>{profileData.name}</h2>
-            <span className="role-tag">
-                {role === 'student' ? 'Student / Graduate': 'Partner Institution'}
-            </span>
+            {role === "student" && (
+  <div className="profile-meta-grid">
+
+    <div className="meta-item">
+      <strong>🏫 University</strong>
+      <span>{profileData.university || "Undefined"}</span>
+    </div>
+
+    <div className="meta-item">
+      <strong>🎓 Major</strong>
+      <span>{profileData.major || "Undefined"}</span>
+    </div>
+
+    <div className="meta-item">
+      <strong>📚 Level</strong>
+      <span>{profileData.level || "Undefined"}</span>
+    </div>
+
+    <div className="meta-item">
+      <strong>📊 GPA</strong>
+      <span>{profileData.gpa || "Undefined"}</span>
+    </div>
+
+    <div className="meta-item">
+      <strong>📞 Phone</strong>
+      <span>{profileData.phoneNumber || "Undefined"}</span>
+    </div>
+
+    <div className="meta-item">
+      <strong>📧 Email</strong>
+      <span>{profileData.email || "Undefined"}</span>
+    </div>
+
+    <div className="meta-item">
+      <strong>📍 Location</strong>
+      <span>{profileData.location || "Undefined"}</span>
+    </div>
+<div className="profile-skills-section">
+    <h3>Skills</h3>
+
+    <div className="skills-container">
+      {profileData.skills?.length ? (
+        profileData.skills.map((skill, index) => (
+          <span key={index} className="skill-chip">
+            {skill}
+          </span>
+        ))
+      ) : (
+        <p>No skills added.</p>
+      )}
+    </div>
+  </div>
+  <div className="profile-links">
+
+    {profileData.githubUrl && (
+      <a
+        href={profileData.githubUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
+        GitHub
+      </a>
+    )}
+
+    {profileData.linkedinUrl && (
+      <a
+        href={profileData.linkedinUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
+        LinkedIn
+      </a>
+    )}
+
+    {profileData.portfolioUrl && (
+      <a
+        href={profileData.portfolioUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Portfolio
+      </a>
+    )}
+
+    {profileData.cvPath && (
+      <a
+        href={profileData.cvPath}
+        target="_blank"
+        rel="noreferrer"
+      >
+        View CV
+      </a>
+    )}
+
+  </div>
+  </div>
+)}
             </div>
         </div>
 

@@ -794,3 +794,30 @@
 .student-profile-view-header {
   background: rgba(255, 255, 255, 0.96);
 }
+.student-profile-view-skills {
+ display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.student-profile-view-skill-tag {
+  display: inline-block;
+  background-color: #eef2ff;
+  color: #4f46e5;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1px solid #c7d2fe;
+}
+.student-profile-view-skills-title { 
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 24px 0 12px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  text-transform: none;
+}

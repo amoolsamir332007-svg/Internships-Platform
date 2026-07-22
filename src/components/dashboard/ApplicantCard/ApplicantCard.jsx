@@ -17,22 +17,15 @@ const ApplicantCard = ({ applicant, onAccept, onReject, isLoading }) => {
 
   const student = applicant.student || {};
   const internshipTitle = applicant.opportunity?.title || "-";
-
-  const handleShowApplicant = () => {
-    navigate(ROUTES.STUDENT_PROFILE_VIEW(student.studentID), {
-      state: {
-        student: {
-          name: student.name,
-          level: student.level,
-          bio: student.bio,
-          phoneNumber: student.phoneNumber,
-          gpa: student.gpa,
-          profileImagePath: student.profileImagePath,
-          cvPath: student.cvPath,
-        },
+const handleShowApplicant = () => {
+  navigate(ROUTES.STUDENT_PROFILE_VIEW(student.studentID), {
+    state: {
+      student: {
+        ...student,
       },
-    });
-  };
+    },
+  });
+};
 
   return (
     <div className="applicant-card">

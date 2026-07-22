@@ -248,14 +248,72 @@ const StudentProfile = () => {
                 <div className="student-profile-view-card">
                   <h3>About Me</h3>
                   <p>{profile.bio}</p>
+
+                  {profile.skills && profile.skills.length > 0 && (
+                    <>
+             <h4 className="student-profile-view-skills-title">Skills</h4>
+
+                    <div className="student-profile-view-skills">
+
+                      {profile.skills.map((skill, index) => (
+                        <div key={index} className="student-profile-view-skill-tag">
+                          {skill}
+                        </div>
+                        
+                      ))}
+                    </div>
+                    </>
+                  )}
                 </div>
 
                 <div className="student-profile-view-card">
                   <h3>Contact & Academic Info</h3>
+                  <div className="student-profile-view-item">📧 {profile.email}</div>
                   <div className="student-profile-view-item">📞 {profile.phoneNumber}</div>
+                  {profile.location && (
+                    <div className="student-profile-view-item">📍 {profile.location}</div>
+                  )}
+                  <div className="student-profile-view-item">🏫 {profile.university}</div>
+                  <div className="student-profile-view-item">📚 {profile.major}</div>
                   <div className="student-profile-view-item">🎓 Level: {profile.level}</div>
                   <div className="student-profile-view-item">📊 GPA: {profile.gpa}</div>
                 </div>
+
+                {(profile.linkedinUrl || profile.githubUrl || profile.portfolioUrl) && (
+                  <div className="student-profile-view-card">
+                    <h3>Links & Portfolio</h3>
+                    {profile.linkedinUrl && (
+                      <a
+                        href={profile.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="student-profile-view-link"
+                      >
+                        🔗 LinkedIn
+                      </a>
+                    )}
+                    {profile.githubUrl && (
+                      <a
+                        href={profile.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="student-profile-view-link"
+                      >
+                        🔗 GitHub
+                      </a>
+                    )}
+                    {profile.portfolioUrl && (
+                      <a
+                        href={profile.portfolioUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="student-profile-view-link"
+                      >
+                        🔗 Portfolio
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           )
